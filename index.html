@@ -155,47 +155,80 @@
         <section class="mb-20 sm:mb-32">
             <div
                 class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-px bg-zinc-200 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800/50">
-                <div class="p-4 sm:p-8 bg-white dark:bg-zinc-950">
-                    <div class="flex items-center gap-3 mb-6 text-zinc-400 dark:text-zinc-500">
-                        <i data-lucide="code-2" class="w-4 h-4"></i>
-                        <span class="text-[10px] font-bold uppercase tracking-widest">Languages</span>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-badge">Python</span><span class="skill-badge">SQL</span><span
-                            class="skill-badge">PySpark</span><span class="skill-badge">R</span><span
-                            class="skill-badge">Hive</span><span class="skill-badge">Hadoop</span>
-                    </div>
-                </div>
-                <div class="p-8 bg-white dark:bg-zinc-950">
-                    <div class="flex items-center gap-3 mb-6 text-zinc-400 dark:text-zinc-500">
-                        <i data-lucide="cpu" class="w-4 h-4"></i>
-                        <span class="text-[10px] font-bold uppercase tracking-widest">AI & ML</span>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-badge">TensorFlow</span><span class="skill-badge">PyTorch</span><span
-                            class="skill-badge">Scikit-learn</span><span class="skill-badge">NLP</span><span
-                            class="skill-badge">CV</span><span class="skill-badge">GenAI</span>
+                <div class="p-8 bg-zinc-50 dark:bg-zinc-950/50 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-8 text-zinc-500 dark:text-zinc-400">
+                            <i data-lucide="code-2" class="w-4 h-4"></i>
+                            <span class="text-[10px] font-bold uppercase tracking-[0.2em]">Languages</span>
+                        </div>
+                        <div class="space-y-4">
+                            <p
+                                class="text-sm sm:text-base font-medium text-zinc-800 dark:text-zinc-200 tracking-wide flex flex-wrap gap-x-4">
+                                <span>Python</span><span>SQL</span><span>PySpark</span>
+                            </p>
+                            <p
+                                class="text-sm sm:text-base font-medium text-zinc-800 dark:text-zinc-200 tracking-wide flex flex-wrap gap-x-4">
+                                <span>R</span><span>Hive</span><span>Hadoop</span>
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class="p-8 bg-white dark:bg-zinc-950">
-                    <div class="flex items-center gap-3 mb-6 text-zinc-400 dark:text-zinc-500">
-                        <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
-                        <span class="text-[10px] font-bold uppercase tracking-widest">Visualization</span>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-badge">Power BI</span><span class="skill-badge">Tableau</span><span
-                            class="skill-badge">Dashboards</span><span class="skill-badge">Insights</span>
+                <div class="p-8 bg-zinc-50 dark:bg-zinc-950/50 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-8 text-zinc-500 dark:text-zinc-400">
+                            <i data-lucide="cpu" class="w-4 h-4"></i>
+                            <span class="text-[10px] font-bold uppercase tracking-[0.2em]">AI & ML</span>
+                        </div>
+                        <div class="space-y-4">
+                            <p
+                                class="text-sm sm:text-base font-medium text-zinc-800 dark:text-zinc-200 tracking-wide flex flex-wrap gap-x-4">
+                                <span>TensorFlow</span><span>PyTorch</span>
+                            </p>
+                            <p
+                                class="text-sm sm:text-base font-medium text-zinc-800 dark:text-zinc-200 tracking-wide flex flex-wrap gap-x-4">
+                                <span>Scikit-learn</span><span>NLP</span><span>CV</span>
+                            </p>
+                            <p
+                                class="text-sm sm:text-base font-medium text-zinc-800 dark:text-zinc-200 tracking-wide flex flex-wrap gap-x-4">
+                                <span>GenAI</span>
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class="p-8 bg-white dark:bg-zinc-950">
-                    <div class="flex items-center gap-3 mb-6 text-zinc-400 dark:text-zinc-500">
-                        <i data-lucide="cloud" class="w-4 h-4"></i>
-                        <span class="text-[10px] font-bold uppercase tracking-widest">Cloud</span>
+                <div class="p-8 bg-zinc-50 dark:bg-zinc-950/50 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-8 text-zinc-500 dark:text-zinc-400">
+                            <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+                            <span class="text-[10px] font-bold uppercase tracking-[0.2em]">Visualization</span>
+                        </div>
+                        <div class="space-y-4">
+                            <p
+                                class="text-sm sm:text-base font-medium text-zinc-800 dark:text-zinc-200 tracking-wide flex flex-wrap gap-x-4">
+                                <span>Power BI</span><span>Tableau</span>
+                            </p>
+                            <p
+                                class="text-sm sm:text-base font-medium text-zinc-800 dark:text-zinc-200 tracking-wide flex flex-wrap gap-x-4">
+                                <span>Dashboards</span><span>Insights</span>
+                            </p>
+                        </div>
                     </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-badge">GCP</span><span class="skill-badge">AWS</span><span
-                            class="skill-badge">BigQuery</span><span class="skill-badge">S3</span><span
-                            class="skill-badge">Git</span><span class="skill-badge">CI/CD</span>
+                </div>
+                <div class="p-8 bg-zinc-50 dark:bg-zinc-950/50 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-8 text-zinc-500 dark:text-zinc-400">
+                            <i data-lucide="cloud" class="w-4 h-4"></i>
+                            <span class="text-[10px] font-bold uppercase tracking-[0.2em]">Cloud</span>
+                        </div>
+                        <div class="space-y-4">
+                            <p
+                                class="text-sm sm:text-base font-medium text-zinc-800 dark:text-zinc-200 tracking-wide flex flex-wrap gap-x-4">
+                                <span>GCP</span><span>AWS</span><span>BigQuery</span>
+                            </p>
+                            <p
+                                class="text-sm sm:text-base font-medium text-zinc-800 dark:text-zinc-200 tracking-wide flex flex-wrap gap-x-4">
+                                <span>S3</span><span>Git</span><span>CI/CD</span>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -360,9 +393,9 @@
     </div>
 
     <!-- Badge and Item Templates -->
-    <style>
+    <style type="text/tailwindcss">
         .skill-badge {
-            @apply text-[10px] font-bold px-2 py-1 border border-zinc-100 dark:border-zinc-900 bg-zinc-50 dark:bg-zinc-900/40 text-zinc-600 dark:text-zinc-500 hover:text-zinc-950 dark:hover:text-zinc-300 transition-colors;
+            @apply text-xs font-medium px-3 py-1.5 border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 text-zinc-700 dark:text-zinc-300 transition-colors;
         }
 
         .filter-btn {
