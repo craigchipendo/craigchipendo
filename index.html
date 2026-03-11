@@ -1885,12 +1885,20 @@
     <!-- ── CONTACT ── -->
     <section id="contact" class="py-32 bg-zinc-950/50 reveal">
         <div class="max-w-5xl mx-auto px-6">
+
+            <!-- Header -->
             <div class="text-center mb-16">
                 <h2 class="text-5xl font-black text-white mb-4 tracking-tight">Initiate Communication</h2>
                 <p class="text-zinc-400 text-base">Ready to deploy intelligent solutions?</p>
             </div>
+
+            <!-- Two-column layout -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+
+                <!-- LEFT: Contact info cards -->
                 <div class="space-y-4">
+
+                    <!-- Location -->
                     <div
                         class="flex items-center gap-5 p-6 rounded-xl bg-zinc-900/60 border border-zinc-800 hover:border-zinc-700 transition-colors">
                         <div class="w-12 h-12 rounded-lg bg-zinc-800 flex items-center justify-center flex-shrink-0">
@@ -1906,7 +1914,9 @@
                             <p class="text-white font-bold text-lg">Atlanta, GA</p>
                         </div>
                     </div>
-                    <a href="/cdn-cgi/l/email-protection#d2b1a0b3bbb5a6b3bcb3b9b3b192b5bfb3bbbefcb1bdbf"
+
+                    <!-- Email -->
+                    <a href="mailto:craigtanakac@gmail.com"
                         class="flex items-center gap-5 p-6 rounded-xl bg-zinc-900/60 border border-zinc-800 hover:border-zinc-600 transition-colors group block">
                         <div
                             class="w-12 h-12 rounded-lg bg-zinc-800 flex items-center justify-center flex-shrink-0 group-hover:bg-zinc-700 transition-colors">
@@ -1918,11 +1928,11 @@
                         </div>
                         <div>
                             <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 mb-0.5">Email</p>
-                            <p class="text-white font-bold text-lg"><span class="__cf_email__"
-                                    data-cfemail="0b68796a626c7f6a656a606a684b6c666a626725686466">[email&#160;protected]</span>
-                            </p>
+                            <p class="text-white font-bold text-lg">craigtanakac@gmail.com</p>
                         </div>
                     </a>
+
+                    <!-- LinkedIn -->
                     <a href="https://www.linkedin.com/in/craig-tanaka-chipendo" target="_blank" rel="noopener"
                         class="flex items-center gap-5 p-6 rounded-xl bg-zinc-900/60 border border-zinc-800 hover:border-zinc-600 transition-colors group block">
                         <div
@@ -1941,6 +1951,8 @@
                             <p class="text-white font-bold text-lg">Connect Profile</p>
                         </div>
                     </a>
+
+                    <!-- GitHub -->
                     <a href="https://github.com/craigchipendo" target="_blank" rel="noopener"
                         class="flex items-center gap-5 p-6 rounded-xl bg-zinc-900/60 border border-zinc-800 hover:border-zinc-600 transition-colors group block">
                         <div
@@ -1956,8 +1968,13 @@
                             <p class="text-white font-bold text-lg">View Code</p>
                         </div>
                     </a>
+
                 </div>
+
+                <!-- RIGHT: Contact form -->
                 <div class="p-8 rounded-xl bg-zinc-900/60 border border-zinc-800">
+
+                    <!-- Name + Email row -->
                     <div class="grid grid-cols-2 gap-4 mb-4">
                         <div>
                             <label
@@ -1972,452 +1989,455 @@
                                 class="w-full bg-zinc-800/80 border border-zinc-700 rounded-lg px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-zinc-500 transition-colors" />
                         </div>
                     </div>
+
+                    <!-- Subject -->
                     <div class="mb-4">
                         <label
                             class="block text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 mb-2">Subject</label>
                         <input type="text" placeholder="Project Inquiry"
                             class="w-full bg-zinc-800/80 border border-zinc-700 rounded-lg px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-zinc-500 transition-colors" />
                     </div>
+
+                    <!-- Message -->
                     <div class="mb-6">
                         <label
                             class="block text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 mb-2">Message</label>
                         <textarea rows="5" placeholder="How can we collaborate?"
                             class="w-full bg-zinc-800/80 border border-zinc-700 rounded-lg px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-zinc-500 transition-colors resize-none"></textarea>
                     </div>
+
+                    <!-- Send button -->
                     <button onclick="handleContactForm(this)"
-                        class="w-full bg-white text-black text-xs font-black uppercase tracking-widest py-4 rounded-lg hover:bg-zinc-200 transition-colors">Send
-                        Message</button>
+                        class="w-full bg-white text-black text-xs font-black uppercase tracking-widest py-4 rounded-lg hover:bg-zinc-200 transition-colors">
+                        Send Message
+                    </button>
+
                 </div>
             </div>
-            <p class="text-center text-[11px] font-mono text-zinc-600 tracking-widest mt-20">© 2026 Craig Tanaka
-                Chipendo. All
-                rights reserved.</p>
-        </div>
-    </section>
 
 
-    <!-- ── SCRIPTS ── -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script>
-        // NOTE: The full projectData object from the original HTML should be preserved here.
-        // Below is the same projectData from the original file.
-        const projectData = {
-            researchagent: {
-                id: 'AGENT-01', category: 'Agentic AI · Multi-Agent · Google ADK',
-                title: 'Research Automation Agentic System',
-                subtitle: 'Containerized multi-agent research assistant built with Python and Google ADK, automating literature review, evidence synthesis, and technical writing for data science and ML workflows.',
-                overview: `As AI chatbots like ChatGPT, Gemini, and Claude become deeply embedded in daily workflows, many people have stopped doing deep, independent research — relying instead on single-turn LLM responses that may be outdated, shallow, or hallucinated. I built this Research Agent to counter that trend: a system that actively goes out, retrieves current information from multiple authoritative sources, synthesises evidence, and produces structured, verifiable outputs. It keeps me up to date with the latest trends in AI and data science without sacrificing the rigour of real research.`,
-                problems: [
-                    { num: '01', text: 'Passive consumption: Widespread LLM chatbot usage has shifted people away from active, multi-source research — accepting single-model answers as ground truth.' },
-                    { num: '02', text: 'Information staleness: LLMs have fixed knowledge cutoffs; staying current on fast-moving ML and data science developments requires continuous retrieval from live sources.' },
-                    { num: '03', text: 'Synthesis bottleneck: Consolidating findings from web, arXiv, and Wikipedia into a coherent, structured report is time-consuming when done manually.' },
-                    { num: '04', text: 'No specialist division of labour: A single generalist prompt cannot simultaneously act as a rigorous researcher, a clear writer, and a quality editor.' },
-                ],
-                baselineKpis: [
-                    { label: 'Research method', value: 'Manual — browser tabs, copy-paste, ad-hoc prompts' },
-                    { label: 'Source coverage', value: 'Single LLM response, no cross-source verification' },
-                    { label: 'Output quality', value: 'Unstructured, inconsistent, not reproducible' },
-                    { label: 'Time to report', value: 'Hours of manual synthesis per topic' },
-                ],
-                solution: `Built a Python-based multi-agent system orchestrated by Google ADK. A planning module decomposes a research question into sequential tasks and routes each to a specialist agent: Researcher (retrieves and synthesises evidence), Writer (structures findings into a coherent draft), and Editor (refines for clarity and accuracy). All agents share the Gemini 2.0 Flash LLM and a unified HTTP session for tool calls across Tavily, arXiv, and Wikipedia.`,
-                capabilities: [
-                    'Planning agent that decomposes any research question into an ordered task list',
-                    'Specialist Researcher agent pulling live data from Tavily web search, arXiv scholarly PDFs, and Wikipedia',
-                    'Writer agent structuring synthesised evidence into a readable technical report',
-                    'Editor agent reviewing and refining drafts for accuracy, clarity, and consistency',
-                    'Containerised deployment via Docker for reproducible, portable execution',
-                    'ADK Web UI and CLI runner for flexible interaction modes',
-                ],
-                approach: [
-                    'Defined specialist agents (Researcher, Writer, Editor) as Google ADK LlmAgents with scoped tool access',
-                    'Built a planning module that uses Gemini to generate an ordered task list from a freeform research question',
-                    'Implemented an executor router that dispatches each task to the correct specialist agent via ADK InMemoryRunner',
-                    'Integrated Tavily (web), arXiv (scholarly), and Wikipedia (context) as tool functions with a shared requests session',
-                    'Containerised the full stack in a python:3.11-slim Docker image with environment-variable credential management',
-                ],
-                architecture: [
-                    { label: 'Query', top: 'INPUT', value: 'Research\nQuestion', sub: 'CLI / Web UI' },
-                    { label: 'Plan', top: 'PLAN', value: 'Planning\nAgent', sub: 'Task List', active: true },
-                    { label: 'Research', top: 'RETRIEVE', value: 'Researcher\nAgent', sub: 'Web+arXiv', active: true },
-                    { label: 'Write', top: 'DRAFT', value: 'Writer +\nEditor', sub: 'Report' },
-                    { label: 'Output', top: 'OUTPUT', value: 'Structured\nReport', sub: 'Verified' },
-                ],
-                archDetails: [
-                    { label: 'LLM', value: 'Gemini 2.0 Flash · Google ADK InMemoryRunner' },
-                    { label: 'Agents', value: 'Planner · Researcher · Writer · Editor (Google ADK LlmAgent)' },
-                    { label: 'Research Tools', value: 'Tavily Web Search · arXiv PDF Scraper · Wikipedia Lookup' },
-                    { label: 'Orchestration', value: 'src/planning_agent.py — task decomposition + executor router' },
-                    { label: 'Infrastructure', value: 'Docker (python:3.11-slim) · .env credential management · .adk/ state' },
-                ],
-                governance: [
-                    'All API credentials stored exclusively in .env — never committed to source control',
-                    'Shared HTTP session with rate-limiting across Tavily, arXiv, and Wikipedia tool calls',
-                    'Modular agent design: each specialist operates within a scoped context, preventing role bleed',
-                    'Containerised environment ensures reproducible research outputs across machines',
-                    'ADK .adk/ directory tracks tool registration and local state for auditability',
-                ],
-                results: [
-                    { num: 'RESULT 1', text: 'Eliminated hours of manual research synthesis per topic — from question to structured report in a single automated pipeline run.' },
-                    { num: 'RESULT 2', text: 'Grounds all outputs in live, multi-source evidence (web, arXiv, Wikipedia), countering the staleness and hallucination risks of single-model LLM responses.' },
-                    { num: 'RESULT 3', text: 'Enables continuous self-education on AI and data science trends without surrendering research rigour to chatbot convenience.' },
-                    { num: 'RESULT 4', text: 'Demonstrates a reusable multi-agent architecture pattern applicable to any domain requiring automated literature review and report generation.' },
-                ],
-                tech: ['Google ADK', 'Gemini 2.0 Flash', 'Python', 'Tavily', 'arXiv', 'Wikipedia', 'Docker', 'FastAPI', 'Multi-Agent Systems', 'LLM Orchestration'],
-                videoUrl: null,
-            },
-            netflix: {
-                id: 'AI-01',
-                category: 'AI & ML · Fall 2025',
-                title: 'Netflix-style AI Recommender & Executive Analytics Platform',
-                subtitle: 'End-to-end data platform simulating a Netflix-style streaming company with AI-powered recommendations and executive dashboards.',
-                overview: `This project is an end-to-end data platform that simulates a Netflix-style streaming company using a large, production-like synthetic dataset. It spans operational OLTP databases, NoSQL systems, a Hive-based big-data warehouse, and a new AI-driven business application for both end users and executives.`,
-                problems: [
-                    { num: '01', text: 'Cold-start gap: No real-time semantic search — users relied on keyword-only catalog navigation.' },
-                    { num: '02', text: 'Data silos: Operational OLTP, S3 raw files, and analytics all lived in disconnected systems with no unified access layer.' },
-                    { num: '03', text: 'No AI layer: The existing stack lacked any vector search, embedding model, or generative AI capability.' },
-                    { num: '04', text: 'Executive blind spots: No interactive dashboards for catalog performance, engagement, or audience behavior analysis.' },
-                    { num: '05', text: 'Scalability risk: Monolithic MySQL queries could not support analytical workloads over millions of watch-event rows.' },
-                ],
-                baselineKpis: [
-                    { label: 'Search paradigm', value: 'Keyword-only (no semantic understanding)' },
-                    { label: 'Data warehouse', value: 'None — raw MySQL OLTP only' },
-                    { label: 'Analytics cadence', value: 'Ad-hoc SQL pulls, no dashboard' },
-                    { label: 'AI capabilities', value: 'None deployed in production' },
-                ],
-                solution: `Architected a full-stack AI platform coupling a Hive-on-EMR star-schema warehouse, a ChromaDB vector store for semantic search, a MongoDB clickstream logger, and a FastAPI + Gradio front end.`,
-                capabilities: [
-                    'Real-time semantic search via ChromaDB (all-MiniLM-L6-v2 embeddings)',
-                    'AI-generated content posters using Stable Diffusion',
-                    'LangChain RAG pipeline for context-aware recommendations',
-                    'Executive dashboards: hidden gems, vintage content, demographic patterns, geographic genre preferences',
-                    'Full clickstream audit log in MongoDB for UX analysis and future model training',
-                    'Multi-environment MySQL auth + analytics warehouse (dw_netflix_analytics)',
-                ],
-                approach: [
-                    'ETL flows: S3 CSV → Hive Parquet star schema (fact + dim tables, partition pruning)',
-                    'Vector index: HuggingFace embeddings → ChromaDB for sub-second similarity retrieval',
-                    'FastAPI orchestration mediating MySQL, MongoDB, ChromaDB, and AI model calls',
-                    'Gradio Blocks multi-page UI: user login, AI search, admin portal, analytics dashboard',
-                ],
-                architecture: [
-                    { label: 'Sources', top: 'SOURCES', value: 'MySQL\nS3 / Hive', sub: 'Raw Data' },
-                    { label: 'Ingest', top: 'INGEST', value: 'EMR\nHive', sub: 'Star Schema' },
-                    { label: 'Transform', top: 'TRANSFORM', value: 'ChromaDB\ndbt/SQL', sub: 'Embeddings', active: true },
-                    { label: 'Serve', top: 'SERVE', value: 'FastAPI\nGradio', sub: 'App Layer', active: true },
-                    { label: 'Consume', top: 'CONSUME', value: '2\nPortals', sub: 'User + Exec' },
-                ],
-                archDetails: [
-                    { label: 'AI / Vector Store', value: 'ChromaDB · HuggingFace all-MiniLM-L6-v2 · Stable Diffusion' },
-                    { label: 'Backend / API', value: 'FastAPI · Uvicorn · LangChain RAG pipeline' },
-                    { label: 'Databases', value: 'MySQL (Auth + Analytics) · MongoDB (Clickstream) · ChromaDB' },
-                    { label: 'Big Data', value: 'Apache Hive on Amazon EMR · S3 · Parquet Star Schema' },
-                    { label: 'Frontend', value: 'Gradio Blocks · HTML/CSS · Multi-route mounting' },
-                ],
-                governance: [
-                    'SHA-256 password hashing for all user and admin credentials',
-                    'Role-based access: separate user and admin portals with distinct data permissions',
-                    'Immutable MongoDB audit log capturing every click, login, and navigation event',
-                    'Modular database auto-creation on startup; MySQL credentials centralized in config',
-                    'Partition pruning and Parquet formatting to prevent runaway scan costs on EMR',
-                ],
-                results: [
-                    { num: 'RESULT 1', text: 'Enabled sub-second natural-language search over thousands of titles via vector similarity.' },
-                    { num: 'RESULT 2', text: 'Unified 4 disparate data stores (MySQL, S3/Hive, MongoDB, ChromaDB) into a single cohesive application stack.' },
-                    { num: 'RESULT 3', text: 'Delivered dual-facing product: AI-powered "Ask Netflix" for subscribers and an interactive analytics portal for executives.' },
-                    { num: 'RESULT 4', text: 'Achieved production-like data quality through Parquet conversion and dynamic partition tuning, enabling DAU and engagement queries at scale.' },
-                ],
-                tech: ['LangChain', 'ChromaDB', 'FastAPI', 'Gradio', 'Hive / EMR', 'MySQL', 'MongoDB', 'HuggingFace', 'Stable Diffusion', 'Python', 'AWS S3'],
-                videoUrl: 'https://youtu.be/divvz5rfEiE?si=9tNabdRgbbn7kPBo',
-            },
-            newsmining: {
-                id: 'NLP-02', category: 'NLP · Web Mining · Deployed App',
-                title: 'Newspaper Text Mining & Recommendation Platform',
-                subtitle: 'End-to-end NLP and web mining platform scraping 4 major newspapers, clustering articles by latent topic, and serving live recommendations via a deployed Streamlit application.',
-                overview: `Developed an end-to-end NLP and web mining solution to extract, classify, and recommend news content from multiple online sources.`,
-                problems: [
-                    { num: '01', text: 'Information fragmentation: News consumers had to manually visit four separate newspaper sites.' },
-                    { num: '02', text: 'No topic organization: Raw scraped articles had no automated categorization or topic grouping.' },
-                    { num: '03', text: 'Manual content curation: Identifying thematically related articles across sources required human editorial effort.' },
-                    { num: '04', text: 'No interactive access layer: Users needed a deployable interface to explore recommendations.' },
-                ],
-                baselineKpis: [
-                    { label: 'Sources scraped', value: '4 major online newspapers' },
-                    { label: 'Categories', value: 'Business · Politics · Arts/Culture/Celebrities · Sports' },
-                    { label: 'Output format', value: 'Structured CSV datasets for scalable analysis' },
-                    { label: 'Deployment', value: 'Live Streamlit app — publicly accessible' },
-                ],
-                solution: `Built a Python spider-based scraping pipeline collecting articles from four newspapers and storing them in structured CSV datasets. Applied unsupervised clustering algorithms to organize articles into latent topic groups.`,
-                capabilities: ['Python spider collecting articles from 4 major online newspapers', 'Article categorization into Business, Politics, Arts/Culture/Celebrities, and Sports', 'Unsupervised clustering to uncover latent topic groups', 'CSV data pipeline: raw HTML → structured article datasets', 'Streamlit web application serving cluster-based article recommendations', 'Live deployed application accessible publicly via Streamlit Cloud'],
-                approach: ['Built Python web spider to scrape article text, headlines, and URLs', 'Preprocessed raw text: cleaning, tokenization, and vectorization', 'Applied clustering algorithms to group articles by latent topic', 'Structured article data into CSV datasets', 'Designed and deployed interactive Streamlit app'],
-                architecture: [
-                    { label: 'Sources', top: 'SOURCES', value: '4 News\nSites', sub: 'Web Scrape' },
-                    { label: 'Extract', top: 'EXTRACT', value: 'Python\nSpider', sub: 'CSV Pipeline', active: true },
-                    { label: 'Cluster', top: 'CLUSTER', value: 'NLP\nClustering', sub: 'Topic Groups', active: true },
-                    { label: 'Serve', top: 'SERVE', value: 'Streamlit\nApp', sub: 'Recommender' },
-                    { label: 'Consume', top: 'CONSUME', value: 'Live\nUsers', sub: 'Deployed ↗' },
-                ],
-                archDetails: [
-                    { label: 'Scraping', value: 'Python spider — 4 newspaper sources' },
-                    { label: 'NLP Pipeline', value: 'Text cleaning · Tokenization · Vectorization · Clustering' },
-                    { label: 'Clustering', value: 'K-means / hierarchical clustering' },
-                    { label: 'Data Layer', value: 'CSV datasets' },
-                    { label: 'Frontend', value: 'Streamlit — cluster explorer, article browser, URL navigation' },
-                ],
-                governance: ['Scraping pipeline respects robots.txt and rate-limits requests', 'CSV datasets versioned alongside notebook code', 'Clustering parameters exposed as configurable inputs', 'Streamlit app serves only article metadata and URLs'],
-                results: [
-                    { num: 'RESULT 1', text: 'Deployed a live, publicly accessible Streamlit application enabling multi-source news discovery across 4 newspapers.' },
-                    { num: 'RESULT 2', text: 'Automated article collection, categorization (4 topics), and clustering.' },
-                    { num: 'RESULT 3', text: 'Applied unsupervised clustering to surface latent topic groups across sources.' },
-                    { num: 'RESULT 4', text: 'Demonstrated end-to-end ML deployment: from web scraping and NLP to a live user-facing application.' },
-                ],
-                tech: ['Python', 'Web Scraping', 'NLP', 'Clustering', 'Streamlit', 'CSV Pipelines', 'Unsupervised Learning', 'Text Mining'],
-                videoUrl: 'https://web-mining-and-recommender-systems-puf6ohwpydd3upj4emcmmn.streamlit.app/',
-            },
-            retail: {
-                id: 'AI-02', category: 'AI & ML · GCP · RAG',
-                title: 'AI-Powered Retail Q&A App',
-                subtitle: 'Natural-language question-answering system over retail transaction data using Vertex AI embeddings, pgvector semantic search on Cloud SQL PostgreSQL, and LangChain orchestration.',
-                overview: `Built an end-to-end AI-powered question-answering application for a fictional retail company using Google Cloud Vertex AI, LangChain, and PostgreSQL on Cloud SQL.`,
-                problems: [
-                    { num: '01', text: 'Keyword-only access: Analysts could only retrieve retail data through rigid SQL queries.' },
-                    { num: '02', text: 'Hallucination risk: Generic LLM responses could not be grounded in actual transaction data without a retrieval layer.' },
-                    { num: '03', text: 'Vector infrastructure gap: Existing Cloud SQL PostgreSQL had no embedding or similarity-search capability.' },
-                    { num: '04', text: 'Orchestration complexity: Coordinating embedding, retrieval, and generation required a unified pipeline.' },
-                ],
-                baselineKpis: [
-                    { label: 'Query paradigm', value: 'SQL keyword-only — no semantic search' },
-                    { label: 'LLM grounding', value: 'None — raw generative model, no retrieval' },
-                    { label: 'Vector capability', value: 'None — pgvector not yet enabled' },
-                    { label: 'Pipeline', value: 'No embed → retrieve → generate flow' },
-                ],
-                solution: `Implemented a RAG pipeline: retail data is embedded at ingest time using Vertex AI TextEmbeddingModel and stored as vector columns in Cloud SQL PostgreSQL via the pgvector extension.`,
-                capabilities: ['Vertex AI TextEmbeddingModel for document and query embedding', 'pgvector extension on Cloud SQL PostgreSQL enabling cosine similarity search', 'LangChain chain orchestration', 'Vertex AI GenerativeModel for grounded answer synthesis', 'Async Cloud SQL connector (asyncpg) for low-latency vector retrieval'],
-                approach: ['Provisioned Cloud SQL PostgreSQL instance with pgvector extension', 'Loaded product and transaction tables with vector columns', 'Built LangChain chain: user query → VertexAIEmbeddings → pgvector similarity search → context window', 'Passed retrieved rows as structured context to Vertex AI GenerativeModel'],
-                architecture: [
-                    { label: 'Sources', top: 'SOURCES', value: 'Retail\nTables', sub: 'Transactions' },
-                    { label: 'Embed', top: 'EMBED', value: 'Vertex AI\nEmbeddings', sub: 'Vectors', active: true },
-                    { label: 'Retrieve', top: 'RETRIEVE', value: 'pgvector\nCloud SQL', sub: 'Similarity', active: true },
-                    { label: 'Generate', top: 'GENERATE', value: 'Vertex AI\nGenModel', sub: 'RAG Answer' },
-                    { label: 'Consume', top: 'CONSUME', value: 'Notebook\nUI', sub: 'Business User' },
-                ],
-                archDetails: [
-                    { label: 'Embedding Model', value: 'Vertex AI TextEmbeddingModel · LangChain VertexAIEmbeddings' },
-                    { label: 'Vector Store', value: 'Cloud SQL for PostgreSQL · pgvector extension (cosine similarity)' },
-                    { label: 'Generative Model', value: 'Vertex AI GenerativeModel' },
-                    { label: 'Orchestration', value: 'LangChain chains · asyncpg connector' },
-                    { label: 'Infrastructure', value: 'GCP: Vertex AI API · Cloud SQL Admin API' },
-                ],
-                governance: ['Answers grounded exclusively in retrieved database rows', 'Service account with scoped Vertex AI and Cloud SQL permissions', 'pgvector similarity threshold controls retrieval quality', 'Dependency versions pinned for reproducibility'],
-                results: [
-                    { num: 'RESULT 1', text: 'Enabled business users to ask free-text questions over retail transaction data.' },
-                    { num: 'RESULT 2', text: 'Grounded all LLM answers in actual retrieved database rows, eliminating hallucination risk.' },
-                    { num: 'RESULT 3', text: 'Demonstrated full end-to-end RAG pipeline on GCP.' },
-                    { num: 'RESULT 4', text: 'Delivered a reusable architectural pattern applicable to any structured enterprise data source on Cloud SQL.' },
-                ],
-                tech: ['Vertex AI', 'LangChain', 'pgvector', 'Cloud SQL', 'PostgreSQL', 'Python', 'GCP', 'RAG', 'asyncpg', 'Jupyter'],
-                videoUrl: null,
-            },
-            crime: {
-                id: 'VIZ-01', category: 'Analytics · Visualization · 2021–2023',
-                title: 'Crime Analysis Dashboard',
-                subtitle: 'Interactive Tableau workbook summarizing 2,500+ crime incidents across European countries (Sept 2021 – Nov 2023).',
-                overview: `The Crime Analysis Dashboard is an interactive Tableau workbook that consolidates crime incident data across multiple European countries between September 2021 and November 2023.`,
-                problems: [
-                    { num: '01', text: 'Fragmented reporting: Crime data lived in disconnected spreadsheets with no unified analytical view.' },
-                    { num: '02', text: 'No temporal visibility: Command staff could not identify high-risk time windows.' },
-                    { num: '03', text: 'Resolution blind spots: Unresolved backlogs were not tracked accessibly for leadership.' },
-                    { num: '04', text: 'Geographic comparison gaps: Cross-country benchmarking required manual table scanning.' },
-                    { num: '05', text: 'Static snapshots: Existing reports could not be filtered interactively.' },
-                ],
-                baselineKpis: [
-                    { label: 'Total incidents analysed', value: '2,500 crime records (Sept 2021 – Nov 2023)' },
-                    { label: 'Resolution rate', value: '70.04% resolved by authority efforts' },
-                    { label: 'Unresolved share', value: '29.96% of incidents lack resolution' },
-                    { label: 'Peak crime hour', value: '9:00 PM – 11:59 PM (583 incidents)' },
-                    { label: 'Peak crime month', value: 'October (309 incidents, +22% MoM)' },
-                ],
-                solution: `Designed and built a fully interactive Tableau workbook integrating a fact table of 2,500+ crime records with a lookup table mapping offense type IDs to readable descriptions.`,
-                capabilities: ['Yearly bar chart with variance indicators for year-over-year comparison', 'Headline KPIs: total crimes, 70.04% resolution rate, 29.96% unresolved share', 'Monthly trend line with month-over-month % change labels', 'Proportional-symbol map (Mapbox)', 'Top-N crime type bar chart driven by a parameter slider', 'Hourly bucket bar chart', 'Month × Weekday heatmap', 'Global interactive filters'],
-                approach: ['Joined Crimes-Data.xlsx and Other-Data.xlsx in Tableau', 'Derived calculated fields: Year, Month, Weekday', 'Built resolution metrics as calculated measures', 'Applied consistent color encoding', 'Configured marks as global filters'],
-                architecture: [
-                    { label: 'Sources', top: 'SOURCES', value: 'Excel\nFact+Lookup', sub: 'Raw Data' },
-                    { label: 'Prep', top: 'PREP', value: 'Tableau\nJoins', sub: 'Data Model' },
-                    { label: 'Calc', top: 'CALC', value: 'Derived\nFields', sub: 'KPIs', active: true },
-                    { label: 'Visualise', top: 'VISUALISE', value: '8-Panel\nDashboard', sub: 'Tableau', active: true },
-                    { label: 'Consume', top: 'CONSUME', value: 'Command\nStaff', sub: 'Decisions' },
-                ],
-                archDetails: [
-                    { label: 'BI Tool', value: 'Tableau Desktop — 8 coordinated visual panels' },
-                    { label: 'Data Sources', value: 'Crimes-Data.xlsx (fact) · Other-Data.xlsx (crime-type lookup)' },
-                    { label: 'Derived Fields', value: 'Year, Month, Weekday, Hourly Bucket, Resolution Rate, Top-N Rank' },
-                    { label: 'Geospatial Layer', value: 'Mapbox proportional-symbol map by country' },
-                    { label: 'Interactivity', value: 'Global filters · Mark-as-filter · Top-N parameter slider' },
-                ],
-                governance: ['Date-range filter ensures all panels stay in scope', 'Resolution slider cleanly separates resolved and unresolved views', 'Top-N parameter prevents overloaded bar charts', 'Color encoding is consistent and purposeful', 'Heatmap metric toggles allow switching between counts and rates'],
-                results: [
-                    { num: 'RESULT 1', text: 'Delivered a single-pane dashboard replacing 2+ disconnected spreadsheets, covering 2,500 incidents across 5+ European countries.' },
-                    { num: 'RESULT 2', text: 'Surfaced October as the peak crime month (+22% MoM) and 9 PM–11:59 PM as the highest-risk window.' },
-                    { num: 'RESULT 3', text: 'Exposed that Violence and Sexual Offences (959 incidents) account for 38% of all crime.' },
-                    { num: 'RESULT 4', text: 'Made the 29.96% unresolved rate visible in a headline KPI accessible to non-technical leadership.' },
-                    { num: 'RESULT 5', text: 'Enabled drill-down from national view → country → crime type → weekday in under 3 clicks.' },
-                ],
-                tech: ['Tableau', 'Mapbox', 'Excel', 'Calculated Fields', 'Parameter Controls', 'Heatmap', 'KPI Design'],
-                videoUrl: null,
-                previewImg: 'Crime_Analysis_Dashboard.png',
-            },
-            sentiment: {
-                id: 'NLP-01', category: 'NLP · ML · Spark · E-Commerce',
-                title: 'Sentiment Analysis Pipeline for E-Commerce Customer Insights',
-                subtitle: 'End-to-end NLP pipeline classifying customer sentiment from X (Twitter) posts using TensorFlow, Scikit-learn, and Apache Spark.',
-                overview: `Led the end-to-end development of a natural language processing pipeline to analyze and classify customer sentiment from X (Twitter) posts related to e-commerce brands and products.`,
-                problems: [
-                    { num: '01', text: 'Unstructured feedback at scale: Thousands of daily X (Twitter) posts contained rich customer sentiment buried in unstructured free text.' },
-                    { num: '02', text: 'No sentiment classification: Without NLP models, support teams could not distinguish positive, negative, or neutral brand mentions.' },
-                    { num: '03', text: 'Scale bottleneck: Volume of social data exceeded single-machine processing capacity.' },
-                    { num: '04', text: 'Insight accessibility gap: Raw NLP outputs were not consumable by non-technical stakeholders.' },
-                ],
-                baselineKpis: [
-                    { label: 'Data source', value: 'X (Twitter) posts — e-commerce brands & products' },
-                    { label: 'Baseline approach', value: 'Manual review — no automated sentiment scoring' },
-                    { label: 'Processing scale', value: 'Single-machine bottleneck, no distributed pipeline' },
-                    { label: 'Reporting', value: 'Ad-hoc — no dashboard, no trend visualization' },
-                ],
-                solution: `Built a scalable NLP pipeline combining TensorFlow deep learning models and Scikit-learn classical ML for multi-class sentiment classification. Apache Spark handled distributed data processing and model training at volume.`,
-                capabilities: ['Deep learning text classifiers (TensorFlow) for sentiment polarity prediction', 'Classical ML models (Scikit-learn) for text classification', 'Apache Spark distributed processing', 'Power BI dashboards: sentiment trend lines, brand comparison, spike detection', 'Information extraction pipeline'],
-                approach: ['Ingested and preprocessed large volumes of X (Twitter) posts via distributed Spark pipelines', 'Engineered text features for both deep learning and classical models', 'Trained and evaluated TensorFlow and Scikit-learn models', 'Built Power BI reports aggregating model outputs'],
-                architecture: [
-                    { label: 'Sources', top: 'SOURCES', value: 'X Posts\nTweets', sub: 'Social Data' },
-                    { label: 'Process', top: 'PROCESS', value: 'Apache\nSpark', sub: 'Distributed', active: true },
-                    { label: 'Model', top: 'MODEL', value: 'TensorFlow\nSklearn', sub: 'NLP / ML', active: true },
-                    { label: 'Output', top: 'OUTPUT', value: 'Sentiment\nScores', sub: 'Classified' },
-                    { label: 'Consume', top: 'CONSUME', value: 'Power BI\nDashboards', sub: 'Insights' },
-                ],
-                archDetails: [
-                    { label: 'Deep Learning', value: 'TensorFlow — text classification, sentiment polarity prediction' },
-                    { label: 'Classical ML', value: 'Scikit-learn — text classification, information extraction' },
-                    { label: 'Distributed Compute', value: 'Apache Spark — scalable data processing & distributed model training' },
-                    { label: 'Visualization', value: 'Power BI — sentiment trend dashboards, brand comparison reports' },
-                    { label: 'NLP Techniques', value: 'Tokenization · Embeddings · TF-IDF · Sentiment Polarity' },
-                ],
-                governance: ['Model outputs validated against labelled sentiment benchmarks', 'Spark pipeline designed for reproducibility', 'Power BI reports scoped by brand/product', 'Insight delivery cycle aligned with cross-functional team review cadences'],
-                results: [
-                    { num: 'RESULT 1', text: 'Automated sentiment classification across thousands of daily brand mentions.' },
-                    { num: 'RESULT 2', text: 'Delivered Power BI sentiment trend dashboards giving cross-functional teams real-time visibility.' },
-                    { num: 'RESULT 3', text: 'Enabled Apache Spark distributed training to overcome single-machine scale limits.' },
-                    { num: 'RESULT 4', text: 'Insights directly improved conversational AI systems in digital commerce environments.' },
-                ],
-                tech: ['TensorFlow', 'Scikit-learn', 'Apache Spark', 'Python', 'Power BI', 'NLP', 'Text Classification', 'Sentiment Analysis'],
-                videoUrl: null,
-            },
-            webusage: {
-                id: 'DM-01', category: 'Data Mining · Web Analytics',
-                title: 'Web Usage Mining Analytics',
-                subtitle: 'Apache web server log analysis pipeline extracting session statistics, referrer patterns, and frequent page co-occurrence rules via the Apriori algorithm.',
-                overview: `Developed a comprehensive Jupyter notebook-based pipeline to parse, process, and mine behavioral patterns from Apache HTTP access logs.`,
-                problems: [
-                    { num: '01', text: 'Raw, unstructured logs: Apache access logs are dense, multi-field text files requiring custom parsing.' },
-                    { num: '02', text: 'No session visibility: Raw logs record individual requests but do not surface session-level behavior.' },
-                    { num: '03', text: 'Referrer blind spots: Marketing and content teams had no automated view of which external domains were driving traffic.' },
-                    { num: '04', text: 'Hidden page co-occurrence patterns: UX teams could not identify which pages users frequently visit together.' },
-                ],
-                baselineKpis: [
-                    { label: 'Log format', value: 'Apache HTTP access log (apachelogs.txt)' },
-                    { label: 'Parsed fields', value: 'IP, timestamp, resource, referrer, user agent, status, object size' },
-                    { label: 'Analysis method', value: 'Manual inspection — no automated mining' },
-                    { label: 'Pattern detection', value: 'None — page co-occurrence not previously analyzed' },
-                ],
-                solution: `Built a modular Python/Pandas pipeline that parses Apache logs into structured DataFrames, extracts session and pageview statistics, ranks top visitor and referrer sources, then applies the Apriori algorithm.`,
-                capabilities: ['Modular log parsing functions extracting IP, timestamp, resource, referrer, user agent, status, and object size', 'Session extraction and per-user pageview tracking', 'Top visitor/client pair identification', 'Referrer domain analysis', 'Apriori algorithm mining frequent page-set combinations', 'Association rules output with support, confidence, and lift metrics'],
-                approach: ['Defined Python parsing functions with timezone handling', 'Loaded log entries into Pandas DataFrame', 'Separated sessions and page activities', 'Aggregated visited pages by session/client as item baskets', 'Applied Apriori with tunable thresholds'],
-                architecture: [
-                    { label: 'Sources', top: 'SOURCES', value: 'Apache\nHTTP Logs', sub: 'apachelogs.txt' },
-                    { label: 'Parse', top: 'PARSE', value: 'Python\nPandas', sub: 'Structured DF', active: true },
-                    { label: 'Analyse', top: 'ANALYSE', value: 'Session\nReferrer', sub: 'EDA', active: true },
-                    { label: 'Mine', top: 'MINE', value: 'Apriori\nRules', sub: 'Patterns' },
-                    { label: 'Output', top: 'OUTPUT', value: 'Ranked\nRules', sub: 'Insights' },
-                ],
-                archDetails: [
-                    { label: 'Log Source', value: 'Apache HTTP access log — apachelogs.txt' },
-                    { label: 'Processing Stack', value: 'Python · Pandas — parsing, session extraction, EDA' },
-                    { label: 'Mining Algorithm', value: 'Apriori (apyori) — frequent itemsets and association rules' },
-                    { label: 'Rule Metrics', value: 'Support · Confidence · Lift' },
-                    { label: 'Outputs', value: 'Top visitor pairs · Referrer rankings · Frequent page rules DataFrames' },
-                ],
-                governance: ['Modular parsing functions ensure reproducibility', 'Apriori thresholds explicitly defined and tunable', 'IP and user agent data treated as behavioral signals only', 'Results clearly separated into session-level, page-level, and referrer-level analyses'],
-                results: [
-                    { num: 'RESULT 1', text: 'Converted dense, unstructured Apache logs into clean, queryable Pandas DataFrames.' },
-                    { num: 'RESULT 2', text: 'Surfaced top visitor/client pairs and leading referrer domains.' },
-                    { num: 'RESULT 3', text: 'Discovered frequent page co-occurrence rules using Apriori.' },
-                    { num: 'RESULT 4', text: 'Delivered fully parameterized rule mining with tunable support, confidence, and lift thresholds.' },
-                ],
-                tech: ['Python', 'Pandas', 'Apriori', 'apyori', 'Jupyter', 'Log Parsing', 'Association Rules', 'Session Mining'],
-                videoUrl: null,
-            },
-            patternmining: {
-                id: 'DM-02', category: 'Data Mining · Market Basket Analysis',
-                title: 'Pattern Mining with Association Rules',
-                subtitle: 'Market Basket Analysis pipeline applying the Apriori algorithm to transactional retail data.',
-                overview: `Developed a Market Basket Analysis pipeline in a Jupyter notebook to discover latent purchasing patterns within transactional retail data.`,
-                problems: [
-                    { num: '01', text: 'Hidden purchase patterns: Retail managers lacked visibility into which products customers consistently buy together.' },
-                    { num: '02', text: 'Manual co-occurrence analysis: Identifying item associations required impractical manual cross-referencing at scale.' },
-                    { num: '03', text: 'No ranking framework: There was no metric-driven framework to prioritize which associations had the highest business value.' },
-                    { num: '04', text: 'Variable transaction width: Transaction records contained NaN padding for shorter baskets, requiring preprocessing.' },
-                ],
-                baselineKpis: [
-                    { label: 'Dataset', value: 'storedata.csv — multi-item transaction records' },
-                    { label: 'Format', value: 'Tabular CSV; each row a transaction, NaN-padded to max width' },
-                    { label: 'Baseline analysis', value: 'None — no automated pattern detection in place' },
-                    { label: 'Rule metrics', value: 'Support, confidence, lift — computed per mined rule' },
-                ],
-                solution: `Built a clean MBA pipeline: loaded and preprocessed storedata.csv into a list-of-lists basket format, ran the Apriori algorithm with configurable thresholds, and converted results into structured Pandas DataFrames.`,
-                capabilities: ['Apriori algorithm mining frequent itemsets across all transaction baskets', 'Configurable min-support, confidence, lift, and itemset-length thresholds', 'NaN-aware transaction preprocessing', 'Association rules stored in structured Pandas DataFrames', 'Multi-metric ranking: sort rules by antecedent length, confidence, or support', 'Extended to secondary dataset (transactions.txt)'],
-                approach: ['Loaded storedata.csv into Pandas and inspected shape and data types', 'Preprocessed each row into a basket list, stripping NaN values', 'Ran Apriori with user-defined thresholds', 'Converted association rules to structured DataFrame', 'Sorted rules by multiple metrics', 'Replicated pipeline on transactions.txt'],
-                architecture: [
-                    { label: 'Sources', top: 'SOURCES', value: 'Store\nCSV / TXT', sub: 'Transactions' },
-                    { label: 'Prep', top: 'PREP', value: 'Pandas\nNaN Strip', sub: 'Baskets', active: true },
-                    { label: 'Mine', top: 'MINE', value: 'Apriori\napyori', sub: 'Frequent Sets', active: true },
-                    { label: 'Rank', top: 'RANK', value: 'DataFrame\nSort', sub: 'Rules' },
-                    { label: 'Output', top: 'OUTPUT', value: 'Business\nInsights', sub: 'Cross-Sell' },
-                ],
-                archDetails: [
-                    { label: 'Dataset', value: 'storedata.csv + transactions.txt — transactional retail records' },
-                    { label: 'Mining Algorithm', value: 'Apriori (apyori) — frequent itemsets and association rule generation' },
-                    { label: 'Processing Stack', value: 'Python · Pandas · NumPy' },
-                    { label: 'Rule Metrics', value: 'Support · Confidence · Lift · Antecedent Length' },
-                    { label: 'Visualization', value: 'Matplotlib — optional rule metric distribution plots' },
-                ],
-                governance: ['Apriori thresholds explicitly parameterized for auditability', 'NaN preprocessing documented and modular', 'Rules converted to DataFrames immediately after mining', 'Multi-dataset validation confirms pipeline generalizability'],
-                results: [
-                    { num: 'RESULT 1', text: 'Mined actionable frequent itemsets and ranked association rules from retail transaction data.' },
-                    { num: 'RESULT 2', text: 'Delivered rules ranked by confidence, support, and lift.' },
-                    { num: 'RESULT 3', text: 'Preprocessed NaN-padded variable-width transaction records into clean Apriori input.' },
-                    { num: 'RESULT 4', text: 'Validated pipeline generalizability on a second dataset (transactions.txt).' },
-                ],
-                tech: ['Python', 'Pandas', 'NumPy', 'Apriori', 'apyori', 'Matplotlib', 'Jupyter', 'Market Basket Analysis', 'Association Rules'],
-                videoUrl: null,
-            },
-        };
+            <!-- ── SCRIPTS ── -->
+            <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+            <script>
+                // NOTE: The full projectData object from the original HTML should be preserved here.
+                // Below is the same projectData from the original file.
+                const projectData = {
+                    researchagent: {
+                        id: 'AGENT-01', category: 'Agentic AI · Multi-Agent · Google ADK',
+                        title: 'Research Automation Agentic System',
+                        subtitle: 'Containerized multi-agent research assistant built with Python and Google ADK, automating literature review, evidence synthesis, and technical writing for data science and ML workflows.',
+                        overview: `As AI chatbots like ChatGPT, Gemini, and Claude become deeply embedded in daily workflows, many people have stopped doing deep, independent research — relying instead on single-turn LLM responses that may be outdated, shallow, or hallucinated. I built this Research Agent to counter that trend: a system that actively goes out, retrieves current information from multiple authoritative sources, synthesises evidence, and produces structured, verifiable outputs. It keeps me up to date with the latest trends in AI and data science without sacrificing the rigour of real research.`,
+                        problems: [
+                            { num: '01', text: 'Passive consumption: Widespread LLM chatbot usage has shifted people away from active, multi-source research — accepting single-model answers as ground truth.' },
+                            { num: '02', text: 'Information staleness: LLMs have fixed knowledge cutoffs; staying current on fast-moving ML and data science developments requires continuous retrieval from live sources.' },
+                            { num: '03', text: 'Synthesis bottleneck: Consolidating findings from web, arXiv, and Wikipedia into a coherent, structured report is time-consuming when done manually.' },
+                            { num: '04', text: 'No specialist division of labour: A single generalist prompt cannot simultaneously act as a rigorous researcher, a clear writer, and a quality editor.' },
+                        ],
+                        baselineKpis: [
+                            { label: 'Research method', value: 'Manual — browser tabs, copy-paste, ad-hoc prompts' },
+                            { label: 'Source coverage', value: 'Single LLM response, no cross-source verification' },
+                            { label: 'Output quality', value: 'Unstructured, inconsistent, not reproducible' },
+                            { label: 'Time to report', value: 'Hours of manual synthesis per topic' },
+                        ],
+                        solution: `Built a Python-based multi-agent system orchestrated by Google ADK. A planning module decomposes a research question into sequential tasks and routes each to a specialist agent: Researcher (retrieves and synthesises evidence), Writer (structures findings into a coherent draft), and Editor (refines for clarity and accuracy). All agents share the Gemini 2.0 Flash LLM and a unified HTTP session for tool calls across Tavily, arXiv, and Wikipedia.`,
+                        capabilities: [
+                            'Planning agent that decomposes any research question into an ordered task list',
+                            'Specialist Researcher agent pulling live data from Tavily web search, arXiv scholarly PDFs, and Wikipedia',
+                            'Writer agent structuring synthesised evidence into a readable technical report',
+                            'Editor agent reviewing and refining drafts for accuracy, clarity, and consistency',
+                            'Containerised deployment via Docker for reproducible, portable execution',
+                            'ADK Web UI and CLI runner for flexible interaction modes',
+                        ],
+                        approach: [
+                            'Defined specialist agents (Researcher, Writer, Editor) as Google ADK LlmAgents with scoped tool access',
+                            'Built a planning module that uses Gemini to generate an ordered task list from a freeform research question',
+                            'Implemented an executor router that dispatches each task to the correct specialist agent via ADK InMemoryRunner',
+                            'Integrated Tavily (web), arXiv (scholarly), and Wikipedia (context) as tool functions with a shared requests session',
+                            'Containerised the full stack in a python:3.11-slim Docker image with environment-variable credential management',
+                        ],
+                        architecture: [
+                            { label: 'Query', top: 'INPUT', value: 'Research\nQuestion', sub: 'CLI / Web UI' },
+                            { label: 'Plan', top: 'PLAN', value: 'Planning\nAgent', sub: 'Task List', active: true },
+                            { label: 'Research', top: 'RETRIEVE', value: 'Researcher\nAgent', sub: 'Web+arXiv', active: true },
+                            { label: 'Write', top: 'DRAFT', value: 'Writer +\nEditor', sub: 'Report' },
+                            { label: 'Output', top: 'OUTPUT', value: 'Structured\nReport', sub: 'Verified' },
+                        ],
+                        archDetails: [
+                            { label: 'LLM', value: 'Gemini 2.0 Flash · Google ADK InMemoryRunner' },
+                            { label: 'Agents', value: 'Planner · Researcher · Writer · Editor (Google ADK LlmAgent)' },
+                            { label: 'Research Tools', value: 'Tavily Web Search · arXiv PDF Scraper · Wikipedia Lookup' },
+                            { label: 'Orchestration', value: 'src/planning_agent.py — task decomposition + executor router' },
+                            { label: 'Infrastructure', value: 'Docker (python:3.11-slim) · .env credential management · .adk/ state' },
+                        ],
+                        governance: [
+                            'All API credentials stored exclusively in .env — never committed to source control',
+                            'Shared HTTP session with rate-limiting across Tavily, arXiv, and Wikipedia tool calls',
+                            'Modular agent design: each specialist operates within a scoped context, preventing role bleed',
+                            'Containerised environment ensures reproducible research outputs across machines',
+                            'ADK .adk/ directory tracks tool registration and local state for auditability',
+                        ],
+                        results: [
+                            { num: 'RESULT 1', text: 'Eliminated hours of manual research synthesis per topic — from question to structured report in a single automated pipeline run.' },
+                            { num: 'RESULT 2', text: 'Grounds all outputs in live, multi-source evidence (web, arXiv, Wikipedia), countering the staleness and hallucination risks of single-model LLM responses.' },
+                            { num: 'RESULT 3', text: 'Enables continuous self-education on AI and data science trends without surrendering research rigour to chatbot convenience.' },
+                            { num: 'RESULT 4', text: 'Demonstrates a reusable multi-agent architecture pattern applicable to any domain requiring automated literature review and report generation.' },
+                        ],
+                        tech: ['Google ADK', 'Gemini 2.0 Flash', 'Python', 'Tavily', 'arXiv', 'Wikipedia', 'Docker', 'FastAPI', 'Multi-Agent Systems', 'LLM Orchestration'],
+                        videoUrl: null,
+                    },
+                    netflix: {
+                        id: 'AI-01',
+                        category: 'AI & ML · Fall 2025',
+                        title: 'Netflix-style AI Recommender & Executive Analytics Platform',
+                        subtitle: 'End-to-end data platform simulating a Netflix-style streaming company with AI-powered recommendations and executive dashboards.',
+                        overview: `This project is an end-to-end data platform that simulates a Netflix-style streaming company using a large, production-like synthetic dataset. It spans operational OLTP databases, NoSQL systems, a Hive-based big-data warehouse, and a new AI-driven business application for both end users and executives.`,
+                        problems: [
+                            { num: '01', text: 'Cold-start gap: No real-time semantic search — users relied on keyword-only catalog navigation.' },
+                            { num: '02', text: 'Data silos: Operational OLTP, S3 raw files, and analytics all lived in disconnected systems with no unified access layer.' },
+                            { num: '03', text: 'No AI layer: The existing stack lacked any vector search, embedding model, or generative AI capability.' },
+                            { num: '04', text: 'Executive blind spots: No interactive dashboards for catalog performance, engagement, or audience behavior analysis.' },
+                            { num: '05', text: 'Scalability risk: Monolithic MySQL queries could not support analytical workloads over millions of watch-event rows.' },
+                        ],
+                        baselineKpis: [
+                            { label: 'Search paradigm', value: 'Keyword-only (no semantic understanding)' },
+                            { label: 'Data warehouse', value: 'None — raw MySQL OLTP only' },
+                            { label: 'Analytics cadence', value: 'Ad-hoc SQL pulls, no dashboard' },
+                            { label: 'AI capabilities', value: 'None deployed in production' },
+                        ],
+                        solution: `Architected a full-stack AI platform coupling a Hive-on-EMR star-schema warehouse, a ChromaDB vector store for semantic search, a MongoDB clickstream logger, and a FastAPI + Gradio front end.`,
+                        capabilities: [
+                            'Real-time semantic search via ChromaDB (all-MiniLM-L6-v2 embeddings)',
+                            'AI-generated content posters using Stable Diffusion',
+                            'LangChain RAG pipeline for context-aware recommendations',
+                            'Executive dashboards: hidden gems, vintage content, demographic patterns, geographic genre preferences',
+                            'Full clickstream audit log in MongoDB for UX analysis and future model training',
+                            'Multi-environment MySQL auth + analytics warehouse (dw_netflix_analytics)',
+                        ],
+                        approach: [
+                            'ETL flows: S3 CSV → Hive Parquet star schema (fact + dim tables, partition pruning)',
+                            'Vector index: HuggingFace embeddings → ChromaDB for sub-second similarity retrieval',
+                            'FastAPI orchestration mediating MySQL, MongoDB, ChromaDB, and AI model calls',
+                            'Gradio Blocks multi-page UI: user login, AI search, admin portal, analytics dashboard',
+                        ],
+                        architecture: [
+                            { label: 'Sources', top: 'SOURCES', value: 'MySQL\nS3 / Hive', sub: 'Raw Data' },
+                            { label: 'Ingest', top: 'INGEST', value: 'EMR\nHive', sub: 'Star Schema' },
+                            { label: 'Transform', top: 'TRANSFORM', value: 'ChromaDB\ndbt/SQL', sub: 'Embeddings', active: true },
+                            { label: 'Serve', top: 'SERVE', value: 'FastAPI\nGradio', sub: 'App Layer', active: true },
+                            { label: 'Consume', top: 'CONSUME', value: '2\nPortals', sub: 'User + Exec' },
+                        ],
+                        archDetails: [
+                            { label: 'AI / Vector Store', value: 'ChromaDB · HuggingFace all-MiniLM-L6-v2 · Stable Diffusion' },
+                            { label: 'Backend / API', value: 'FastAPI · Uvicorn · LangChain RAG pipeline' },
+                            { label: 'Databases', value: 'MySQL (Auth + Analytics) · MongoDB (Clickstream) · ChromaDB' },
+                            { label: 'Big Data', value: 'Apache Hive on Amazon EMR · S3 · Parquet Star Schema' },
+                            { label: 'Frontend', value: 'Gradio Blocks · HTML/CSS · Multi-route mounting' },
+                        ],
+                        governance: [
+                            'SHA-256 password hashing for all user and admin credentials',
+                            'Role-based access: separate user and admin portals with distinct data permissions',
+                            'Immutable MongoDB audit log capturing every click, login, and navigation event',
+                            'Modular database auto-creation on startup; MySQL credentials centralized in config',
+                            'Partition pruning and Parquet formatting to prevent runaway scan costs on EMR',
+                        ],
+                        results: [
+                            { num: 'RESULT 1', text: 'Enabled sub-second natural-language search over thousands of titles via vector similarity.' },
+                            { num: 'RESULT 2', text: 'Unified 4 disparate data stores (MySQL, S3/Hive, MongoDB, ChromaDB) into a single cohesive application stack.' },
+                            { num: 'RESULT 3', text: 'Delivered dual-facing product: AI-powered "Ask Netflix" for subscribers and an interactive analytics portal for executives.' },
+                            { num: 'RESULT 4', text: 'Achieved production-like data quality through Parquet conversion and dynamic partition tuning, enabling DAU and engagement queries at scale.' },
+                        ],
+                        tech: ['LangChain', 'ChromaDB', 'FastAPI', 'Gradio', 'Hive / EMR', 'MySQL', 'MongoDB', 'HuggingFace', 'Stable Diffusion', 'Python', 'AWS S3'],
+                        videoUrl: 'https://youtu.be/divvz5rfEiE?si=9tNabdRgbbn7kPBo',
+                    },
+                    newsmining: {
+                        id: 'NLP-02', category: 'NLP · Web Mining · Deployed App',
+                        title: 'Newspaper Text Mining & Recommendation Platform',
+                        subtitle: 'End-to-end NLP and web mining platform scraping 4 major newspapers, clustering articles by latent topic, and serving live recommendations via a deployed Streamlit application.',
+                        overview: `Developed an end-to-end NLP and web mining solution to extract, classify, and recommend news content from multiple online sources.`,
+                        problems: [
+                            { num: '01', text: 'Information fragmentation: News consumers had to manually visit four separate newspaper sites.' },
+                            { num: '02', text: 'No topic organization: Raw scraped articles had no automated categorization or topic grouping.' },
+                            { num: '03', text: 'Manual content curation: Identifying thematically related articles across sources required human editorial effort.' },
+                            { num: '04', text: 'No interactive access layer: Users needed a deployable interface to explore recommendations.' },
+                        ],
+                        baselineKpis: [
+                            { label: 'Sources scraped', value: '4 major online newspapers' },
+                            { label: 'Categories', value: 'Business · Politics · Arts/Culture/Celebrities · Sports' },
+                            { label: 'Output format', value: 'Structured CSV datasets for scalable analysis' },
+                            { label: 'Deployment', value: 'Live Streamlit app — publicly accessible' },
+                        ],
+                        solution: `Built a Python spider-based scraping pipeline collecting articles from four newspapers and storing them in structured CSV datasets. Applied unsupervised clustering algorithms to organize articles into latent topic groups.`,
+                        capabilities: ['Python spider collecting articles from 4 major online newspapers', 'Article categorization into Business, Politics, Arts/Culture/Celebrities, and Sports', 'Unsupervised clustering to uncover latent topic groups', 'CSV data pipeline: raw HTML → structured article datasets', 'Streamlit web application serving cluster-based article recommendations', 'Live deployed application accessible publicly via Streamlit Cloud'],
+                        approach: ['Built Python web spider to scrape article text, headlines, and URLs', 'Preprocessed raw text: cleaning, tokenization, and vectorization', 'Applied clustering algorithms to group articles by latent topic', 'Structured article data into CSV datasets', 'Designed and deployed interactive Streamlit app'],
+                        architecture: [
+                            { label: 'Sources', top: 'SOURCES', value: '4 News\nSites', sub: 'Web Scrape' },
+                            { label: 'Extract', top: 'EXTRACT', value: 'Python\nSpider', sub: 'CSV Pipeline', active: true },
+                            { label: 'Cluster', top: 'CLUSTER', value: 'NLP\nClustering', sub: 'Topic Groups', active: true },
+                            { label: 'Serve', top: 'SERVE', value: 'Streamlit\nApp', sub: 'Recommender' },
+                            { label: 'Consume', top: 'CONSUME', value: 'Live\nUsers', sub: 'Deployed ↗' },
+                        ],
+                        archDetails: [
+                            { label: 'Scraping', value: 'Python spider — 4 newspaper sources' },
+                            { label: 'NLP Pipeline', value: 'Text cleaning · Tokenization · Vectorization · Clustering' },
+                            { label: 'Clustering', value: 'K-means / hierarchical clustering' },
+                            { label: 'Data Layer', value: 'CSV datasets' },
+                            { label: 'Frontend', value: 'Streamlit — cluster explorer, article browser, URL navigation' },
+                        ],
+                        governance: ['Scraping pipeline respects robots.txt and rate-limits requests', 'CSV datasets versioned alongside notebook code', 'Clustering parameters exposed as configurable inputs', 'Streamlit app serves only article metadata and URLs'],
+                        results: [
+                            { num: 'RESULT 1', text: 'Deployed a live, publicly accessible Streamlit application enabling multi-source news discovery across 4 newspapers.' },
+                            { num: 'RESULT 2', text: 'Automated article collection, categorization (4 topics), and clustering.' },
+                            { num: 'RESULT 3', text: 'Applied unsupervised clustering to surface latent topic groups across sources.' },
+                            { num: 'RESULT 4', text: 'Demonstrated end-to-end ML deployment: from web scraping and NLP to a live user-facing application.' },
+                        ],
+                        tech: ['Python', 'Web Scraping', 'NLP', 'Clustering', 'Streamlit', 'CSV Pipelines', 'Unsupervised Learning', 'Text Mining'],
+                        videoUrl: 'https://web-mining-and-recommender-systems-puf6ohwpydd3upj4emcmmn.streamlit.app/',
+                    },
+                    retail: {
+                        id: 'AI-02', category: 'AI & ML · GCP · RAG',
+                        title: 'AI-Powered Retail Q&A App',
+                        subtitle: 'Natural-language question-answering system over retail transaction data using Vertex AI embeddings, pgvector semantic search on Cloud SQL PostgreSQL, and LangChain orchestration.',
+                        overview: `Built an end-to-end AI-powered question-answering application for a fictional retail company using Google Cloud Vertex AI, LangChain, and PostgreSQL on Cloud SQL.`,
+                        problems: [
+                            { num: '01', text: 'Keyword-only access: Analysts could only retrieve retail data through rigid SQL queries.' },
+                            { num: '02', text: 'Hallucination risk: Generic LLM responses could not be grounded in actual transaction data without a retrieval layer.' },
+                            { num: '03', text: 'Vector infrastructure gap: Existing Cloud SQL PostgreSQL had no embedding or similarity-search capability.' },
+                            { num: '04', text: 'Orchestration complexity: Coordinating embedding, retrieval, and generation required a unified pipeline.' },
+                        ],
+                        baselineKpis: [
+                            { label: 'Query paradigm', value: 'SQL keyword-only — no semantic search' },
+                            { label: 'LLM grounding', value: 'None — raw generative model, no retrieval' },
+                            { label: 'Vector capability', value: 'None — pgvector not yet enabled' },
+                            { label: 'Pipeline', value: 'No embed → retrieve → generate flow' },
+                        ],
+                        solution: `Implemented a RAG pipeline: retail data is embedded at ingest time using Vertex AI TextEmbeddingModel and stored as vector columns in Cloud SQL PostgreSQL via the pgvector extension.`,
+                        capabilities: ['Vertex AI TextEmbeddingModel for document and query embedding', 'pgvector extension on Cloud SQL PostgreSQL enabling cosine similarity search', 'LangChain chain orchestration', 'Vertex AI GenerativeModel for grounded answer synthesis', 'Async Cloud SQL connector (asyncpg) for low-latency vector retrieval'],
+                        approach: ['Provisioned Cloud SQL PostgreSQL instance with pgvector extension', 'Loaded product and transaction tables with vector columns', 'Built LangChain chain: user query → VertexAIEmbeddings → pgvector similarity search → context window', 'Passed retrieved rows as structured context to Vertex AI GenerativeModel'],
+                        architecture: [
+                            { label: 'Sources', top: 'SOURCES', value: 'Retail\nTables', sub: 'Transactions' },
+                            { label: 'Embed', top: 'EMBED', value: 'Vertex AI\nEmbeddings', sub: 'Vectors', active: true },
+                            { label: 'Retrieve', top: 'RETRIEVE', value: 'pgvector\nCloud SQL', sub: 'Similarity', active: true },
+                            { label: 'Generate', top: 'GENERATE', value: 'Vertex AI\nGenModel', sub: 'RAG Answer' },
+                            { label: 'Consume', top: 'CONSUME', value: 'Notebook\nUI', sub: 'Business User' },
+                        ],
+                        archDetails: [
+                            { label: 'Embedding Model', value: 'Vertex AI TextEmbeddingModel · LangChain VertexAIEmbeddings' },
+                            { label: 'Vector Store', value: 'Cloud SQL for PostgreSQL · pgvector extension (cosine similarity)' },
+                            { label: 'Generative Model', value: 'Vertex AI GenerativeModel' },
+                            { label: 'Orchestration', value: 'LangChain chains · asyncpg connector' },
+                            { label: 'Infrastructure', value: 'GCP: Vertex AI API · Cloud SQL Admin API' },
+                        ],
+                        governance: ['Answers grounded exclusively in retrieved database rows', 'Service account with scoped Vertex AI and Cloud SQL permissions', 'pgvector similarity threshold controls retrieval quality', 'Dependency versions pinned for reproducibility'],
+                        results: [
+                            { num: 'RESULT 1', text: 'Enabled business users to ask free-text questions over retail transaction data.' },
+                            { num: 'RESULT 2', text: 'Grounded all LLM answers in actual retrieved database rows, eliminating hallucination risk.' },
+                            { num: 'RESULT 3', text: 'Demonstrated full end-to-end RAG pipeline on GCP.' },
+                            { num: 'RESULT 4', text: 'Delivered a reusable architectural pattern applicable to any structured enterprise data source on Cloud SQL.' },
+                        ],
+                        tech: ['Vertex AI', 'LangChain', 'pgvector', 'Cloud SQL', 'PostgreSQL', 'Python', 'GCP', 'RAG', 'asyncpg', 'Jupyter'],
+                        videoUrl: null,
+                    },
+                    crime: {
+                        id: 'VIZ-01', category: 'Analytics · Visualization · 2021–2023',
+                        title: 'Crime Analysis Dashboard',
+                        subtitle: 'Interactive Tableau workbook summarizing 2,500+ crime incidents across European countries (Sept 2021 – Nov 2023).',
+                        overview: `The Crime Analysis Dashboard is an interactive Tableau workbook that consolidates crime incident data across multiple European countries between September 2021 and November 2023.`,
+                        problems: [
+                            { num: '01', text: 'Fragmented reporting: Crime data lived in disconnected spreadsheets with no unified analytical view.' },
+                            { num: '02', text: 'No temporal visibility: Command staff could not identify high-risk time windows.' },
+                            { num: '03', text: 'Resolution blind spots: Unresolved backlogs were not tracked accessibly for leadership.' },
+                            { num: '04', text: 'Geographic comparison gaps: Cross-country benchmarking required manual table scanning.' },
+                            { num: '05', text: 'Static snapshots: Existing reports could not be filtered interactively.' },
+                        ],
+                        baselineKpis: [
+                            { label: 'Total incidents analysed', value: '2,500 crime records (Sept 2021 – Nov 2023)' },
+                            { label: 'Resolution rate', value: '70.04% resolved by authority efforts' },
+                            { label: 'Unresolved share', value: '29.96% of incidents lack resolution' },
+                            { label: 'Peak crime hour', value: '9:00 PM – 11:59 PM (583 incidents)' },
+                            { label: 'Peak crime month', value: 'October (309 incidents, +22% MoM)' },
+                        ],
+                        solution: `Designed and built a fully interactive Tableau workbook integrating a fact table of 2,500+ crime records with a lookup table mapping offense type IDs to readable descriptions.`,
+                        capabilities: ['Yearly bar chart with variance indicators for year-over-year comparison', 'Headline KPIs: total crimes, 70.04% resolution rate, 29.96% unresolved share', 'Monthly trend line with month-over-month % change labels', 'Proportional-symbol map (Mapbox)', 'Top-N crime type bar chart driven by a parameter slider', 'Hourly bucket bar chart', 'Month × Weekday heatmap', 'Global interactive filters'],
+                        approach: ['Joined Crimes-Data.xlsx and Other-Data.xlsx in Tableau', 'Derived calculated fields: Year, Month, Weekday', 'Built resolution metrics as calculated measures', 'Applied consistent color encoding', 'Configured marks as global filters'],
+                        architecture: [
+                            { label: 'Sources', top: 'SOURCES', value: 'Excel\nFact+Lookup', sub: 'Raw Data' },
+                            { label: 'Prep', top: 'PREP', value: 'Tableau\nJoins', sub: 'Data Model' },
+                            { label: 'Calc', top: 'CALC', value: 'Derived\nFields', sub: 'KPIs', active: true },
+                            { label: 'Visualise', top: 'VISUALISE', value: '8-Panel\nDashboard', sub: 'Tableau', active: true },
+                            { label: 'Consume', top: 'CONSUME', value: 'Command\nStaff', sub: 'Decisions' },
+                        ],
+                        archDetails: [
+                            { label: 'BI Tool', value: 'Tableau Desktop — 8 coordinated visual panels' },
+                            { label: 'Data Sources', value: 'Crimes-Data.xlsx (fact) · Other-Data.xlsx (crime-type lookup)' },
+                            { label: 'Derived Fields', value: 'Year, Month, Weekday, Hourly Bucket, Resolution Rate, Top-N Rank' },
+                            { label: 'Geospatial Layer', value: 'Mapbox proportional-symbol map by country' },
+                            { label: 'Interactivity', value: 'Global filters · Mark-as-filter · Top-N parameter slider' },
+                        ],
+                        governance: ['Date-range filter ensures all panels stay in scope', 'Resolution slider cleanly separates resolved and unresolved views', 'Top-N parameter prevents overloaded bar charts', 'Color encoding is consistent and purposeful', 'Heatmap metric toggles allow switching between counts and rates'],
+                        results: [
+                            { num: 'RESULT 1', text: 'Delivered a single-pane dashboard replacing 2+ disconnected spreadsheets, covering 2,500 incidents across 5+ European countries.' },
+                            { num: 'RESULT 2', text: 'Surfaced October as the peak crime month (+22% MoM) and 9 PM–11:59 PM as the highest-risk window.' },
+                            { num: 'RESULT 3', text: 'Exposed that Violence and Sexual Offences (959 incidents) account for 38% of all crime.' },
+                            { num: 'RESULT 4', text: 'Made the 29.96% unresolved rate visible in a headline KPI accessible to non-technical leadership.' },
+                            { num: 'RESULT 5', text: 'Enabled drill-down from national view → country → crime type → weekday in under 3 clicks.' },
+                        ],
+                        tech: ['Tableau', 'Mapbox', 'Excel', 'Calculated Fields', 'Parameter Controls', 'Heatmap', 'KPI Design'],
+                        videoUrl: null,
+                        previewImg: 'Crime_Analysis_Dashboard.png',
+                    },
+                    sentiment: {
+                        id: 'NLP-01', category: 'NLP · ML · Spark · E-Commerce',
+                        title: 'Sentiment Analysis Pipeline for E-Commerce Customer Insights',
+                        subtitle: 'End-to-end NLP pipeline classifying customer sentiment from X (Twitter) posts using TensorFlow, Scikit-learn, and Apache Spark.',
+                        overview: `Led the end-to-end development of a natural language processing pipeline to analyze and classify customer sentiment from X (Twitter) posts related to e-commerce brands and products.`,
+                        problems: [
+                            { num: '01', text: 'Unstructured feedback at scale: Thousands of daily X (Twitter) posts contained rich customer sentiment buried in unstructured free text.' },
+                            { num: '02', text: 'No sentiment classification: Without NLP models, support teams could not distinguish positive, negative, or neutral brand mentions.' },
+                            { num: '03', text: 'Scale bottleneck: Volume of social data exceeded single-machine processing capacity.' },
+                            { num: '04', text: 'Insight accessibility gap: Raw NLP outputs were not consumable by non-technical stakeholders.' },
+                        ],
+                        baselineKpis: [
+                            { label: 'Data source', value: 'X (Twitter) posts — e-commerce brands & products' },
+                            { label: 'Baseline approach', value: 'Manual review — no automated sentiment scoring' },
+                            { label: 'Processing scale', value: 'Single-machine bottleneck, no distributed pipeline' },
+                            { label: 'Reporting', value: 'Ad-hoc — no dashboard, no trend visualization' },
+                        ],
+                        solution: `Built a scalable NLP pipeline combining TensorFlow deep learning models and Scikit-learn classical ML for multi-class sentiment classification. Apache Spark handled distributed data processing and model training at volume.`,
+                        capabilities: ['Deep learning text classifiers (TensorFlow) for sentiment polarity prediction', 'Classical ML models (Scikit-learn) for text classification', 'Apache Spark distributed processing', 'Power BI dashboards: sentiment trend lines, brand comparison, spike detection', 'Information extraction pipeline'],
+                        approach: ['Ingested and preprocessed large volumes of X (Twitter) posts via distributed Spark pipelines', 'Engineered text features for both deep learning and classical models', 'Trained and evaluated TensorFlow and Scikit-learn models', 'Built Power BI reports aggregating model outputs'],
+                        architecture: [
+                            { label: 'Sources', top: 'SOURCES', value: 'X Posts\nTweets', sub: 'Social Data' },
+                            { label: 'Process', top: 'PROCESS', value: 'Apache\nSpark', sub: 'Distributed', active: true },
+                            { label: 'Model', top: 'MODEL', value: 'TensorFlow\nSklearn', sub: 'NLP / ML', active: true },
+                            { label: 'Output', top: 'OUTPUT', value: 'Sentiment\nScores', sub: 'Classified' },
+                            { label: 'Consume', top: 'CONSUME', value: 'Power BI\nDashboards', sub: 'Insights' },
+                        ],
+                        archDetails: [
+                            { label: 'Deep Learning', value: 'TensorFlow — text classification, sentiment polarity prediction' },
+                            { label: 'Classical ML', value: 'Scikit-learn — text classification, information extraction' },
+                            { label: 'Distributed Compute', value: 'Apache Spark — scalable data processing & distributed model training' },
+                            { label: 'Visualization', value: 'Power BI — sentiment trend dashboards, brand comparison reports' },
+                            { label: 'NLP Techniques', value: 'Tokenization · Embeddings · TF-IDF · Sentiment Polarity' },
+                        ],
+                        governance: ['Model outputs validated against labelled sentiment benchmarks', 'Spark pipeline designed for reproducibility', 'Power BI reports scoped by brand/product', 'Insight delivery cycle aligned with cross-functional team review cadences'],
+                        results: [
+                            { num: 'RESULT 1', text: 'Automated sentiment classification across thousands of daily brand mentions.' },
+                            { num: 'RESULT 2', text: 'Delivered Power BI sentiment trend dashboards giving cross-functional teams real-time visibility.' },
+                            { num: 'RESULT 3', text: 'Enabled Apache Spark distributed training to overcome single-machine scale limits.' },
+                            { num: 'RESULT 4', text: 'Insights directly improved conversational AI systems in digital commerce environments.' },
+                        ],
+                        tech: ['TensorFlow', 'Scikit-learn', 'Apache Spark', 'Python', 'Power BI', 'NLP', 'Text Classification', 'Sentiment Analysis'],
+                        videoUrl: null,
+                    },
+                    webusage: {
+                        id: 'DM-01', category: 'Data Mining · Web Analytics',
+                        title: 'Web Usage Mining Analytics',
+                        subtitle: 'Apache web server log analysis pipeline extracting session statistics, referrer patterns, and frequent page co-occurrence rules via the Apriori algorithm.',
+                        overview: `Developed a comprehensive Jupyter notebook-based pipeline to parse, process, and mine behavioral patterns from Apache HTTP access logs.`,
+                        problems: [
+                            { num: '01', text: 'Raw, unstructured logs: Apache access logs are dense, multi-field text files requiring custom parsing.' },
+                            { num: '02', text: 'No session visibility: Raw logs record individual requests but do not surface session-level behavior.' },
+                            { num: '03', text: 'Referrer blind spots: Marketing and content teams had no automated view of which external domains were driving traffic.' },
+                            { num: '04', text: 'Hidden page co-occurrence patterns: UX teams could not identify which pages users frequently visit together.' },
+                        ],
+                        baselineKpis: [
+                            { label: 'Log format', value: 'Apache HTTP access log (apachelogs.txt)' },
+                            { label: 'Parsed fields', value: 'IP, timestamp, resource, referrer, user agent, status, object size' },
+                            { label: 'Analysis method', value: 'Manual inspection — no automated mining' },
+                            { label: 'Pattern detection', value: 'None — page co-occurrence not previously analyzed' },
+                        ],
+                        solution: `Built a modular Python/Pandas pipeline that parses Apache logs into structured DataFrames, extracts session and pageview statistics, ranks top visitor and referrer sources, then applies the Apriori algorithm.`,
+                        capabilities: ['Modular log parsing functions extracting IP, timestamp, resource, referrer, user agent, status, and object size', 'Session extraction and per-user pageview tracking', 'Top visitor/client pair identification', 'Referrer domain analysis', 'Apriori algorithm mining frequent page-set combinations', 'Association rules output with support, confidence, and lift metrics'],
+                        approach: ['Defined Python parsing functions with timezone handling', 'Loaded log entries into Pandas DataFrame', 'Separated sessions and page activities', 'Aggregated visited pages by session/client as item baskets', 'Applied Apriori with tunable thresholds'],
+                        architecture: [
+                            { label: 'Sources', top: 'SOURCES', value: 'Apache\nHTTP Logs', sub: 'apachelogs.txt' },
+                            { label: 'Parse', top: 'PARSE', value: 'Python\nPandas', sub: 'Structured DF', active: true },
+                            { label: 'Analyse', top: 'ANALYSE', value: 'Session\nReferrer', sub: 'EDA', active: true },
+                            { label: 'Mine', top: 'MINE', value: 'Apriori\nRules', sub: 'Patterns' },
+                            { label: 'Output', top: 'OUTPUT', value: 'Ranked\nRules', sub: 'Insights' },
+                        ],
+                        archDetails: [
+                            { label: 'Log Source', value: 'Apache HTTP access log — apachelogs.txt' },
+                            { label: 'Processing Stack', value: 'Python · Pandas — parsing, session extraction, EDA' },
+                            { label: 'Mining Algorithm', value: 'Apriori (apyori) — frequent itemsets and association rules' },
+                            { label: 'Rule Metrics', value: 'Support · Confidence · Lift' },
+                            { label: 'Outputs', value: 'Top visitor pairs · Referrer rankings · Frequent page rules DataFrames' },
+                        ],
+                        governance: ['Modular parsing functions ensure reproducibility', 'Apriori thresholds explicitly defined and tunable', 'IP and user agent data treated as behavioral signals only', 'Results clearly separated into session-level, page-level, and referrer-level analyses'],
+                        results: [
+                            { num: 'RESULT 1', text: 'Converted dense, unstructured Apache logs into clean, queryable Pandas DataFrames.' },
+                            { num: 'RESULT 2', text: 'Surfaced top visitor/client pairs and leading referrer domains.' },
+                            { num: 'RESULT 3', text: 'Discovered frequent page co-occurrence rules using Apriori.' },
+                            { num: 'RESULT 4', text: 'Delivered fully parameterized rule mining with tunable support, confidence, and lift thresholds.' },
+                        ],
+                        tech: ['Python', 'Pandas', 'Apriori', 'apyori', 'Jupyter', 'Log Parsing', 'Association Rules', 'Session Mining'],
+                        videoUrl: null,
+                    },
+                    patternmining: {
+                        id: 'DM-02', category: 'Data Mining · Market Basket Analysis',
+                        title: 'Pattern Mining with Association Rules',
+                        subtitle: 'Market Basket Analysis pipeline applying the Apriori algorithm to transactional retail data.',
+                        overview: `Developed a Market Basket Analysis pipeline in a Jupyter notebook to discover latent purchasing patterns within transactional retail data.`,
+                        problems: [
+                            { num: '01', text: 'Hidden purchase patterns: Retail managers lacked visibility into which products customers consistently buy together.' },
+                            { num: '02', text: 'Manual co-occurrence analysis: Identifying item associations required impractical manual cross-referencing at scale.' },
+                            { num: '03', text: 'No ranking framework: There was no metric-driven framework to prioritize which associations had the highest business value.' },
+                            { num: '04', text: 'Variable transaction width: Transaction records contained NaN padding for shorter baskets, requiring preprocessing.' },
+                        ],
+                        baselineKpis: [
+                            { label: 'Dataset', value: 'storedata.csv — multi-item transaction records' },
+                            { label: 'Format', value: 'Tabular CSV; each row a transaction, NaN-padded to max width' },
+                            { label: 'Baseline analysis', value: 'None — no automated pattern detection in place' },
+                            { label: 'Rule metrics', value: 'Support, confidence, lift — computed per mined rule' },
+                        ],
+                        solution: `Built a clean MBA pipeline: loaded and preprocessed storedata.csv into a list-of-lists basket format, ran the Apriori algorithm with configurable thresholds, and converted results into structured Pandas DataFrames.`,
+                        capabilities: ['Apriori algorithm mining frequent itemsets across all transaction baskets', 'Configurable min-support, confidence, lift, and itemset-length thresholds', 'NaN-aware transaction preprocessing', 'Association rules stored in structured Pandas DataFrames', 'Multi-metric ranking: sort rules by antecedent length, confidence, or support', 'Extended to secondary dataset (transactions.txt)'],
+                        approach: ['Loaded storedata.csv into Pandas and inspected shape and data types', 'Preprocessed each row into a basket list, stripping NaN values', 'Ran Apriori with user-defined thresholds', 'Converted association rules to structured DataFrame', 'Sorted rules by multiple metrics', 'Replicated pipeline on transactions.txt'],
+                        architecture: [
+                            { label: 'Sources', top: 'SOURCES', value: 'Store\nCSV / TXT', sub: 'Transactions' },
+                            { label: 'Prep', top: 'PREP', value: 'Pandas\nNaN Strip', sub: 'Baskets', active: true },
+                            { label: 'Mine', top: 'MINE', value: 'Apriori\napyori', sub: 'Frequent Sets', active: true },
+                            { label: 'Rank', top: 'RANK', value: 'DataFrame\nSort', sub: 'Rules' },
+                            { label: 'Output', top: 'OUTPUT', value: 'Business\nInsights', sub: 'Cross-Sell' },
+                        ],
+                        archDetails: [
+                            { label: 'Dataset', value: 'storedata.csv + transactions.txt — transactional retail records' },
+                            { label: 'Mining Algorithm', value: 'Apriori (apyori) — frequent itemsets and association rule generation' },
+                            { label: 'Processing Stack', value: 'Python · Pandas · NumPy' },
+                            { label: 'Rule Metrics', value: 'Support · Confidence · Lift · Antecedent Length' },
+                            { label: 'Visualization', value: 'Matplotlib — optional rule metric distribution plots' },
+                        ],
+                        governance: ['Apriori thresholds explicitly parameterized for auditability', 'NaN preprocessing documented and modular', 'Rules converted to DataFrames immediately after mining', 'Multi-dataset validation confirms pipeline generalizability'],
+                        results: [
+                            { num: 'RESULT 1', text: 'Mined actionable frequent itemsets and ranked association rules from retail transaction data.' },
+                            { num: 'RESULT 2', text: 'Delivered rules ranked by confidence, support, and lift.' },
+                            { num: 'RESULT 3', text: 'Preprocessed NaN-padded variable-width transaction records into clean Apriori input.' },
+                            { num: 'RESULT 4', text: 'Validated pipeline generalizability on a second dataset (transactions.txt).' },
+                        ],
+                        tech: ['Python', 'Pandas', 'NumPy', 'Apriori', 'apyori', 'Matplotlib', 'Jupyter', 'Market Basket Analysis', 'Association Rules'],
+                        videoUrl: null,
+                    },
+                };
 
-        // ── MODAL OPEN/CLOSE ──────────────────────────────────────────────────
-        function openModal(key) {
-            const p = projectData[key];
-            if (!p) return;
-            document.getElementById('modal-content-box').innerHTML = buildModal(p);
-            document.getElementById('project-modal').classList.add('open');
-            document.body.style.overflow = 'hidden';
-        }
+                // ── MODAL OPEN/CLOSE ──────────────────────────────────────────────────
+                function openModal(key) {
+                    const p = projectData[key];
+                    if (!p) return;
+                    document.getElementById('modal-content-box').innerHTML = buildModal(p);
+                    document.getElementById('project-modal').classList.add('open');
+                    document.body.style.overflow = 'hidden';
+                }
 
-        function closeModal() {
-            document.getElementById('project-modal').classList.remove('open');
-            document.body.style.overflow = '';
-        }
+                function closeModal() {
+                    document.getElementById('project-modal').classList.remove('open');
+                    document.body.style.overflow = '';
+                }
 
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+                document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-        // ── MODAL HTML BUILDER ────────────────────────────────────────────────
-        function buildModal(p) {
-            return `
+                // ── MODAL HTML BUILDER ────────────────────────────────────────────────
+                function buildModal(p) {
+                    return `
         <div style="position:sticky;top:0;z-index:10;background:#0a0a0a;border-bottom:1px solid #1a1a1a;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;">
           <div style="display:flex;align-items:center;gap:14px;">
             <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:#d4d4d8;border:1px solid #1f1f1f;padding:3px 10px;">${p.id}</span>
@@ -2474,104 +2494,104 @@
           </div>
         </div>
       `;
-        }
+                }
 
-        // ── TYPING EFFECT ─────────────────────────────────────────────────────
-        const words = ["Drives Decisions.", "Scales with Data.", "Forecasts the Future.", "Ships to Production."];
-        let wordIdx = 0, charIdx = 0, isDeleting = false;
-        const typingEl = document.getElementById('typing-text');
+                // ── TYPING EFFECT ─────────────────────────────────────────────────────
+                const words = ["Drives Decisions.", "Scales with Data.", "Forecasts the Future.", "Ships to Production."];
+                let wordIdx = 0, charIdx = 0, isDeleting = false;
+                const typingEl = document.getElementById('typing-text');
 
-        function type() {
-            const currentWord = words[wordIdx];
-            if (isDeleting) { typingEl.textContent = currentWord.substring(0, charIdx - 1); charIdx--; }
-            else { typingEl.textContent = currentWord.substring(0, charIdx + 1); charIdx++; }
-            if (!isDeleting && charIdx === currentWord.length) { isDeleting = true; setTimeout(type, 2000); }
-            else if (isDeleting && charIdx === 0) { isDeleting = false; wordIdx = (wordIdx + 1) % words.length; setTimeout(type, 500); }
-            else { setTimeout(type, isDeleting ? 50 : 100); }
-        }
+                function type() {
+                    const currentWord = words[wordIdx];
+                    if (isDeleting) { typingEl.textContent = currentWord.substring(0, charIdx - 1); charIdx--; }
+                    else { typingEl.textContent = currentWord.substring(0, charIdx + 1); charIdx++; }
+                    if (!isDeleting && charIdx === currentWord.length) { isDeleting = true; setTimeout(type, 2000); }
+                    else if (isDeleting && charIdx === 0) { isDeleting = false; wordIdx = (wordIdx + 1) % words.length; setTimeout(type, 500); }
+                    else { setTimeout(type, isDeleting ? 50 : 100); }
+                }
 
-        // ── SCROLL REVEAL ────────────────────────────────────────────────────
-        function reveal() {
-            document.querySelectorAll('.reveal').forEach(el => {
-                if (el.getBoundingClientRect().top < window.innerHeight - 150) el.classList.add('active');
-            });
-        }
-
-        // ── NAVBAR SCROLL ────────────────────────────────────────────────────
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('main-nav');
-            if (window.scrollY > 100) { nav.classList.add('bg-black/80', 'border-zinc-900'); nav.classList.remove('border-transparent'); }
-            else { nav.classList.remove('bg-black/80', 'border-zinc-900'); nav.classList.add('border-transparent'); }
-            reveal();
-        });
-
-        function handleContactForm(btn) {
-            const section = btn.closest('section');
-            const inputs = section.querySelectorAll('input, textarea');
-            const [nameEl, emailEl, subjectEl, msgEl] = inputs;
-            const name = nameEl?.value.trim();
-            const email = emailEl?.value.trim();
-            const subject = subjectEl?.value.trim() || 'Portfolio Inquiry';
-            const body = msgEl?.value.trim();
-            if (!name || !email || !body) {
-                btn.textContent = 'Please fill in all fields';
-                btn.classList.add('bg-zinc-300');
-                setTimeout(() => { btn.textContent = 'Send Message'; btn.classList.remove('bg-zinc-300'); }, 2500);
-                return;
-            }
-            const mailto = `mailto:craigtanakac@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + body)}`;
-            window.location.href = mailto;
-            btn.textContent = 'Opening mail client…';
-            setTimeout(() => { btn.textContent = 'Send Message'; }, 3000);
-        }
-
-        // ── THEME TOGGLE ─────────────────────────────────────────────────────
-        function toggleTheme() {
-            const html = document.documentElement;
-            const isDark = html.classList.contains('dark');
-            html.classList.toggle('dark', !isDark);
-            html.classList.toggle('light', isDark);
-            // Moon icon = click to switch to light (visible in dark mode)
-            // Sun icon = click to switch to dark (visible in light mode)
-            document.getElementById('icon-moon').style.display = isDark ? 'none' : 'block';
-            document.getElementById('icon-sun').style.display = isDark ? 'block' : 'none';
-        }
-
-        // ── PROJECT FILTER LOGIC ─────────────────────────────────────────────
-        function initFilters() {
-            const buttons = document.querySelectorAll('.filter-btn');
-            const cards = document.querySelectorAll('.project-card');
-            const noMsg = document.getElementById('no-projects');
-
-            buttons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    // Update active button style
-                    buttons.forEach(b => b.classList.remove('active-filter'));
-                    btn.classList.add('active-filter');
-
-                    const filter = btn.dataset.filter;
-                    let visibleCount = 0;
-
-                    cards.forEach(card => {
-                        const cats = card.dataset.categories || '';
-                        const matches = filter === 'all' || cats.split(' ').includes(filter);
-
-                        if (matches) {
-                            card.classList.remove('card-hidden');
-                            visibleCount++;
-                        } else {
-                            card.classList.add('card-hidden');
-                        }
+                // ── SCROLL REVEAL ────────────────────────────────────────────────────
+                function reveal() {
+                    document.querySelectorAll('.reveal').forEach(el => {
+                        if (el.getBoundingClientRect().top < window.innerHeight - 150) el.classList.add('active');
                     });
+                }
 
-                    // Show/hide empty state
-                    if (noMsg) noMsg.classList.toggle('hidden', visibleCount > 0);
+                // ── NAVBAR SCROLL ────────────────────────────────────────────────────
+                window.addEventListener('scroll', () => {
+                    const nav = document.getElementById('main-nav');
+                    if (window.scrollY > 100) { nav.classList.add('bg-black/80', 'border-zinc-900'); nav.classList.remove('border-transparent'); }
+                    else { nav.classList.remove('bg-black/80', 'border-zinc-900'); nav.classList.add('border-transparent'); }
+                    reveal();
                 });
-            });
-        }
 
-        window.onload = () => { type(); reveal(); initFilters(); };
-    </script>
+                function handleContactForm(btn) {
+                    const section = btn.closest('section');
+                    const inputs = section.querySelectorAll('input, textarea');
+                    const [nameEl, emailEl, subjectEl, msgEl] = inputs;
+                    const name = nameEl?.value.trim();
+                    const email = emailEl?.value.trim();
+                    const subject = subjectEl?.value.trim() || 'Portfolio Inquiry';
+                    const body = msgEl?.value.trim();
+                    if (!name || !email || !body) {
+                        btn.textContent = 'Please fill in all fields';
+                        btn.classList.add('bg-zinc-300');
+                        setTimeout(() => { btn.textContent = 'Send Message'; btn.classList.remove('bg-zinc-300'); }, 2500);
+                        return;
+                    }
+                    const mailto = `mailto:craigtanakac@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + body)}`;
+                    window.location.href = mailto;
+                    btn.textContent = 'Opening mail client…';
+                    setTimeout(() => { btn.textContent = 'Send Message'; }, 3000);
+                }
+
+                // ── THEME TOGGLE ─────────────────────────────────────────────────────
+                function toggleTheme() {
+                    const html = document.documentElement;
+                    const isDark = html.classList.contains('dark');
+                    html.classList.toggle('dark', !isDark);
+                    html.classList.toggle('light', isDark);
+                    // Moon icon = click to switch to light (visible in dark mode)
+                    // Sun icon = click to switch to dark (visible in light mode)
+                    document.getElementById('icon-moon').style.display = isDark ? 'none' : 'block';
+                    document.getElementById('icon-sun').style.display = isDark ? 'block' : 'none';
+                }
+
+                // ── PROJECT FILTER LOGIC ─────────────────────────────────────────────
+                function initFilters() {
+                    const buttons = document.querySelectorAll('.filter-btn');
+                    const cards = document.querySelectorAll('.project-card');
+                    const noMsg = document.getElementById('no-projects');
+
+                    buttons.forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            // Update active button style
+                            buttons.forEach(b => b.classList.remove('active-filter'));
+                            btn.classList.add('active-filter');
+
+                            const filter = btn.dataset.filter;
+                            let visibleCount = 0;
+
+                            cards.forEach(card => {
+                                const cats = card.dataset.categories || '';
+                                const matches = filter === 'all' || cats.split(' ').includes(filter);
+
+                                if (matches) {
+                                    card.classList.remove('card-hidden');
+                                    visibleCount++;
+                                } else {
+                                    card.classList.add('card-hidden');
+                                }
+                            });
+
+                            // Show/hide empty state
+                            if (noMsg) noMsg.classList.toggle('hidden', visibleCount > 0);
+                        });
+                    });
+                }
+
+                window.onload = () => { type(); reveal(); initFilters(); };
+            </script>
 </body>
 
 </html>
