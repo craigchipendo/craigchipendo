@@ -1,0 +1,2443 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Craig Chipendo | AI & Data Science Engineer</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            border: 'rgba(255, 255, 255, 0.1)',
+            zinc: {
+              950: '#050505',
+              900: '#0a0a0a',
+              800: '#141414',
+              700: '#1f1f1f'
+            }
+          },
+          fontFamily: {
+            mono: ['IBM Plex Mono', 'monospace'],
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Grid Background */
+    .grid-bg {
+      background-image:
+        radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+      background-size: 32px 32px;
+    }
+
+    /* Typing Animation */
+    .typing::after {
+      content: '|';
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+    }
+
+    /* Timeline Styling */
+    .timeline-line {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Code Window Decorations */
+    .code-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .code-red {
+      background: #ff5f56;
+    }
+
+    .code-yellow {
+      background: #ffbd2e;
+    }
+
+    .code-green {
+      background: #27c93f;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #000;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #333;
+      border-radius: 3px;
+    }
+
+    /* Image Overlays for Project Cards */
+    .project-overlay {
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+    }
+
+    /* Section Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── PROJECT MODAL ── */
+    #project-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(10px);
+      overflow-y: auto;
+      padding: 0;
+    }
+
+    #project-modal.open {
+      display: block;
+    }
+
+    .modal-inner {
+      max-width: 860px;
+      margin: 40px auto;
+      background: #0a0a0a;
+      border: 1px solid #1f1f1f;
+      box-shadow: 0 40px 120px rgba(0, 0, 0, 0.8);
+      position: relative;
+    }
+
+    @media (max-width: 768px) {
+      .modal-inner {
+        margin: 0;
+        border-left: none;
+        border-right: none;
+      }
+    }
+
+    /* Divider lines matching image layout */
+    .modal-section {
+      border-top: 1px solid #1a1a1a;
+      padding: 32px 40px;
+    }
+
+    .modal-section:first-child {
+      border-top: none;
+    }
+
+    @media (max-width: 640px) {
+      .modal-section {
+        padding: 24px 20px;
+      }
+    }
+
+    .modal-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #d4d4d8;
+      margin-bottom: 20px;
+    }
+
+    /* Pipeline nodes (architecture diagram) */
+    .pipe-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pipe-circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 1px solid #2a2a2a;
+      background: #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8px;
+    }
+
+    .pipe-circle.active-node {
+      border-color: #555;
+      background: #1a1a1a;
+    }
+
+    .pipe-label-top {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #d4d4d8;
+    }
+
+    .pipe-value {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: #e4e4e7;
+      line-height: 1.2;
+    }
+
+    .pipe-sub {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 8px;
+      color: #d4d4d8;
+      text-transform: uppercase;
+    }
+
+    .pipe-connector {
+      flex: 1;
+      height: 1px;
+      background: #222;
+      min-width: 20px;
+      margin-top: -30px;
+    }
+
+    /* Tech tag pills */
+    .tech-pill {
+      padding: 6px 16px;
+      border: 1px solid #272727;
+      background: #111;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #b4b4b8;
+      transition: all 0.2s;
+    }
+
+    .tech-pill:hover {
+      border-color: #444;
+      color: #d4d4d8;
+    }
+
+    /* Value result cards */
+    .result-card {
+      border-left: 2px solid #272727;
+      padding: 16px 20px;
+      background: #0d0d0d;
+      margin-bottom: 10px;
+    }
+
+    /* Governance check items */
+    .gov-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #111;
+      font-size: 13px;
+      color: #b4b4b8;
+    }
+
+    .gov-item:last-child {
+      border-bottom: none;
+    }
+
+    /* Project card cursor */
+    .project-card-clickable {
+      cursor: pointer;
+    }
+
+    .project-card-clickable .view-case-study {
+      opacity: 0;
+      transform: translateY(4px);
+      transition: all 0.2s;
+    }
+
+    .project-card-clickable:hover .view-case-study {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── PROJECT FILTER BUTTONS ── */
+    .filter-btn {
+      cursor: pointer;
+    }
+
+    .filter-btn.active-filter {
+      background: #ffffff !important;
+      color: #000000 !important;
+      border-color: transparent !important;
+    }
+
+    .filter-btn:not(.active-filter) {
+      background: #0a0a0a;
+      color: #ffffff;
+    }
+
+    /* ── PROJECT CARD FILTER ANIMATION ── */
+    .project-card {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .project-card.card-hidden {
+      display: none !important;
+    }
+
+    /* ── LIGHT MODE ── */
+    html.light body {
+      background-color: #f5f5f5;
+      color: #0a0a0a;
+    }
+
+    html.light .grid-bg {
+      background-image: radial-gradient(circle at 2px 2px, rgba(0, 0, 0, 0.08) 1px, transparent 0);
+      background-size: 32px 32px;
+    }
+
+    html.light #main-nav {
+      background: rgba(245, 245, 245, 0.85) !important;
+      border-bottom-color: rgba(0, 0, 0, 0.1) !important;
+    }
+
+    html.light #main-nav.bg-black\/80 {
+      background: rgba(245, 245, 245, 0.95) !important;
+    }
+
+    html.light nav a {
+      color: #555 !important;
+    }
+
+    html.light nav a:hover {
+      color: #000 !important;
+    }
+
+    html.light .bg-white {
+      background-color: #0a0a0a !important;
+      color: #fff !important;
+    }
+
+    html.light .text-zinc-400 {
+      color: #555 !important;
+    }
+
+    html.light .text-zinc-400:hover {
+      color: #000 !important;
+    }
+
+    html.light h1 .text-zinc-400 {
+      color: #888 !important;
+    }
+
+    html.light p.text-zinc-400 {
+      color: #555 !important;
+    }
+
+    /* Hero section */
+    html.light #home {
+      background-color: #f5f5f5;
+    }
+
+    /* About section */
+    html.light #about {
+      background-color: #ebebeb !important;
+    }
+
+    html.light .bg-\[\#121214\] {
+      background: #ffffff !important;
+    }
+
+    html.light .bg-\[\#1c1c1f\] {
+      background: #e8e8e8 !important;
+    }
+
+    html.light .text-zinc-300 {
+      color: #222 !important;
+    }
+
+    html.light .text-purple-400 {
+      color: #7c3aed !important;
+    }
+
+    html.light .text-yellow-200 {
+      color: #b45309 !important;
+    }
+
+    html.light .text-blue-400 {
+      color: #1d4ed8 !important;
+    }
+
+    html.light .text-green-400 {
+      color: #15803d !important;
+    }
+
+    html.light .bg-zinc-900\/50 {
+      background: rgba(255, 255, 255, 0.8) !important;
+    }
+
+    html.light .bg-zinc-900\/40 {
+      background: rgba(255, 255, 255, 0.7) !important;
+    }
+
+    html.light .bg-zinc-900\/60 {
+      background: rgba(255, 255, 255, 0.85) !important;
+    }
+
+    html.light .border-zinc-800 {
+      border-color: #d4d4d4 !important;
+    }
+
+    html.light .border-zinc-800\/50 {
+      border-color: rgba(200, 200, 200, 0.7) !important;
+    }
+
+    html.light .border-zinc-800\/60 {
+      border-color: rgba(200, 200, 200, 0.8) !important;
+    }
+
+    html.light .border-zinc-700 {
+      border-color: #c0c0c0 !important;
+    }
+
+    html.light .bg-zinc-800 {
+      background: #e0e0e0 !important;
+    }
+
+    html.light .bg-zinc-800\/80 {
+      background: rgba(220, 220, 220, 0.8) !important;
+    }
+
+    html.light .bg-zinc-800\/60 {
+      background: rgba(220, 220, 220, 0.6) !important;
+    }
+
+    html.light .bg-zinc-900 {
+      background: #ffffff !important;
+    }
+
+    html.light .bg-zinc-950 {
+      background: #f0f0f0 !important;
+    }
+
+    html.light .bg-zinc-950\/50 {
+      background: rgba(240, 240, 240, 0.9) !important;
+    }
+
+    html.light .bg-black {
+      background: #f5f5f5 !important;
+    }
+
+    html.light .text-white {
+      color: #0a0a0a !important;
+    }
+
+    html.light h2,
+    html.light h3,
+    html.light h4 {
+      color: #0a0a0a !important;
+    }
+
+    html.light .text-green-500 {
+      color: #16a34a !important;
+    }
+
+    html.light .bg-green-500 {
+      background: #16a34a !important;
+    }
+
+    html.light .timeline-line {
+      background: rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* Nav download button in light */
+    html.light nav .bg-white {
+      background: #0a0a0a !important;
+      color: #fff !important;
+    }
+
+    html.light nav .bg-white:hover {
+      background: #333 !important;
+    }
+
+    /* Project cards */
+    html.light .bg-\[\#0c0c0e\] {
+      background: #e8e8e8 !important;
+    }
+
+    html.light .bg-zinc-950 {
+      background: #e0e0e0 !important;
+    }
+
+    html.light .project-card {
+      background: #fff !important;
+    }
+
+    html.light .text-zinc-500 {
+      color: #777 !important;
+    }
+
+    html.light .text-zinc-600 {
+      color: #666 !important;
+    }
+
+    /* Timeline dots */
+    html.light .bg-black.border-white {
+      background: #f5f5f5 !important;
+      border-color: #0a0a0a !important;
+    }
+
+    /* Modal */
+    html.light #project-modal {
+      background: rgba(255, 255, 255, 0.95) !important;
+    }
+
+    html.light .modal-inner {
+      background: #fff !important;
+      border-color: #e0e0e0 !important;
+    }
+
+    html.light .modal-section {
+      border-top-color: #e8e8e8 !important;
+    }
+
+    html.light .modal-label {
+      color: #555 !important;
+    }
+
+    html.light .pipe-circle {
+      background: #f0f0f0 !important;
+      border-color: #ccc !important;
+    }
+
+    html.light .pipe-circle.active-node {
+      background: #e0e0e0 !important;
+      border-color: #aaa !important;
+    }
+
+    html.light .pipe-value {
+      color: #0a0a0a !important;
+    }
+
+    html.light .pipe-label-top,
+    html.light .pipe-sub {
+      color: #555 !important;
+    }
+
+    html.light .pipe-connector {
+      background: #ccc !important;
+    }
+
+    html.light .tech-pill {
+      background: #f0f0f0 !important;
+      border-color: #d0d0d0 !important;
+      color: #444 !important;
+    }
+
+    html.light .tech-pill:hover {
+      border-color: #999 !important;
+      color: #111 !important;
+    }
+
+    html.light .result-card {
+      background: #fafafa !important;
+      border-left-color: #ccc !important;
+    }
+
+    html.light .gov-item {
+      color: #444 !important;
+      border-bottom-color: #eee !important;
+    }
+
+    /* Contact */
+    html.light input,
+    html.light textarea {
+      background: rgba(230, 230, 230, 0.8) !important;
+      border-color: #ccc !important;
+      color: #0a0a0a !important;
+    }
+
+    html.light input::placeholder,
+    html.light textarea::placeholder {
+      color: #aaa !important;
+    }
+
+    html.light input:focus,
+    html.light textarea:focus {
+      border-color: #888 !important;
+    }
+
+    /* Footer text */
+    html.light .text-zinc-600 {
+      color: #999 !important;
+    }
+
+    /* Send button */
+    html.light button.bg-white.text-black {
+      background: #0a0a0a !important;
+      color: #fff !important;
+    }
+
+    html.light button.bg-white.text-black:hover {
+      background: #333 !important;
+    }
+
+    /* Scrollbar in light */
+    html.light ::-webkit-scrollbar-track {
+      background: #f0f0f0;
+    }
+
+    html.light ::-webkit-scrollbar-thumb {
+      background: #bbb;
+    }
+
+    /* Border misc */
+    html.light .border-transparent {
+      border-color: transparent;
+    }
+
+    html.light .border-zinc-900 {
+      border-color: #ddd !important;
+    }
+
+    /* Hero border elements */
+    html.light .border-white\/40 {
+      border-color: rgba(0, 0, 0, 0.2) !important;
+    }
+
+    /* Download/resume button in hero */
+    html.light .border-zinc-800 {
+      border-color: #ccc !important;
+    }
+
+    html.light .hover\:bg-zinc-900:hover {
+      background: #e8e8e8 !important;
+    }
+
+    html.light .text-zinc-700 {
+      color: #aaa !important;
+    }
+
+    /* Code window in light */
+    html.light .animate-pulse {
+      background: #1d4ed8 !important;
+    }
+
+    /* About boxes */
+    html.light .hover\:border-zinc-700:hover {
+      border-color: #bbb !important;
+    }
+
+    html.light .hover\:border-zinc-600:hover {
+      border-color: #aaa !important;
+    }
+
+    html.light .hover\:border-zinc-500:hover {
+      border-color: #888 !important;
+    }
+
+    /* Misc bg overrides */
+    html.light .bg-\[\#0d0d0d\] {
+      background: #fafafa !important;
+    }
+
+    html.light .bg-\[\#111\] {
+      background: #f0f0f0 !important;
+    }
+
+    html.light .bg-\[\#0a0a0a\] {
+      background: #fff !important;
+    }
+
+    html.light .bg-\[\#1a1a1a\] {
+      background: #e8e8e8 !important;
+    }
+
+    html.light .bg-black\/80 {
+      background: rgba(245, 245, 245, 0.9) !important;
+    }
+
+    html.light [style*="background:#0a0a0a"] {
+      background: #fff !important;
+    }
+
+    html.light [style*="background:#111"] {
+      background: #f0f0f0 !important;
+    }
+
+    html.light [style*="background:#0d0d0d"] {
+      background: #fafafa !important;
+    }
+
+    html.light [style*="background:#1a1a1a"] {
+      background: #e8e8e8 !important;
+    }
+
+    html.light [style*="color:#d4d4d8"] {
+      color: #444 !important;
+    }
+
+    html.light [style*="color:#b4b4b8"] {
+      color: #555 !important;
+    }
+
+    html.light [style*="color:#e4e4e7"] {
+      color: #111 !important;
+    }
+
+    html.light [style*="color:#ffffff"] {
+      color: #0a0a0a !important;
+    }
+
+    html.light [style*="color:#fff"] {
+      color: #0a0a0a !important;
+    }
+
+    html.light [style*="border:1px solid #1a1a1a"] {
+      border-color: #e0e0e0 !important;
+    }
+
+    html.light [style*="border:1px solid #1f1f1f"] {
+      border-color: #d4d4d4 !important;
+    }
+
+    html.light [style*="border-bottom:1px solid #1a1a1a"] {
+      border-bottom-color: #e0e0e0 !important;
+    }
+
+    html.light [style*="border-left:2px solid #1f1f1f"] {
+      border-left-color: #ccc !important;
+    }
+
+    html.light [style*="border-left:2px solid #272727"] {
+      border-left-color: #ccc !important;
+    }
+
+    html.light [style*="border:1px solid #272727"] {
+      border-color: #d0d0d0 !important;
+    }
+
+    html.light [style*="background:#111;"] {
+      background: #f0f0f0 !important;
+    }
+
+    html.light [style*="stroke:#d4d4d8"] {
+      stroke: #555 !important;
+    }
+
+    html.light [style*="background: #0a0a0a"] {
+      background: #fff !important;
+    }
+
+    html.light [style*="background: #111"] {
+      background: #f0f0f0 !important;
+    }
+  </style>
+</head>
+
+<body class="antialiased overflow-x-hidden selection:bg-white selection:text-black">
+
+  <!-- ── NAVIGATION ── -->
+  <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent backdrop-blur-sm"
+    id="main-nav">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="bg-white text-black font-black text-lg px-2 py-0.5 rounded-sm tracking-tighter">CTC</div>
+      </div>
+
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#home" class="text-sm font-medium hover:text-white text-zinc-400 transition-colors relative group">
+          Home
+          <span
+            class="absolute -bottom-1 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+        </a>
+        <a href="#about" class="text-sm font-medium hover:text-white text-zinc-400 transition-colors">About</a>
+        <a href="#experience"
+          class="text-sm font-medium hover:text-white text-zinc-400 transition-colors">Experience</a>
+        <a href="#education" class="text-sm font-medium hover:text-white text-zinc-400 transition-colors">Education</a>
+        <a href="#projects" class="text-sm font-medium hover:text-white text-zinc-400 transition-colors">Portfolio</a>
+        <a href="#contact" class="text-sm font-medium hover:text-white text-zinc-400 transition-colors">Contact</a>
+
+        <div class="flex items-center gap-4 ml-4">
+          <a href="Craig_Chipendo_Resume.pdf" download="Craig_Chipendo_Resume.pdf"
+            class="bg-white text-black px-5 py-2 text-xs font-bold rounded-sm hover:bg-zinc-200 transition-all flex items-center gap-2">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Download CV
+          </a>
+          <button onclick="toggleTheme()" id="theme-toggle-btn" title="Toggle light/dark mode"
+            style="background:none;border:none;cursor:pointer;padding:0;display:flex;align-items:center;">
+            <img id="icon-moon"
+              src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCABIADgDASIAAhEBAxEB/8QAGwABAAIDAQEAAAAAAAAAAAAAAAYHAwQFCAL/xAA4EAABAwMCAwMHDAMAAAAAAAABAgMEAAURBgcSMUEIEyEiN1FhcXWBFBUWMlVXlJaytNHSQoKh/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAH/xAAYEQEBAQEBAAAAAAAAAAAAAAAAARExYf/aAAwDAQACEQMRAD8A8ZUpSgUpSgUpSgUpSg3bHa517vUKzWyOqROnSER47Sea3FqCUj4kir21FsttVol9Fm1xu+41qJtIMyHa7QuQiOojPCV5wT7cH1CoB2aPP9oj3wx+qsG5EO66j3ovsCGlyVPnXyUEpz9ZReXkn0AcyegFBMfoPsB97Wofy6r+1PoPsB97Wofy6r+1djRWg9trXfXdPXl53UN9iRFy5ykKUIsUI4cpwCCT5XI59YTyqhLvIjybtMkQY5iRXX1rYY4ie6QVEpTnrgYHwq2YLzsO1OyOpJ6LPZt55sa5ySG4guFiW0044fqpKuIAZPh4kc/DPKqh3E0jeNCa0uWlL62hE+3u8Cyg5QtJAUlaT1SpJBHtrk25a0yU4UofGrg7abrj++Uh91XE47aoC1qPUmOgk1BStKUoLE7NHn+0R74Y/VU70cG4m7+499DfeSrW1cXo6cZPF3yvEevAx/tUE7NHn+0R74Y/VXaY1XH0lv5qCXcEldslz5sSckDOGlvK8rHqIB9OM1Z0RnaDVUew6/Fwvbi3Idxbciz3FHJKXcEqV6fKAJ64zX3rTa7U1jnk22BIvVqePFEmwWy8lxs/VJ4M4OMer0E1m3B2xu9kkm42Jly9aek5chzIg77DZ8QF8PIjlxcj/wAGxthH3YcWi36Veu0KEokqW6CmK0DzV5Y4Qevk+Jq+UcO4aE1TYLPHvt5tTkGG893CA8oJc4ikkZRniHgk8x0qddsvz1ue57f+2RWHe7Vkeb80aOgXhy8N2sFybPWvi+USSCPA8sJyrl4Dix0rN2y/PW57nt/7ZFSimKUpUEu2Xv0HS+7OltQ3NSkwYF0YekKSMlLYWOJWOuBk49VXJvH2d9d3XW9z1Hou3Naj09d5Tk6BMgSmlgtuqKwkgqB8M4yMg459B5trbiXS5RGu6iXGXHbzngaeUkZ9gNBemltpe0ZphBbsdjvcRoq4iz3jC28+ngUopz8K2tS7bdpfUTC490tF7XHcHCtlpbDTah6CEKGR7c1Q/wA+3z7ZuP4pf80+fb59s3H8Uv8Ammi5dIdmHdWfemWrnYVWaAFAyZ0yQ0lDDf8AkrAUVKwM+AHtxzrgdrHUVk1LvheJenJKZVsitsQmX0K4ku9y0lCik9U8QIB64z1qtpF3u0hlTMi6TXW1eCkLkKUk+0E1o0ClKUClKUClKUClKUClKUH/2Q=="
+              alt="Dark mode" style="width:32px;height:32px;border-radius:6px;display:block;" />
+            <img id="icon-sun"
+              src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAA2ADoDASIAAhEBAxEB/8QAGwABAAIDAQEAAAAAAAAAAAAAAAYHAwUIBAL/xAA+EAABAgUDAAUHBw0AAAAAAAABAgMABAUGEQcSIQgTFTFBIlFVYXGU0RQWMleWtNIXIyQ3OEJidXaBkbHB/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwDjKMsrLTE08GZVh19w8hDaCpR/sIxR07KXpM6LdHSy3rGZlpK4rtRMztSqq5dDjwbbd2IbTuBGOQOcgbScZVmA5z7Crnoao+6r+EOwq56GqPuq/hFqzfSC1vlG2HJu7KzLomG+tYU7LtpDqD+8nKOR6xG5e1p1jb09Zu78pE2Q7UDJfJOqa3ghBVuzt7uO7HjAUj2FXPQ1R91X8I8LzTrLqmnm1tuJOFIWkgg+sGLkkukJrg+29NSt11h9qVAW+4iVaWhoZ4K/zeAM+eJTq5cDeq3RsldQa/JyqbvoldRS359hkNmbl1tFaSsAYznHHcNpwBuxAc3whCARd+tv6i9H/wCTzn3mKQi/9SKquh6T6K1VuUlZtcvSZxQZmkb2l/pBGFDIyOYCE2W7cOo8hTrCm5iURTaWTNGoPN5dlZdKdpTuzjbyMD2c4HHvEroa5N9iJm7jQvd1Yq6inqiru3Ed+3P8I/7H3pTckpXbvuaQqQkaO5dFOXJsKlm+rZadKdqQBnjIye/k+2I+1pJf6652UaA+g79pmVEdQBn6W/ux4+f1Z4jQ9F6zNy2FTZ7TfrJVMhMO/KlTjDe1ycaUBtyrP0fJ7u/IIyR3yynfsb3B/Vsp93MavVS7pOk6j0k0hun1kW/TUU9aptrrWXnAFBRIzzjd5+CDG6EyZzoi3RNqbbaL95SzhQ2MJTuYUcAeAGYlFFQhCIEXnrZLvHQPR2YDai0qlTqEq8CoTAJH+CIoyLm011opFN08Rp5qHZTN327LPKfp+JtUvMSa1ElQQsDO0kqPBB8o8kcAILcNyUuasqkW3SLeZkjLYenZxYC3ph/BBIVjIRznHsHhzt5mZugaSsVw3tVVtO1AyJppmV4DewndndnHGMYxzEr+fOgH1SXD9olfhh8+NAPqluH7RK/DF0QOj3PR06eVC1qvb6JmYKy/Tp1kBDrTp4O896k4+HmIsGSYdb6GFdfWgpbcvCWQlR8SmX5/2Ixovro/pWFHSK4FgHJSbiXg+rgRp9Z9X2b0tyl2Za9ry1qWhS3S+zT2ni6t14gjrHFkDJwpXnPlHJPGIKohCEAhCEAhCEAhCEAhCEB//9k="
+              alt="Light mode" style="width:32px;height:32px;border-radius:6px;display:none;" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── HERO SECTION ── -->
+  <section id="home" class="relative min-h-screen flex items-center grid-bg pt-20">
+    <div class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+      <!-- Text Side -->
+      <div class="lg:col-span-7 z-10">
+        <h1 class="font-sans text-7xl md:text-9xl font-black tracking-tight leading-[0.85] mb-8">
+          Craig Tanaka<br /><span class="text-zinc-400">Chipendo</span>
+        </h1>
+
+        <div class="flex items-center gap-3 mb-8">
+          <span class="text-2xl md:text-3xl font-bold text-white tracking-tight">Architecting AI that</span>
+          <span id="typing-text" class="text-2xl md:text-3xl font-bold text-zinc-400 typing tracking-tight"></span>
+        </div>
+
+        <p class="text-zinc-400 text-lg max-w-xl mb-10 leading-relaxed font-medium">
+          MSBA candidate at Emory University with hands-on experience building deep learning models, real-time data
+          pipelines, and production-grade AI systems across telecom and financial services.
+        </p>
+
+        <div class="flex flex-wrap gap-4 mb-16">
+          <a href="#contact"
+            class="bg-white text-black px-8 py-3.5 text-sm font-bold rounded-sm hover:scale-105 transition-all">
+            Hire Me
+          </a>
+          <a href="#experience"
+            class="border border-zinc-800 text-white px-8 py-3.5 text-sm font-bold rounded-sm hover:bg-zinc-900 transition-all">
+            View Resume
+          </a>
+        </div>
+
+        <div class="flex gap-8 text-zinc-400 text-xs font-bold uppercase tracking-widest">
+          <div class="flex items-center gap-2">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="4" width="16" height="16" rx="2" />
+              <rect x="9" y="9" width="6" height="6" />
+              <line x1="9" y1="1" x2="9" y2="4" />
+              <line x1="15" y1="1" x2="15" y2="4" />
+              <line x1="9" y1="20" x2="9" y2="23" />
+              <line x1="15" y1="20" x2="15" y2="23" />
+              <line x1="20" y1="9" x2="23" y2="9" />
+              <line x1="20" y1="14" x2="23" y2="14" />
+              <line x1="1" y1="9" x2="4" y2="9" />
+              <line x1="1" y1="14" x2="4" y2="14" />
+            </svg>
+            Deep Learning
+          </div>
+          <div class="flex items-center gap-2">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 3v18h18" />
+              <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3" />
+            </svg>
+            Data Engineering
+          </div>
+          <div class="flex items-center gap-2">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            Generative AI
+          </div>
+          <div class="flex items-center gap-2">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            Agentic AI
+          </div>
+        </div>
+      </div>
+
+      <!-- Image Side -->
+      <div class="lg:col-span-5 relative flex justify-center">
+        <div class="relative group">
+          <div class="absolute -top-4 -left-4 w-12 h-12 border-t-2 border-l-2 border-white/40"></div>
+          <div class="absolute -top-4 -right-4 w-12 h-12 border-t-2 border-r-2 border-white/40"></div>
+          <div class="absolute -bottom-4 -left-4 w-12 h-12 border-b-2 border-l-2 border-white/40"></div>
+          <div class="absolute -bottom-4 -right-4 w-12 h-12 border-b-2 border-r-2 border-white/40"></div>
+
+          <div class="w-80 h-96 bg-zinc-900 grayscale border border-zinc-800 overflow-hidden relative">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+            <img src="Craig.jpg" alt="Craig Chipendo"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              onerror="this.style.display='none'" />
+            <div class="absolute bottom-6 left-6 z-20 text-[10px] font-mono text-white/50 tracking-[0.3em]"
+              style="writing-mode: vertical-rl;">
+              C_CHIPENDO
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROFESSIONAL SUMMARY ── -->
+  <section id="about" class="py-32 bg-zinc-950/50 reveal">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+      <div class="bg-[#121214] rounded-lg border border-zinc-800 shadow-2xl overflow-hidden font-mono text-sm relative">
+        <div class="bg-[#1c1c1f] px-4 py-3 flex items-center justify-between">
+          <div class="flex gap-2">
+            <div class="code-dot code-red"></div>
+            <div class="code-dot code-yellow"></div>
+            <div class="code-dot code-green"></div>
+          </div>
+          <div class="text-[11px] text-zinc-400 font-medium tracking-tight flex items-center gap-2">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+            </svg>
+            chipendo_profile.py
+            <span class="text-zinc-700 ml-2">v1.0.0</span>
+          </div>
+        </div>
+        <div class="p-8 text-zinc-300 space-y-1">
+          <p><span class="text-purple-400">class</span> <span class="text-yellow-200">DataScientist</span>(Person):</p>
+          <p class="pl-4 text-zinc-400">"""Deep learning, pipelines &amp; production AI."""</p>
+          <p class="pl-4"><span class="text-purple-400">def</span> <span class="text-blue-400">__init__</span>(self):
+          </p>
+          <p class="pl-8">self.name = <span class="text-green-400">"Craig Tanaka Chipendo"</span></p>
+          <p class="pl-8">self.stack = {</p>
+          <p class="pl-12">"core": [<span class="text-green-400">"Python"</span>, <span
+              class="text-green-400">"SQL"</span>, <span class="text-green-400">"R"</span>],</p>
+          <p class="pl-12">"ai_ml": [<span class="text-green-400">"TensorFlow"</span>, <span
+              class="text-green-400">"PyTorch"</span>, <span class="text-green-400">"RAG"</span>],</p>
+          <p class="pl-12">"cloud": [<span class="text-green-400">"GCP"</span>, <span
+              class="text-green-400">"AWS"</span>, <span class="text-green-400">"BigQuery"</span>],</p>
+          <p class="pl-8">}</p>
+          <p class="pl-4 mt-2"><span class="text-purple-400">async def</span> <span
+              class="text-blue-400">build</span>(self):</p>
+          <p class="pl-8"><span class="text-purple-400">while</span> <span class="text-blue-400">True</span>:</p>
+          <p class="pl-12"><span class="text-purple-400">await</span> self.ship_models() <span
+              class="inline-block w-2 h-4 bg-blue-400 align-middle animate-pulse"></span></p>
+        </div>
+        <div class="bg-[#1c1c1f] px-6 py-2 flex items-center justify-end">
+          <div class="flex items-center gap-2 text-[10px] font-bold text-zinc-400">
+            <span class="w-2 h-2 rounded-full bg-green-500"></span>
+            CURRENT STATUS: <span class="text-green-500">MSBA_CANDIDATE</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-2 h-2 rounded-full bg-white"></div>
+          <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-400">System Architecture</span>
+        </div>
+        <h2 class="text-5xl font-black mb-10 tracking-tight uppercase">Professional Summary</h2>
+        <div class="space-y-6 text-zinc-400 text-lg leading-relaxed mb-12">
+          <p>Data Scientist &amp; AI Engineer with experience architecting deep learning models, real-time ETL
+            pipelines,
+            and production AI systems across telecom and financial services industries.</p>
+          <p>Proficient in Python, SQL, PySpark, TensorFlow, and PyTorch, with hands-on deployment of NLP, Computer
+            Vision, Generative AI, and Reinforcement Learning solutions on GCP and AWS.</p>
+          <p>Proven ability to convert large-scale datasets into actionable business intelligence — from 70M+ credit
+            records to real-time network telemetry — driving measurable operational improvements.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="p-6 rounded-lg bg-zinc-900/50 border border-zinc-800 hover:border-zinc-700 transition-colors">
+            <div class="flex items-center gap-4 mb-3">
+              <svg class="text-zinc-400" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <rect x="4" y="4" width="16" height="16" rx="2" />
+                <rect x="9" y="9" width="6" height="6" />
+                <line x1="9" y1="1" x2="9" y2="4" />
+                <line x1="15" y1="1" x2="15" y2="4" />
+                <line x1="9" y1="20" x2="9" y2="23" />
+                <line x1="15" y1="20" x2="15" y2="23" />
+                <line x1="20" y1="9" x2="23" y2="9" />
+                <line x1="20" y1="14" x2="23" y2="14" />
+                <line x1="1" y1="9" x2="4" y2="9" />
+                <line x1="1" y1="14" x2="4" y2="14" />
+              </svg>
+              <h4 class="text-sm font-bold text-white uppercase tracking-wider">Core Expertise</h4>
+            </div>
+            <p class="text-xs text-zinc-400 font-medium">Deep Learning, NLP, CV, GenAI, A/B Testing, ETL, MLOps, Agentic
+              AI</p>
+          </div>
+          <div class="p-6 rounded-lg bg-zinc-900/50 border border-zinc-800 hover:border-zinc-700 transition-colors">
+            <div class="flex items-center gap-4 mb-3">
+              <svg class="text-zinc-400" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                <path d="M6 12v5c3 3 9 3 12 0v-5" />
+              </svg>
+              <h4 class="text-sm font-bold text-white uppercase tracking-wider">Education</h4>
+            </div>
+            <p class="text-xs text-zinc-400 font-medium">MSc. Business Analytics, Emory University (STEM Credentialed,
+              May 2026).</p>
+            <p class="text-xs text-zinc-400 font-medium">BSc. Data Science and Systems, University of Zimbabwe (2024).
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── WORK EXPERIENCE ── -->
+  <section id="experience" class="py-32 relative reveal">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-400 mb-4 block">Career Path</span>
+          <h2 class="text-6xl font-black uppercase tracking-tight">Work Experience</h2>
+        </div>
+        <a href="Craig_Chipendo_Resume.pdf" download="Craig_Chipendo_Resume.pdf"
+          class="flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-colors">
+          Download Resume
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="relative">
+        <div class="timeline-line"></div>
+
+        <!-- Graduate Research Assistant -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24 relative">
+          <div
+            class="bg-zinc-900/40 p-10 border border-zinc-800/50 hover:border-zinc-700 transition-colors order-2 md:order-1">
+            <ul class="space-y-6">
+              <li class="flex gap-4"><span class="text-white mt-1">→</span>
+                <p class="text-zinc-400 text-sm leading-relaxed">Led a team of undergraduate students to build a
+                  geospatial investment scoring framework combining MARTA ridership, business licenses, and stadium
+                  proximity for Invest Atlanta's capital deployment strategy.</p>
+              </li>
+              <li class="flex gap-4"><span class="text-white mt-1">→</span>
+                <p class="text-zinc-400 text-sm leading-relaxed">Collaborated with faculty and city partners to
+                  translate policy questions into technical requirements and present findings via dashboards, reports,
+                  and live demos.</p>
+              </li>
+              <li class="flex gap-4"><span class="text-white mt-1">→</span>
+                <p class="text-zinc-400 text-sm leading-relaxed">Mentored junior team members on research methods, data
+                  quality checks, and version-controlled workflows to ensure reproducible, well-documented analysis.</p>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="absolute left-1/2 -translate-x-1/2 top-10 w-3 h-3 bg-black border-2 border-white rounded-full z-10 hidden md:block">
+          </div>
+          <div class="flex flex-col items-start order-1 md:order-2">
+            <div class="bg-zinc-800 px-3 py-1 text-[10px] font-bold text-white mb-4">08/2025 - 12/2025</div>
+            <h3 class="text-2xl font-bold text-white mb-1">Graduate Research Assistant</h3>
+            <p class="text-zinc-400 font-semibold mb-2">Emory University</p>
+            <p class="text-zinc-400 text-[10px] font-bold uppercase tracking-widest">Atlanta, Georgia</p>
+          </div>
+        </div>
+
+        <!-- Data Analytics & AI Specialist -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24 relative">
+          <div class="md:text-right flex flex-col items-end">
+            <div class="bg-zinc-800 px-3 py-1 text-[10px] font-bold text-white mb-4">03/2025 – 07/2025</div>
+            <h3 class="text-2xl font-bold text-white mb-1">Data Analytics &amp; AI Specialist</h3>
+            <p class="text-zinc-400 font-semibold mb-2">Liquid Intelligent Technologies</p>
+            <p class="text-zinc-400 text-[10px] font-bold uppercase tracking-widest">Harare, Zimbabwe</p>
+          </div>
+          <div
+            class="absolute left-1/2 -translate-x-1/2 top-10 w-3 h-3 bg-black border-2 border-white rounded-full z-10 hidden md:block">
+          </div>
+          <div class="bg-zinc-900/40 p-10 border border-zinc-800/50 hover:border-zinc-700 transition-colors">
+            <ul class="space-y-6">
+              <li class="flex gap-4"><span class="text-white mt-1">→</span>
+                <p class="text-zinc-400 text-sm leading-relaxed">Designed and deployed deep learning models for anomaly
+                  detection, user-engagement analytics, and network fault forecasting — increasing user engagement by
+                  18% and reducing platform downtime by 20%.</p>
+              </li>
+              <li class="flex gap-4"><span class="text-white mt-1">→</span>
+                <p class="text-zinc-400 text-sm leading-relaxed">Built 6 Power BI executive dashboards to monitor
+                  experiment KPIs, service adoption, retention, and performance, enabling product managers to make
+                  data-driven roadmap and investment decisions.</p>
+              </li>
+              <li class="flex gap-4"><span class="text-white mt-1">→</span>
+                <p class="text-zinc-400 text-sm leading-relaxed">Partnered with engineers and product managers to define
+                  metrics, telemetry, and data-quality checks, ensuring accurate end-to-end customer journey tracking
+                  and reducing reporting discrepancies.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Data Analytics Graduate Trainee -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24 relative">
+          <div
+            class="bg-zinc-900/40 p-10 border border-zinc-800/50 hover:border-zinc-700 transition-colors order-2 md:order-1">
+            <ul class="space-y-6">
+              <li class="flex gap-4"><span class="text-white mt-1">→</span>
+                <p class="text-zinc-400 text-sm leading-relaxed">Engineered advanced ETL pipelines on complex real-time
+                  datasets in BigQuery, improving enterprise data quality by 12% and supporting regulated, audit-ready
+                  analytics.</p>
+              </li>
+              <li class="flex gap-4"><span class="text-white mt-1">→</span>
+                <p class="text-zinc-400 text-sm leading-relaxed">Developed automated Python-based reporting and
+                  anomaly-flagging workflows for network traffic, cutting incident detection and response time by 30%
+                  and enhancing operational efficiency.</p>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="absolute left-1/2 -translate-x-1/2 top-10 w-3 h-3 bg-black border-2 border-white rounded-full z-10 hidden md:block">
+          </div>
+          <div class="flex flex-col items-start order-1 md:order-2">
+            <div class="bg-zinc-800 px-3 py-1 text-[10px] font-bold text-white mb-4">09/2024 - 02/2025</div>
+            <h3 class="text-2xl font-bold text-white mb-1">Data Analytics Graduate Trainee</h3>
+            <p class="text-zinc-400 font-semibold mb-2">Liquid Intelligent Technologies</p>
+            <p class="text-zinc-400 text-[10px] font-bold uppercase tracking-widest">Harare, Zimbabwe</p>
+          </div>
+        </div>
+
+        <!-- Data Science Intern -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24 relative">
+          <div class="md:text-right flex flex-col items-end">
+            <div class="bg-zinc-800 px-3 py-1 text-[10px] font-bold text-white mb-4">08/2022 – 07/2023</div>
+            <h3 class="text-2xl font-bold text-white mb-1">Data Science Intern</h3>
+            <p class="text-zinc-400 font-semibold mb-2">Expert Decision Systems (XDS) Zimbabwe</p>
+            <p class="text-zinc-400 text-[10px] font-bold uppercase tracking-widest">Harare, Zimbabwe</p>
+          </div>
+          <div
+            class="absolute left-1/2 -translate-x-1/2 top-10 w-3 h-3 bg-black border-2 border-white rounded-full z-10 hidden md:block">
+          </div>
+          <div class="bg-zinc-900/40 p-10 border border-zinc-800/50 hover:border-zinc-700 transition-colors">
+            <ul class="space-y-6">
+              <li class="flex gap-4"><span class="text-white mt-1">→</span>
+                <p class="text-zinc-400 text-sm leading-relaxed">Built and deployed a loan-default prediction model
+                  integrated into official credit reports, enabling lenders and insurers to better quantify risk and
+                  make more accurate, data-driven credit decisions.</p>
+              </li>
+              <li class="flex gap-4"><span class="text-white mt-1">→</span>
+                <p class="text-zinc-400 text-sm leading-relaxed">Queried and analyzed 70M+ records using SQL and PySpark
+                  to generate underwriting and portfolio-risk insights, influencing lending policies and improving model
+                  monitoring across multiple financial partners.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── EDUCATION & AWARDS ── -->
+  <section id="education" class="py-32 bg-zinc-950/50 reveal">
+    <div class="max-w-7xl mx-auto px-6">
+      <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-400 mb-4 block">Academic Background</span>
+      <h2 class="text-6xl font-black uppercase tracking-tight mb-16">Education &amp; Awards</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="space-y-5">
+          <div class="p-8 rounded-xl bg-zinc-900/50 border border-zinc-800 hover:border-zinc-700 transition-colors">
+            <div class="flex items-start justify-between gap-4 mb-4">
+              <h3 class="text-xl font-bold text-white leading-snug">MSc. Business Analytics</h3>
+              <span
+                class="flex-shrink-0 text-[11px] font-mono font-semibold text-zinc-400 bg-zinc-800 border border-zinc-700 px-3 py-1 rounded-md whitespace-nowrap">2025
+                – 2026</span>
+            </div>
+            <p class="text-zinc-400 text-sm mb-5">Emory University</p>
+            <div class="flex items-center gap-2 px-3 py-1.5 bg-zinc-800/60 border border-zinc-700/60 rounded-md w-fit">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#d4d4d8" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
+              </svg>
+              <span class="text-[11px] font-medium text-zinc-400">STEM Credentialed</span>
+            </div>
+          </div>
+          <div class="p-8 rounded-xl bg-zinc-900/50 border border-zinc-800 hover:border-zinc-700 transition-colors">
+            <div class="flex items-start justify-between gap-4 mb-4">
+              <h3 class="text-xl font-bold text-white leading-snug">Bachelor of Science Degree in Data Science and
+                Systems
+                <span
+                  class="flex-shrink-0 text-[11px] font-mono font-semibold text-zinc-400 bg-zinc-800 border border-zinc-700 px-3 py-1 rounded-md whitespace-nowrap">2020
+                  – 2024</span>
+              </h3>
+            </div>
+            <p class="text-zinc-400 text-sm mb-5">University of Zimbabwe</p>
+            <div class="flex items-center gap-2 px-3 py-1.5 bg-zinc-800/60 border border-zinc-700/60 rounded-md w-fit">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#d4d4d8" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="6" />
+                <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" />
+              </svg>
+              <span class="text-[11px] font-medium text-zinc-400">Graduated with Honors</span>
+            </div>
+          </div>
+        </div>
+        <div class="p-8 rounded-xl bg-zinc-900/50 border border-zinc-800 flex flex-col">
+          <div class="flex items-center gap-3 mb-5 pb-5 border-b border-zinc-800">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d4d4d8" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+              <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+              <path d="M4 22h16" />
+              <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+              <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+              <path d="M18 2H6v7a6 6 0 0 0 12 0V2z" />
+            </svg>
+            <h3 class="text-lg font-bold text-white">Honors &amp; Awards</h3>
+          </div>
+          <div class="space-y-7 flex-grow">
+            <div class="flex gap-4 items-start">
+              <span class="w-2 h-2 rounded-full bg-zinc-600 flex-shrink-0 mt-1.5"></span>
+              <div>
+                <h4 class="text-[15px] font-bold text-white mb-1">Book Prize (Overall Best Student in Data Science class
+                  of 2024)</h4>
+                <p class="text-zinc-400 text-sm">University of Zimbabwe</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CERTIFICATIONS -->
+      <div class="mt-16">
+        <div class="flex items-center gap-3 mb-8">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d4d4d8" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="6" />
+            <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" />
+          </svg>
+          <h3 class="text-lg font-bold text-white">Certifications &amp; Licenses</h3>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+
+          <div
+            class="p-4 bg-zinc-900/50 border border-zinc-800 hover:border-zinc-600 transition-colors rounded-lg flex gap-3 items-start">
+            <div
+              class="w-8 h-8 flex-shrink-0 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d4d4d8" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 8v4l3 3" />
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <h4 class="text-[13px] font-bold text-white leading-snug mb-0.5">Agentic AI</h4>
+              <p class="text-[11px] text-zinc-500 mb-2">DeepLearning.AI · Jan 2026</p>
+              <div class="flex flex-wrap gap-1">
+                <span
+                  class="text-[9px] font-mono font-semibold uppercase tracking-wider bg-zinc-800 border border-zinc-700 text-zinc-400 px-1.5 py-0.5 rounded">LLMs</span>
+                <span
+                  class="text-[9px] font-mono font-semibold uppercase tracking-wider bg-zinc-800 border border-zinc-700 text-zinc-400 px-1.5 py-0.5 rounded">Agentic
+                  Workflows</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="p-4 bg-zinc-900/50 border border-zinc-800 hover:border-zinc-600 transition-colors rounded-lg flex gap-3 items-start">
+            <div
+              class="w-8 h-8 flex-shrink-0 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d4d4d8" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <h4 class="text-[13px] font-bold text-white leading-snug mb-0.5">Text Prompt Engineering Techniques</h4>
+              <p class="text-[11px] text-zinc-500 mb-2">Google · Jan 2026</p>
+              <div class="flex flex-wrap gap-1"><span
+                  class="text-[9px] font-mono font-semibold uppercase tracking-wider bg-zinc-800 border border-zinc-700 text-zinc-400 px-1.5 py-0.5 rounded">Prompt
+                  Eng.</span></div>
+            </div>
+          </div>
+
+          <div
+            class="p-4 bg-zinc-900/50 border border-zinc-800 hover:border-zinc-600 transition-colors rounded-lg flex gap-3 items-start">
+            <div
+              class="w-8 h-8 flex-shrink-0 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d4d4d8" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6" />
+                <polyline points="8 6 2 12 8 18" />
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <h4 class="text-[13px] font-bold text-white leading-snug mb-0.5">Orchestrate PaLM LLM with LangChain</h4>
+              <p class="text-[11px] text-zinc-500 mb-2">Google · Jan 2026</p>
+              <div class="flex flex-wrap gap-1">
+                <span
+                  class="text-[9px] font-mono font-semibold uppercase tracking-wider bg-zinc-800 border border-zinc-700 text-zinc-400 px-1.5 py-0.5 rounded">LangChain</span>
+                <span
+                  class="text-[9px] font-mono font-semibold uppercase tracking-wider bg-zinc-800 border border-zinc-700 text-zinc-400 px-1.5 py-0.5 rounded">LLMs</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="p-4 bg-zinc-900/50 border border-zinc-800 hover:border-zinc-600 transition-colors rounded-lg flex gap-3 items-start">
+            <div
+              class="w-8 h-8 flex-shrink-0 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d4d4d8" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" />
+                <path d="M8 21h8M12 17v4" />
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <h4 class="text-[13px] font-bold text-white leading-snug mb-0.5">Develop GenAI Apps with Gemini &amp;
+                Streamlit</h4>
+              <p class="text-[11px] text-zinc-500 mb-2">Google · Jan 2026</p>
+              <div class="flex flex-wrap gap-1">
+                <span
+                  class="text-[9px] font-mono font-semibold uppercase tracking-wider bg-zinc-800 border border-zinc-700 text-zinc-400 px-1.5 py-0.5 rounded">Gemini</span>
+                <span
+                  class="text-[9px] font-mono font-semibold uppercase tracking-wider bg-zinc-800 border border-zinc-700 text-zinc-400 px-1.5 py-0.5 rounded">Streamlit</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="p-4 bg-zinc-900/50 border border-zinc-800 hover:border-zinc-600 transition-colors rounded-lg flex gap-3 items-start">
+            <div
+              class="w-8 h-8 flex-shrink-0 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d4d4d8" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 3v18h18" />
+                <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3" />
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <h4 class="text-[13px] font-bold text-white leading-snug mb-0.5">Build MLOps Pipelines using Vertex AI
+              </h4>
+              <p class="text-[11px] text-zinc-500 mb-2">Google · Jan 2026</p>
+              <div class="flex flex-wrap gap-1">
+                <span
+                  class="text-[9px] font-mono font-semibold uppercase tracking-wider bg-zinc-800 border border-zinc-700 text-zinc-400 px-1.5 py-0.5 rounded">MLOps</span>
+                <span
+                  class="text-[9px] font-mono font-semibold uppercase tracking-wider bg-zinc-800 border border-zinc-700 text-zinc-400 px-1.5 py-0.5 rounded">Vertex
+                  AI</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="p-4 bg-zinc-900/50 border border-zinc-800 hover:border-zinc-600 transition-colors rounded-lg flex gap-3 items-start">
+            <div
+              class="w-8 h-8 flex-shrink-0 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d4d4d8" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <ellipse cx="12" cy="5" rx="9" ry="3" />
+                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <h4 class="text-[13px] font-bold text-white leading-snug mb-0.5">Engineer Data for Predictive Modeling —
+                BigQuery ML</h4>
+              <p class="text-[11px] text-zinc-500 mb-2">Google · Jul 2025</p>
+              <div class="flex flex-wrap gap-1">
+                <span
+                  class="text-[9px] font-mono font-semibold uppercase tracking-wider bg-zinc-800 border border-zinc-700 text-zinc-400 px-1.5 py-0.5 rounded">BigQuery</span>
+                <span
+                  class="text-[9px] font-mono font-semibold uppercase tracking-wider bg-zinc-800 border border-zinc-700 text-zinc-400 px-1.5 py-0.5 rounded">ETL</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="p-4 bg-zinc-900/50 border border-zinc-800 hover:border-zinc-600 transition-colors rounded-lg flex gap-3 items-start">
+            <div
+              class="w-8 h-8 flex-shrink-0 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d4d4d8" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="18" cy="18" r="3" />
+                <circle cx="6" cy="6" r="3" />
+                <path d="M6 21V9a9 9 0 0 0 9 9" />
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <h4 class="text-[13px] font-bold text-white leading-snug mb-0.5">Create ML Models with BigQuery ML</h4>
+              <p class="text-[11px] text-zinc-500 mb-2">Google · Jul 2025</p>
+              <div class="flex flex-wrap gap-1">
+                <span
+                  class="text-[9px] font-mono font-semibold uppercase tracking-wider bg-zinc-800 border border-zinc-700 text-zinc-400 px-1.5 py-0.5 rounded">BigQuery</span>
+                <span
+                  class="text-[9px] font-mono font-semibold uppercase tracking-wider bg-zinc-800 border border-zinc-700 text-zinc-400 px-1.5 py-0.5 rounded">GCP</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="p-4 bg-zinc-900/50 border border-zinc-800 hover:border-zinc-600 transition-colors rounded-lg flex gap-3 items-start">
+            <div
+              class="w-8 h-8 flex-shrink-0 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d4d4d8" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+                <path d="M12 12v9" />
+                <path d="m8 17 4 4 4-4" />
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <h4 class="text-[13px] font-bold text-white leading-snug mb-0.5">Prepare Data for ML APIs on Google Cloud
+              </h4>
+              <p class="text-[11px] text-zinc-500 mb-2">Google · Jun 2025</p>
+              <div class="flex flex-wrap gap-1">
+                <span
+                  class="text-[9px] font-mono font-semibold uppercase tracking-wider bg-zinc-800 border border-zinc-700 text-zinc-400 px-1.5 py-0.5 rounded">GCP</span>
+                <span
+                  class="text-[9px] font-mono font-semibold uppercase tracking-wider bg-zinc-800 border border-zinc-700 text-zinc-400 px-1.5 py-0.5 rounded">ML
+                  APIs</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="p-4 bg-zinc-900/50 border border-zinc-800 hover:border-zinc-600 transition-colors rounded-lg flex gap-3 items-start">
+            <div
+              class="w-8 h-8 flex-shrink-0 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d4d4d8" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <h4 class="text-[13px] font-bold text-white leading-snug mb-0.5">Cloud Digital Leader Certification</h4>
+              <p class="text-[11px] text-zinc-500 mb-2">Google · Apr 2025 – Apr 2028</p>
+              <div class="flex flex-wrap gap-1">
+                <span
+                  class="text-[9px] font-mono font-semibold uppercase tracking-wider bg-zinc-800 border border-zinc-700 text-zinc-400 px-1.5 py-0.5 rounded">Cloud</span>
+                <span
+                  class="text-[9px] font-mono font-semibold uppercase tracking-wider bg-zinc-800 border border-zinc-700 text-zinc-400 px-1.5 py-0.5 rounded">Security
+                  &amp; Trust</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="p-4 bg-zinc-900/50 border border-zinc-800 hover:border-zinc-600 transition-colors rounded-lg flex gap-3 items-start">
+            <div
+              class="w-8 h-8 flex-shrink-0 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d4d4d8" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2" />
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <h4 class="text-[13px] font-bold text-white leading-snug mb-0.5">Data Engineer Associate</h4>
+              <p class="text-[11px] text-zinc-500 mb-2">DataCamp · Jul 2023 – Jul 2025</p>
+              <div class="flex flex-wrap gap-1">
+                <span
+                  class="text-[9px] font-mono font-semibold uppercase tracking-wider bg-zinc-800 border border-zinc-700 text-zinc-400 px-1.5 py-0.5 rounded">Data
+                  Mgmt</span>
+                <span
+                  class="text-[9px] font-mono font-semibold uppercase tracking-wider bg-zinc-800 border border-zinc-700 text-zinc-400 px-1.5 py-0.5 rounded">Apache
+                  Spark</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── CASE STUDIES / PROJECTS ── -->
+  <section id="projects" class="py-32 reveal">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-400 mb-4 block">My Projects</span>
+          <h2 class="text-6xl font-black uppercase tracking-tight">Case Studies</h2>
+        </div>
+        <p class="text-zinc-400 text-sm max-w-xs md:text-right">Selected works showcasing deep learning, data
+          engineering, and end-to-end AI system design.</p>
+      </div>
+
+      <div class="flex flex-wrap gap-3 mb-12" id="project-filters">
+        <button data-filter="all"
+          class="filter-btn active-filter px-6 py-2.5 bg-white text-black text-xs font-bold rounded-sm transition-all duration-200">All</button>
+        <button data-filter="ai-ml"
+          class="filter-btn px-6 py-2.5 bg-zinc-900 text-white text-xs font-bold rounded-sm border border-zinc-800 hover:border-zinc-600 transition-all duration-200">AI
+          &amp; ML</button>
+        <button data-filter="data-sci"
+          class="filter-btn px-6 py-2.5 bg-zinc-900 text-white text-xs font-bold rounded-sm border border-zinc-800 hover:border-zinc-600 transition-all duration-200">Data
+          Sci</button>
+        <button data-filter="visualization"
+          class="filter-btn px-6 py-2.5 bg-zinc-900 text-white text-xs font-bold rounded-sm border border-zinc-800 hover:border-zinc-600 transition-all duration-200">Visualization</button>
+        <button data-filter="data-eng"
+          class="filter-btn px-6 py-2.5 bg-zinc-900 text-white text-xs font-bold rounded-sm border border-zinc-800 hover:border-zinc-600 transition-all duration-200">Data
+          Eng</button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+
+        <div onclick="openModal('researchagent')" data-categories="ai-ml"
+          class="project-card group bg-zinc-900/40 rounded-xl overflow-hidden border border-zinc-800/60 hover:border-zinc-500 transition-all duration-500 flex flex-col h-full project-card-clickable">
+          <div class="h-56 relative overflow-hidden bg-[#0c0c0e]">
+            <div class="absolute inset-0 project-overlay z-10"></div>
+            <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"><span
+                class="text-white font-black text-lg tracking-tighter opacity-20">AGENTIC AI · RESEARCH</span></div>
+            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2600&auto=format&fit=crop"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-30"
+              alt="Research Agent" />
+            <div class="absolute inset-0 z-20 flex items-center justify-center"><span
+                class="view-case-study bg-white text-black text-xs font-bold px-5 py-2.5 uppercase tracking-widest">View
+                Case Study →</span></div>
+          </div>
+          <div class="p-8 flex-grow">
+            <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-400 mb-2 block">Agentic AI ·
+              Multi-Agent · Google ADK</span>
+            <h4 class="text-xl font-bold text-white mb-4">AI Research Automation Agentic System</h4>
+            <p class="text-zinc-400 text-sm leading-relaxed mb-8">Containerized multi-agent research assistant built
+              with Google ADK and Gemini 2.0, automating literature review, evidence synthesis, and technical writing
+              across web, arXiv, and Wikipedia sources.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">Google ADK</span>
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">Gemini 2.0</span>
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">Multi-Agent</span>
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">Docker</span>
+            </div>
+          </div>
+        </div>
+
+        <div onclick="openModal('netflix')" data-categories="ai-ml data-eng"
+          class="project-card group bg-zinc-900/40 rounded-xl overflow-hidden border border-zinc-800/60 hover:border-zinc-500 transition-all duration-500 flex flex-col h-full project-card-clickable">
+          <div class="h-56 relative overflow-hidden bg-[#0c0c0e]">
+            <div class="absolute inset-0 project-overlay z-10"></div>
+            <img src="netflix.jpg"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-40"
+              alt="AI Recommender" />
+            <div class="absolute inset-0 z-20 flex items-center justify-center"><span
+                class="view-case-study bg-white text-black text-xs font-bold px-5 py-2.5 uppercase tracking-widest">View
+                Case Study →</span></div>
+          </div>
+          <div class="p-8 flex-grow">
+            <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-400 mb-2 block">AI &amp; ML · Data Eng
+              · Fall 2025</span>
+            <h4 class="text-xl font-bold text-white mb-4">Netflix-style AI Recommender</h4>
+            <p class="text-zinc-400 text-sm leading-relaxed mb-8">End-to-end AI platform combining real-time semantic
+              search, personalized recommendations, and executive analytics on a production data stack (MySQL, Hive/EMR,
+              S3, MongoDB, ChromaDB).</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">LangChain RAG</span>
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">ChromaDB</span>
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">FastAPI</span>
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">Hive / S3</span>
+            </div>
+          </div>
+        </div>
+
+        <div onclick="openModal('newsmining')" data-categories="ai-ml data-sci"
+          class="project-card group bg-zinc-900/40 rounded-xl overflow-hidden border border-zinc-800/60 hover:border-zinc-500 transition-all duration-500 flex flex-col h-full project-card-clickable">
+          <div class="h-56 relative overflow-hidden bg-[#0c0c0e]">
+            <div class="absolute inset-0 project-overlay z-10"></div>
+            <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"><span
+                class="text-white font-black text-lg tracking-tighter opacity-20">NLP · WEB MINING</span></div>
+            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=2600&auto=format&fit=crop"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-30"
+              alt="News Mining" />
+            <div class="absolute inset-0 z-20 flex items-center justify-center"><span
+                class="view-case-study bg-white text-black text-xs font-bold px-5 py-2.5 uppercase tracking-widest">View
+                Case Study →</span></div>
+          </div>
+          <div class="p-8 flex-grow">
+            <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-400 mb-2 block">AI &amp; ML · NLP ·
+              Deployed</span>
+            <h4 class="text-xl font-bold text-white mb-4">Newspaper Text Mining &amp; Recommender</h4>
+            <p class="text-zinc-400 text-sm leading-relaxed mb-8">End-to-end web scraping and NLP platform that collects
+              articles from 4 newspapers, clusters them by latent topic, and serves a live Streamlit recommender
+              application for multi-source story discovery.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">Web Scraping</span>
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">NLP Clustering</span>
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">Streamlit</span>
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">Deployed ↗</span>
+            </div>
+          </div>
+        </div>
+
+        <div onclick="openModal('retail')" data-categories="ai-ml"
+          class="project-card group bg-zinc-900/40 rounded-xl overflow-hidden border border-zinc-800/60 hover:border-zinc-500 transition-all duration-500 flex flex-col h-full project-card-clickable">
+          <div class="h-56 relative overflow-hidden bg-[#0c0c0e]">
+            <div class="absolute inset-0 project-overlay z-10"></div>
+            <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"><span
+                class="text-white font-black text-xl tracking-tighter opacity-20">VERTEX AI · RETAIL</span></div>
+            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2600&auto=format&fit=crop"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-35"
+              alt="Retail AI App" />
+            <div class="absolute inset-0 z-20 flex items-center justify-center"><span
+                class="view-case-study bg-white text-black text-xs font-bold px-5 py-2.5 uppercase tracking-widest">View
+                Case Study →</span></div>
+          </div>
+          <div class="p-8 flex-grow">
+            <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-400 mb-2 block">AI &amp; ML · GCP ·
+              RAG</span>
+            <h4 class="text-xl font-bold text-white mb-4">AI-Powered Retail Q&amp;A App</h4>
+            <p class="text-zinc-400 text-sm leading-relaxed mb-8">Natural-language question-answering system over retail
+              transaction data using Vertex AI embeddings, pgvector semantic search on Cloud SQL PostgreSQL, and
+              LangChain orchestration.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">Vertex AI</span>
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">pgvector</span>
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">LangChain</span>
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">Cloud SQL</span>
+            </div>
+          </div>
+        </div>
+
+        <div onclick="openModal('crime')" data-categories="visualization"
+          class="project-card group bg-zinc-900/40 rounded-xl overflow-hidden border border-zinc-800/60 hover:border-zinc-500 transition-all duration-500 flex flex-col h-full project-card-clickable">
+          <div class="h-56 relative overflow-hidden bg-[#0c0c0e]">
+            <div class="absolute inset-0 project-overlay z-10"></div>
+            <img src="Crime_Analysis_Dashboard.png"
+              onerror="this.src='https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=2600&auto=format&fit=crop'"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-55"
+              alt="Crime Analysis Dashboard" />
+            <div class="absolute inset-0 z-20 flex items-center justify-center"><span
+                class="view-case-study bg-white text-black text-xs font-bold px-5 py-2.5 uppercase tracking-widest">View
+                Case Study →</span></div>
+          </div>
+          <div class="p-8 flex-grow">
+            <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-400 mb-2 block">Visualization ·
+              2021–2023</span>
+            <h4 class="text-xl font-bold text-white mb-4">Crime Analysis Dashboard</h4>
+            <p class="text-zinc-400 text-sm leading-relaxed mb-8">Interactive Tableau workbook summarizing 2,500+ crime
+              incidents across European countries (Sept 2021–Nov 2023) with temporal patterns, geographic distribution,
+              and resolution performance metrics.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">Tableau</span>
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">Geospatial</span>
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">Heatmap</span>
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">KPI Design</span>
+            </div>
+          </div>
+        </div>
+
+        <div onclick="openModal('sentiment')" data-categories="data-sci"
+          class="project-card group bg-zinc-900/40 rounded-xl overflow-hidden border border-zinc-800/60 hover:border-zinc-500 transition-all duration-500 flex flex-col h-full project-card-clickable">
+          <div class="h-56 relative overflow-hidden bg-[#0c0c0e]">
+            <div class="absolute inset-0 project-overlay z-10"></div>
+            <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"><span
+                class="text-white font-black text-lg tracking-tighter opacity-20">NLP · SENTIMENT</span></div>
+            <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?q=80&w=2600&auto=format&fit=crop"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-35"
+              alt="Sentiment Analysis" />
+            <div class="absolute inset-0 z-20 flex items-center justify-center"><span
+                class="view-case-study bg-white text-black text-xs font-bold px-5 py-2.5 uppercase tracking-widest">View
+                Case Study →</span></div>
+          </div>
+          <div class="p-8 flex-grow">
+            <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-400 mb-2 block">Analytics · NLP ·
+              Spark</span>
+            <h4 class="text-xl font-bold text-white mb-4">Sentiment Analysis Pipeline</h4>
+            <p class="text-zinc-400 text-sm leading-relaxed mb-8">End-to-end NLP pipeline classifying e-commerce
+              customer sentiment from X (Twitter) posts using TensorFlow, Scikit-learn, and Apache Spark, with Power BI
+              dashboards surfacing actionable brand insights.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">TensorFlow</span>
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">Apache Spark</span>
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">NLP</span>
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">Power BI</span>
+            </div>
+          </div>
+        </div>
+
+        <div onclick="openModal('webusage')" data-categories="data-sci"
+          class="project-card group bg-zinc-900/40 rounded-xl overflow-hidden border border-zinc-800/60 hover:border-zinc-500 transition-all duration-500 flex flex-col h-full project-card-clickable">
+          <div class="h-56 relative overflow-hidden bg-[#0c0c0e]">
+            <div class="absolute inset-0 project-overlay z-10"></div>
+            <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"><span
+                class="text-white font-black text-lg tracking-tighter opacity-20">WEB LOGS · APRIORI</span></div>
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2600&auto=format&fit=crop"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-30"
+              alt="Web Usage Mining" />
+            <div class="absolute inset-0 z-20 flex items-center justify-center"><span
+                class="view-case-study bg-white text-black text-xs font-bold px-5 py-2.5 uppercase tracking-widest">View
+                Case Study →</span></div>
+          </div>
+          <div class="p-8 flex-grow">
+            <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-400 mb-2 block">Analytics · Data
+              Mining</span>
+            <h4 class="text-xl font-bold text-white mb-4">Web Usage Mining Analytics</h4>
+            <p class="text-zinc-400 text-sm leading-relaxed mb-8">Apache web server log analysis pipeline extracting
+              session statistics, referrer patterns, and frequent page co-occurrence rules using the Apriori algorithm
+              for UX and operational intelligence.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">Python</span>
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">Apriori</span>
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">Pandas</span>
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">Log Parsing</span>
+            </div>
+          </div>
+        </div>
+
+        <div onclick="openModal('patternmining')" data-categories="data-sci"
+          class="project-card group bg-zinc-900/40 rounded-xl overflow-hidden border border-zinc-800/60 hover:border-zinc-500 transition-all duration-500 flex flex-col h-full project-card-clickable">
+          <div class="h-56 relative overflow-hidden bg-[#0c0c0e]">
+            <div class="absolute inset-0 project-overlay z-10"></div>
+            <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none"><span
+                class="text-white font-black text-lg tracking-tighter opacity-20">MARKET BASKET · MBA</span></div>
+            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2600&auto=format&fit=crop"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-30"
+              alt="Pattern Mining" />
+            <div class="absolute inset-0 z-20 flex items-center justify-center"><span
+                class="view-case-study bg-white text-black text-xs font-bold px-5 py-2.5 uppercase tracking-widest">View
+                Case Study →</span></div>
+          </div>
+          <div class="p-8 flex-grow">
+            <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-400 mb-2 block">Analytics · Data
+              Mining</span>
+            <h4 class="text-xl font-bold text-white mb-4">Pattern Mining &amp; Association Rules</h4>
+            <p class="text-zinc-400 text-sm leading-relaxed mb-8">Market Basket Analysis pipeline applying the Apriori
+              algorithm to transactional retail data, generating ranked association rules by support, confidence, and
+              lift for merchandising and cross-sell strategy.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">Apriori</span>
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">Python</span>
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">Pandas</span>
+              <span class="px-2.5 py-1 bg-zinc-950 text-[10px] font-mono text-zinc-400 rounded">Market Basket</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div id="no-projects" class="hidden text-center py-20">
+        <p class="text-zinc-400 text-sm font-mono uppercase tracking-widest">No projects in this category yet.</p>
+      </div>
+    </div>
+  </section>
+
+  <div id="project-modal" onclick="if(event.target===this)closeModal()">
+    <div class="modal-inner" id="modal-content-box"></div>
+  </div>
+
+
+  <!-- ── CONTACT ── -->
+  <section id="contact" class="py-32 bg-zinc-950/50 reveal">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-5xl font-black text-white mb-4 tracking-tight">Initiate Communication</h2>
+        <p class="text-zinc-400 text-base">Ready to deploy intelligent solutions?</p>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div class="space-y-4">
+          <div
+            class="flex items-center gap-5 p-6 rounded-xl bg-zinc-900/60 border border-zinc-800 hover:border-zinc-700 transition-colors">
+            <div class="w-12 h-12 rounded-lg bg-zinc-800 flex items-center justify-center flex-shrink-0">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 mb-0.5">Location</p>
+              <p class="text-white font-bold text-lg">Atlanta, GA</p>
+            </div>
+          </div>
+          <a href="/cdn-cgi/l/email-protection#d2b1a0b3bbb5a6b3bcb3b9b3b192b5bfb3bbbefcb1bdbf"
+            class="flex items-center gap-5 p-6 rounded-xl bg-zinc-900/60 border border-zinc-800 hover:border-zinc-600 transition-colors group block">
+            <div
+              class="w-12 h-12 rounded-lg bg-zinc-800 flex items-center justify-center flex-shrink-0 group-hover:bg-zinc-700 transition-colors">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 mb-0.5">Email</p>
+              <p class="text-white font-bold text-lg"><span class="__cf_email__"
+                  data-cfemail="0b68796a626c7f6a656a606a684b6c666a626725686466">[email&#160;protected]</span></p>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/craig-tanaka-chipendo" target="_blank" rel="noopener"
+            class="flex items-center gap-5 p-6 rounded-xl bg-zinc-900/60 border border-zinc-800 hover:border-zinc-600 transition-colors group block">
+            <div
+              class="w-12 h-12 rounded-lg bg-zinc-800 flex items-center justify-center flex-shrink-0 group-hover:bg-zinc-700 transition-colors">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                <rect x="2" y="9" width="4" height="12" />
+                <circle cx="4" cy="4" r="2" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 mb-0.5">LinkedIn</p>
+              <p class="text-white font-bold text-lg">Connect Profile</p>
+            </div>
+          </a>
+          <a href="https://github.com/craigchipendo" target="_blank" rel="noopener"
+            class="flex items-center gap-5 p-6 rounded-xl bg-zinc-900/60 border border-zinc-800 hover:border-zinc-600 transition-colors group block">
+            <div
+              class="w-12 h-12 rounded-lg bg-zinc-800 flex items-center justify-center flex-shrink-0 group-hover:bg-zinc-700 transition-colors">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 mb-0.5">GitHub</p>
+              <p class="text-white font-bold text-lg">View Code</p>
+            </div>
+          </a>
+        </div>
+        <div class="p-8 rounded-xl bg-zinc-900/60 border border-zinc-800">
+          <div class="grid grid-cols-2 gap-4 mb-4">
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 mb-2">Name</label>
+              <input type="text" placeholder="John Doe"
+                class="w-full bg-zinc-800/80 border border-zinc-700 rounded-lg px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-zinc-500 transition-colors" />
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 mb-2">Email</label>
+              <input type="email" placeholder="john@example.com"
+                class="w-full bg-zinc-800/80 border border-zinc-700 rounded-lg px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-zinc-500 transition-colors" />
+            </div>
+          </div>
+          <div class="mb-4">
+            <label class="block text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 mb-2">Subject</label>
+            <input type="text" placeholder="Project Inquiry"
+              class="w-full bg-zinc-800/80 border border-zinc-700 rounded-lg px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-zinc-500 transition-colors" />
+          </div>
+          <div class="mb-6">
+            <label class="block text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 mb-2">Message</label>
+            <textarea rows="5" placeholder="How can we collaborate?"
+              class="w-full bg-zinc-800/80 border border-zinc-700 rounded-lg px-4 py-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-zinc-500 transition-colors resize-none"></textarea>
+          </div>
+          <button onclick="handleContactForm(this)"
+            class="w-full bg-white text-black text-xs font-black uppercase tracking-widest py-4 rounded-lg hover:bg-zinc-200 transition-colors">Send
+            Message</button>
+        </div>
+      </div>
+      <p class="text-center text-[11px] font-mono text-zinc-600 tracking-widest mt-20">© 2026 Craig Tanaka Chipendo. All
+        rights reserved.</p>
+    </div>
+  </section>
+
+
+  <!-- ── SCRIPTS ── -->
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script>
+    // NOTE: The full projectData object from the original HTML should be preserved here.
+    // Below is the same projectData from the original file.
+    const projectData = {
+      researchagent: {
+        id: 'AGENT-01', category: 'Agentic AI · Multi-Agent · Google ADK',
+        title: 'AI Research Agent',
+        subtitle: 'Containerized multi-agent research assistant built with Python and Google ADK, automating literature review, evidence synthesis, and technical writing for data science and ML workflows.',
+        overview: `As AI chatbots like ChatGPT, Gemini, and Claude become deeply embedded in daily workflows, many people have stopped doing deep, independent research — relying instead on single-turn LLM responses that may be outdated, shallow, or hallucinated. I built this Research Agent to counter that trend: a system that actively goes out, retrieves current information from multiple authoritative sources, synthesises evidence, and produces structured, verifiable outputs. It keeps me up to date with the latest trends in AI and data science without sacrificing the rigour of real research.`,
+        problems: [
+          { num: '01', text: 'Passive consumption: Widespread LLM chatbot usage has shifted people away from active, multi-source research — accepting single-model answers as ground truth.' },
+          { num: '02', text: 'Information staleness: LLMs have fixed knowledge cutoffs; staying current on fast-moving ML and data science developments requires continuous retrieval from live sources.' },
+          { num: '03', text: 'Synthesis bottleneck: Consolidating findings from web, arXiv, and Wikipedia into a coherent, structured report is time-consuming when done manually.' },
+          { num: '04', text: 'No specialist division of labour: A single generalist prompt cannot simultaneously act as a rigorous researcher, a clear writer, and a quality editor.' },
+        ],
+        baselineKpis: [
+          { label: 'Research method', value: 'Manual — browser tabs, copy-paste, ad-hoc prompts' },
+          { label: 'Source coverage', value: 'Single LLM response, no cross-source verification' },
+          { label: 'Output quality', value: 'Unstructured, inconsistent, not reproducible' },
+          { label: 'Time to report', value: 'Hours of manual synthesis per topic' },
+        ],
+        solution: `Built a Python-based multi-agent system orchestrated by Google ADK. A planning module decomposes a research question into sequential tasks and routes each to a specialist agent: Researcher (retrieves and synthesises evidence), Writer (structures findings into a coherent draft), and Editor (refines for clarity and accuracy). All agents share the Gemini 2.0 Flash LLM and a unified HTTP session for tool calls across Tavily, arXiv, and Wikipedia.`,
+        capabilities: [
+          'Planning agent that decomposes any research question into an ordered task list',
+          'Specialist Researcher agent pulling live data from Tavily web search, arXiv scholarly PDFs, and Wikipedia',
+          'Writer agent structuring synthesised evidence into a readable technical report',
+          'Editor agent reviewing and refining drafts for accuracy, clarity, and consistency',
+          'Containerised deployment via Docker for reproducible, portable execution',
+          'ADK Web UI and CLI runner for flexible interaction modes',
+        ],
+        approach: [
+          'Defined specialist agents (Researcher, Writer, Editor) as Google ADK LlmAgents with scoped tool access',
+          'Built a planning module that uses Gemini to generate an ordered task list from a freeform research question',
+          'Implemented an executor router that dispatches each task to the correct specialist agent via ADK InMemoryRunner',
+          'Integrated Tavily (web), arXiv (scholarly), and Wikipedia (context) as tool functions with a shared requests session',
+          'Containerised the full stack in a python:3.11-slim Docker image with environment-variable credential management',
+        ],
+        architecture: [
+          { label: 'Query', top: 'INPUT', value: 'Research\nQuestion', sub: 'CLI / Web UI' },
+          { label: 'Plan', top: 'PLAN', value: 'Planning\nAgent', sub: 'Task List', active: true },
+          { label: 'Research', top: 'RETRIEVE', value: 'Researcher\nAgent', sub: 'Web+arXiv', active: true },
+          { label: 'Write', top: 'DRAFT', value: 'Writer +\nEditor', sub: 'Report' },
+          { label: 'Output', top: 'OUTPUT', value: 'Structured\nReport', sub: 'Verified' },
+        ],
+        archDetails: [
+          { label: 'LLM', value: 'Gemini 2.0 Flash · Google ADK InMemoryRunner' },
+          { label: 'Agents', value: 'Planner · Researcher · Writer · Editor (Google ADK LlmAgent)' },
+          { label: 'Research Tools', value: 'Tavily Web Search · arXiv PDF Scraper · Wikipedia Lookup' },
+          { label: 'Orchestration', value: 'src/planning_agent.py — task decomposition + executor router' },
+          { label: 'Infrastructure', value: 'Docker (python:3.11-slim) · .env credential management · .adk/ state' },
+        ],
+        governance: [
+          'All API credentials stored exclusively in .env — never committed to source control',
+          'Shared HTTP session with rate-limiting across Tavily, arXiv, and Wikipedia tool calls',
+          'Modular agent design: each specialist operates within a scoped context, preventing role bleed',
+          'Containerised environment ensures reproducible research outputs across machines',
+          'ADK .adk/ directory tracks tool registration and local state for auditability',
+        ],
+        results: [
+          { num: 'RESULT 1', text: 'Eliminated hours of manual research synthesis per topic — from question to structured report in a single automated pipeline run.' },
+          { num: 'RESULT 2', text: 'Grounds all outputs in live, multi-source evidence (web, arXiv, Wikipedia), countering the staleness and hallucination risks of single-model LLM responses.' },
+          { num: 'RESULT 3', text: 'Enables continuous self-education on AI and data science trends without surrendering research rigour to chatbot convenience.' },
+          { num: 'RESULT 4', text: 'Demonstrates a reusable multi-agent architecture pattern applicable to any domain requiring automated literature review and report generation.' },
+        ],
+        tech: ['Google ADK', 'Gemini 2.0 Flash', 'Python', 'Tavily', 'arXiv', 'Wikipedia', 'Docker', 'FastAPI', 'Multi-Agent Systems', 'LLM Orchestration'],
+        videoUrl: null,
+      },
+      netflix: {
+        id: 'AI-01',
+        category: 'AI & ML · Fall 2025',
+        title: 'Netflix-style AI Recommender & Executive Analytics Platform',
+        subtitle: 'End-to-end data platform simulating a Netflix-style streaming company with AI-powered recommendations and executive dashboards.',
+        overview: `This project is an end-to-end data platform that simulates a Netflix-style streaming company using a large, production-like synthetic dataset. It spans operational OLTP databases, NoSQL systems, a Hive-based big-data warehouse, and a new AI-driven business application for both end users and executives.`,
+        problems: [
+          { num: '01', text: 'Cold-start gap: No real-time semantic search — users relied on keyword-only catalog navigation.' },
+          { num: '02', text: 'Data silos: Operational OLTP, S3 raw files, and analytics all lived in disconnected systems with no unified access layer.' },
+          { num: '03', text: 'No AI layer: The existing stack lacked any vector search, embedding model, or generative AI capability.' },
+          { num: '04', text: 'Executive blind spots: No interactive dashboards for catalog performance, engagement, or audience behavior analysis.' },
+          { num: '05', text: 'Scalability risk: Monolithic MySQL queries could not support analytical workloads over millions of watch-event rows.' },
+        ],
+        baselineKpis: [
+          { label: 'Search paradigm', value: 'Keyword-only (no semantic understanding)' },
+          { label: 'Data warehouse', value: 'None — raw MySQL OLTP only' },
+          { label: 'Analytics cadence', value: 'Ad-hoc SQL pulls, no dashboard' },
+          { label: 'AI capabilities', value: 'None deployed in production' },
+        ],
+        solution: `Architected a full-stack AI platform coupling a Hive-on-EMR star-schema warehouse, a ChromaDB vector store for semantic search, a MongoDB clickstream logger, and a FastAPI + Gradio front end.`,
+        capabilities: [
+          'Real-time semantic search via ChromaDB (all-MiniLM-L6-v2 embeddings)',
+          'AI-generated content posters using Stable Diffusion',
+          'LangChain RAG pipeline for context-aware recommendations',
+          'Executive dashboards: hidden gems, vintage content, demographic patterns, geographic genre preferences',
+          'Full clickstream audit log in MongoDB for UX analysis and future model training',
+          'Multi-environment MySQL auth + analytics warehouse (dw_netflix_analytics)',
+        ],
+        approach: [
+          'ETL flows: S3 CSV → Hive Parquet star schema (fact + dim tables, partition pruning)',
+          'Vector index: HuggingFace embeddings → ChromaDB for sub-second similarity retrieval',
+          'FastAPI orchestration mediating MySQL, MongoDB, ChromaDB, and AI model calls',
+          'Gradio Blocks multi-page UI: user login, AI search, admin portal, analytics dashboard',
+        ],
+        architecture: [
+          { label: 'Sources', top: 'SOURCES', value: 'MySQL\nS3 / Hive', sub: 'Raw Data' },
+          { label: 'Ingest', top: 'INGEST', value: 'EMR\nHive', sub: 'Star Schema' },
+          { label: 'Transform', top: 'TRANSFORM', value: 'ChromaDB\ndbt/SQL', sub: 'Embeddings', active: true },
+          { label: 'Serve', top: 'SERVE', value: 'FastAPI\nGradio', sub: 'App Layer', active: true },
+          { label: 'Consume', top: 'CONSUME', value: '2\nPortals', sub: 'User + Exec' },
+        ],
+        archDetails: [
+          { label: 'AI / Vector Store', value: 'ChromaDB · HuggingFace all-MiniLM-L6-v2 · Stable Diffusion' },
+          { label: 'Backend / API', value: 'FastAPI · Uvicorn · LangChain RAG pipeline' },
+          { label: 'Databases', value: 'MySQL (Auth + Analytics) · MongoDB (Clickstream) · ChromaDB' },
+          { label: 'Big Data', value: 'Apache Hive on Amazon EMR · S3 · Parquet Star Schema' },
+          { label: 'Frontend', value: 'Gradio Blocks · HTML/CSS · Multi-route mounting' },
+        ],
+        governance: [
+          'SHA-256 password hashing for all user and admin credentials',
+          'Role-based access: separate user and admin portals with distinct data permissions',
+          'Immutable MongoDB audit log capturing every click, login, and navigation event',
+          'Modular database auto-creation on startup; MySQL credentials centralized in config',
+          'Partition pruning and Parquet formatting to prevent runaway scan costs on EMR',
+        ],
+        results: [
+          { num: 'RESULT 1', text: 'Enabled sub-second natural-language search over thousands of titles via vector similarity.' },
+          { num: 'RESULT 2', text: 'Unified 4 disparate data stores (MySQL, S3/Hive, MongoDB, ChromaDB) into a single cohesive application stack.' },
+          { num: 'RESULT 3', text: 'Delivered dual-facing product: AI-powered "Ask Netflix" for subscribers and an interactive analytics portal for executives.' },
+          { num: 'RESULT 4', text: 'Achieved production-like data quality through Parquet conversion and dynamic partition tuning, enabling DAU and engagement queries at scale.' },
+        ],
+        tech: ['LangChain', 'ChromaDB', 'FastAPI', 'Gradio', 'Hive / EMR', 'MySQL', 'MongoDB', 'HuggingFace', 'Stable Diffusion', 'Python', 'AWS S3'],
+        videoUrl: 'https://youtu.be/divvz5rfEiE?si=9tNabdRgbbn7kPBo',
+      },
+      newsmining: {
+        id: 'NLP-02', category: 'NLP · Web Mining · Deployed App',
+        title: 'Newspaper Text Mining & Recommendation Platform',
+        subtitle: 'End-to-end NLP and web mining platform scraping 4 major newspapers, clustering articles by latent topic, and serving live recommendations via a deployed Streamlit application.',
+        overview: `Developed an end-to-end NLP and web mining solution to extract, classify, and recommend news content from multiple online sources.`,
+        problems: [
+          { num: '01', text: 'Information fragmentation: News consumers had to manually visit four separate newspaper sites.' },
+          { num: '02', text: 'No topic organization: Raw scraped articles had no automated categorization or topic grouping.' },
+          { num: '03', text: 'Manual content curation: Identifying thematically related articles across sources required human editorial effort.' },
+          { num: '04', text: 'No interactive access layer: Users needed a deployable interface to explore recommendations.' },
+        ],
+        baselineKpis: [
+          { label: 'Sources scraped', value: '4 major online newspapers' },
+          { label: 'Categories', value: 'Business · Politics · Arts/Culture/Celebrities · Sports' },
+          { label: 'Output format', value: 'Structured CSV datasets for scalable analysis' },
+          { label: 'Deployment', value: 'Live Streamlit app — publicly accessible' },
+        ],
+        solution: `Built a Python spider-based scraping pipeline collecting articles from four newspapers and storing them in structured CSV datasets. Applied unsupervised clustering algorithms to organize articles into latent topic groups.`,
+        capabilities: ['Python spider collecting articles from 4 major online newspapers', 'Article categorization into Business, Politics, Arts/Culture/Celebrities, and Sports', 'Unsupervised clustering to uncover latent topic groups', 'CSV data pipeline: raw HTML → structured article datasets', 'Streamlit web application serving cluster-based article recommendations', 'Live deployed application accessible publicly via Streamlit Cloud'],
+        approach: ['Built Python web spider to scrape article text, headlines, and URLs', 'Preprocessed raw text: cleaning, tokenization, and vectorization', 'Applied clustering algorithms to group articles by latent topic', 'Structured article data into CSV datasets', 'Designed and deployed interactive Streamlit app'],
+        architecture: [
+          { label: 'Sources', top: 'SOURCES', value: '4 News\nSites', sub: 'Web Scrape' },
+          { label: 'Extract', top: 'EXTRACT', value: 'Python\nSpider', sub: 'CSV Pipeline', active: true },
+          { label: 'Cluster', top: 'CLUSTER', value: 'NLP\nClustering', sub: 'Topic Groups', active: true },
+          { label: 'Serve', top: 'SERVE', value: 'Streamlit\nApp', sub: 'Recommender' },
+          { label: 'Consume', top: 'CONSUME', value: 'Live\nUsers', sub: 'Deployed ↗' },
+        ],
+        archDetails: [
+          { label: 'Scraping', value: 'Python spider — 4 newspaper sources' },
+          { label: 'NLP Pipeline', value: 'Text cleaning · Tokenization · Vectorization · Clustering' },
+          { label: 'Clustering', value: 'K-means / hierarchical clustering' },
+          { label: 'Data Layer', value: 'CSV datasets' },
+          { label: 'Frontend', value: 'Streamlit — cluster explorer, article browser, URL navigation' },
+        ],
+        governance: ['Scraping pipeline respects robots.txt and rate-limits requests', 'CSV datasets versioned alongside notebook code', 'Clustering parameters exposed as configurable inputs', 'Streamlit app serves only article metadata and URLs'],
+        results: [
+          { num: 'RESULT 1', text: 'Deployed a live, publicly accessible Streamlit application enabling multi-source news discovery across 4 newspapers.' },
+          { num: 'RESULT 2', text: 'Automated article collection, categorization (4 topics), and clustering.' },
+          { num: 'RESULT 3', text: 'Applied unsupervised clustering to surface latent topic groups across sources.' },
+          { num: 'RESULT 4', text: 'Demonstrated end-to-end ML deployment: from web scraping and NLP to a live user-facing application.' },
+        ],
+        tech: ['Python', 'Web Scraping', 'NLP', 'Clustering', 'Streamlit', 'CSV Pipelines', 'Unsupervised Learning', 'Text Mining'],
+        videoUrl: 'https://web-mining-and-recommender-systems-puf6ohwpydd3upj4emcmmn.streamlit.app/',
+      },
+      retail: {
+        id: 'AI-02', category: 'AI & ML · GCP · RAG',
+        title: 'AI-Powered Retail Q&A App',
+        subtitle: 'Natural-language question-answering system over retail transaction data using Vertex AI embeddings, pgvector semantic search on Cloud SQL PostgreSQL, and LangChain orchestration.',
+        overview: `Built an end-to-end AI-powered question-answering application for a fictional retail company using Google Cloud Vertex AI, LangChain, and PostgreSQL on Cloud SQL.`,
+        problems: [
+          { num: '01', text: 'Keyword-only access: Analysts could only retrieve retail data through rigid SQL queries.' },
+          { num: '02', text: 'Hallucination risk: Generic LLM responses could not be grounded in actual transaction data without a retrieval layer.' },
+          { num: '03', text: 'Vector infrastructure gap: Existing Cloud SQL PostgreSQL had no embedding or similarity-search capability.' },
+          { num: '04', text: 'Orchestration complexity: Coordinating embedding, retrieval, and generation required a unified pipeline.' },
+        ],
+        baselineKpis: [
+          { label: 'Query paradigm', value: 'SQL keyword-only — no semantic search' },
+          { label: 'LLM grounding', value: 'None — raw generative model, no retrieval' },
+          { label: 'Vector capability', value: 'None — pgvector not yet enabled' },
+          { label: 'Pipeline', value: 'No embed → retrieve → generate flow' },
+        ],
+        solution: `Implemented a RAG pipeline: retail data is embedded at ingest time using Vertex AI TextEmbeddingModel and stored as vector columns in Cloud SQL PostgreSQL via the pgvector extension.`,
+        capabilities: ['Vertex AI TextEmbeddingModel for document and query embedding', 'pgvector extension on Cloud SQL PostgreSQL enabling cosine similarity search', 'LangChain chain orchestration', 'Vertex AI GenerativeModel for grounded answer synthesis', 'Async Cloud SQL connector (asyncpg) for low-latency vector retrieval'],
+        approach: ['Provisioned Cloud SQL PostgreSQL instance with pgvector extension', 'Loaded product and transaction tables with vector columns', 'Built LangChain chain: user query → VertexAIEmbeddings → pgvector similarity search → context window', 'Passed retrieved rows as structured context to Vertex AI GenerativeModel'],
+        architecture: [
+          { label: 'Sources', top: 'SOURCES', value: 'Retail\nTables', sub: 'Transactions' },
+          { label: 'Embed', top: 'EMBED', value: 'Vertex AI\nEmbeddings', sub: 'Vectors', active: true },
+          { label: 'Retrieve', top: 'RETRIEVE', value: 'pgvector\nCloud SQL', sub: 'Similarity', active: true },
+          { label: 'Generate', top: 'GENERATE', value: 'Vertex AI\nGenModel', sub: 'RAG Answer' },
+          { label: 'Consume', top: 'CONSUME', value: 'Notebook\nUI', sub: 'Business User' },
+        ],
+        archDetails: [
+          { label: 'Embedding Model', value: 'Vertex AI TextEmbeddingModel · LangChain VertexAIEmbeddings' },
+          { label: 'Vector Store', value: 'Cloud SQL for PostgreSQL · pgvector extension (cosine similarity)' },
+          { label: 'Generative Model', value: 'Vertex AI GenerativeModel' },
+          { label: 'Orchestration', value: 'LangChain chains · asyncpg connector' },
+          { label: 'Infrastructure', value: 'GCP: Vertex AI API · Cloud SQL Admin API' },
+        ],
+        governance: ['Answers grounded exclusively in retrieved database rows', 'Service account with scoped Vertex AI and Cloud SQL permissions', 'pgvector similarity threshold controls retrieval quality', 'Dependency versions pinned for reproducibility'],
+        results: [
+          { num: 'RESULT 1', text: 'Enabled business users to ask free-text questions over retail transaction data.' },
+          { num: 'RESULT 2', text: 'Grounded all LLM answers in actual retrieved database rows, eliminating hallucination risk.' },
+          { num: 'RESULT 3', text: 'Demonstrated full end-to-end RAG pipeline on GCP.' },
+          { num: 'RESULT 4', text: 'Delivered a reusable architectural pattern applicable to any structured enterprise data source on Cloud SQL.' },
+        ],
+        tech: ['Vertex AI', 'LangChain', 'pgvector', 'Cloud SQL', 'PostgreSQL', 'Python', 'GCP', 'RAG', 'asyncpg', 'Jupyter'],
+        videoUrl: null,
+      },
+      crime: {
+        id: 'VIZ-01', category: 'Analytics · Visualization · 2021–2023',
+        title: 'Crime Analysis Dashboard',
+        subtitle: 'Interactive Tableau workbook summarizing 2,500+ crime incidents across European countries (Sept 2021 – Nov 2023).',
+        overview: `The Crime Analysis Dashboard is an interactive Tableau workbook that consolidates crime incident data across multiple European countries between September 2021 and November 2023.`,
+        problems: [
+          { num: '01', text: 'Fragmented reporting: Crime data lived in disconnected spreadsheets with no unified analytical view.' },
+          { num: '02', text: 'No temporal visibility: Command staff could not identify high-risk time windows.' },
+          { num: '03', text: 'Resolution blind spots: Unresolved backlogs were not tracked accessibly for leadership.' },
+          { num: '04', text: 'Geographic comparison gaps: Cross-country benchmarking required manual table scanning.' },
+          { num: '05', text: 'Static snapshots: Existing reports could not be filtered interactively.' },
+        ],
+        baselineKpis: [
+          { label: 'Total incidents analysed', value: '2,500 crime records (Sept 2021 – Nov 2023)' },
+          { label: 'Resolution rate', value: '70.04% resolved by authority efforts' },
+          { label: 'Unresolved share', value: '29.96% of incidents lack resolution' },
+          { label: 'Peak crime hour', value: '9:00 PM – 11:59 PM (583 incidents)' },
+          { label: 'Peak crime month', value: 'October (309 incidents, +22% MoM)' },
+        ],
+        solution: `Designed and built a fully interactive Tableau workbook integrating a fact table of 2,500+ crime records with a lookup table mapping offense type IDs to readable descriptions.`,
+        capabilities: ['Yearly bar chart with variance indicators for year-over-year comparison', 'Headline KPIs: total crimes, 70.04% resolution rate, 29.96% unresolved share', 'Monthly trend line with month-over-month % change labels', 'Proportional-symbol map (Mapbox)', 'Top-N crime type bar chart driven by a parameter slider', 'Hourly bucket bar chart', 'Month × Weekday heatmap', 'Global interactive filters'],
+        approach: ['Joined Crimes-Data.xlsx and Other-Data.xlsx in Tableau', 'Derived calculated fields: Year, Month, Weekday', 'Built resolution metrics as calculated measures', 'Applied consistent color encoding', 'Configured marks as global filters'],
+        architecture: [
+          { label: 'Sources', top: 'SOURCES', value: 'Excel\nFact+Lookup', sub: 'Raw Data' },
+          { label: 'Prep', top: 'PREP', value: 'Tableau\nJoins', sub: 'Data Model' },
+          { label: 'Calc', top: 'CALC', value: 'Derived\nFields', sub: 'KPIs', active: true },
+          { label: 'Visualise', top: 'VISUALISE', value: '8-Panel\nDashboard', sub: 'Tableau', active: true },
+          { label: 'Consume', top: 'CONSUME', value: 'Command\nStaff', sub: 'Decisions' },
+        ],
+        archDetails: [
+          { label: 'BI Tool', value: 'Tableau Desktop — 8 coordinated visual panels' },
+          { label: 'Data Sources', value: 'Crimes-Data.xlsx (fact) · Other-Data.xlsx (crime-type lookup)' },
+          { label: 'Derived Fields', value: 'Year, Month, Weekday, Hourly Bucket, Resolution Rate, Top-N Rank' },
+          { label: 'Geospatial Layer', value: 'Mapbox proportional-symbol map by country' },
+          { label: 'Interactivity', value: 'Global filters · Mark-as-filter · Top-N parameter slider' },
+        ],
+        governance: ['Date-range filter ensures all panels stay in scope', 'Resolution slider cleanly separates resolved and unresolved views', 'Top-N parameter prevents overloaded bar charts', 'Color encoding is consistent and purposeful', 'Heatmap metric toggles allow switching between counts and rates'],
+        results: [
+          { num: 'RESULT 1', text: 'Delivered a single-pane dashboard replacing 2+ disconnected spreadsheets, covering 2,500 incidents across 5+ European countries.' },
+          { num: 'RESULT 2', text: 'Surfaced October as the peak crime month (+22% MoM) and 9 PM–11:59 PM as the highest-risk window.' },
+          { num: 'RESULT 3', text: 'Exposed that Violence and Sexual Offences (959 incidents) account for 38% of all crime.' },
+          { num: 'RESULT 4', text: 'Made the 29.96% unresolved rate visible in a headline KPI accessible to non-technical leadership.' },
+          { num: 'RESULT 5', text: 'Enabled drill-down from national view → country → crime type → weekday in under 3 clicks.' },
+        ],
+        tech: ['Tableau', 'Mapbox', 'Excel', 'Calculated Fields', 'Parameter Controls', 'Heatmap', 'KPI Design'],
+        videoUrl: null,
+        previewImg: 'Crime_Analysis_Dashboard.png',
+      },
+      sentiment: {
+        id: 'NLP-01', category: 'NLP · ML · Spark · E-Commerce',
+        title: 'Sentiment Analysis Pipeline for E-Commerce Customer Insights',
+        subtitle: 'End-to-end NLP pipeline classifying customer sentiment from X (Twitter) posts using TensorFlow, Scikit-learn, and Apache Spark.',
+        overview: `Led the end-to-end development of a natural language processing pipeline to analyze and classify customer sentiment from X (Twitter) posts related to e-commerce brands and products.`,
+        problems: [
+          { num: '01', text: 'Unstructured feedback at scale: Thousands of daily X (Twitter) posts contained rich customer sentiment buried in unstructured free text.' },
+          { num: '02', text: 'No sentiment classification: Without NLP models, support teams could not distinguish positive, negative, or neutral brand mentions.' },
+          { num: '03', text: 'Scale bottleneck: Volume of social data exceeded single-machine processing capacity.' },
+          { num: '04', text: 'Insight accessibility gap: Raw NLP outputs were not consumable by non-technical stakeholders.' },
+        ],
+        baselineKpis: [
+          { label: 'Data source', value: 'X (Twitter) posts — e-commerce brands & products' },
+          { label: 'Baseline approach', value: 'Manual review — no automated sentiment scoring' },
+          { label: 'Processing scale', value: 'Single-machine bottleneck, no distributed pipeline' },
+          { label: 'Reporting', value: 'Ad-hoc — no dashboard, no trend visualization' },
+        ],
+        solution: `Built a scalable NLP pipeline combining TensorFlow deep learning models and Scikit-learn classical ML for multi-class sentiment classification. Apache Spark handled distributed data processing and model training at volume.`,
+        capabilities: ['Deep learning text classifiers (TensorFlow) for sentiment polarity prediction', 'Classical ML models (Scikit-learn) for text classification', 'Apache Spark distributed processing', 'Power BI dashboards: sentiment trend lines, brand comparison, spike detection', 'Information extraction pipeline'],
+        approach: ['Ingested and preprocessed large volumes of X (Twitter) posts via distributed Spark pipelines', 'Engineered text features for both deep learning and classical models', 'Trained and evaluated TensorFlow and Scikit-learn models', 'Built Power BI reports aggregating model outputs'],
+        architecture: [
+          { label: 'Sources', top: 'SOURCES', value: 'X Posts\nTweets', sub: 'Social Data' },
+          { label: 'Process', top: 'PROCESS', value: 'Apache\nSpark', sub: 'Distributed', active: true },
+          { label: 'Model', top: 'MODEL', value: 'TensorFlow\nSklearn', sub: 'NLP / ML', active: true },
+          { label: 'Output', top: 'OUTPUT', value: 'Sentiment\nScores', sub: 'Classified' },
+          { label: 'Consume', top: 'CONSUME', value: 'Power BI\nDashboards', sub: 'Insights' },
+        ],
+        archDetails: [
+          { label: 'Deep Learning', value: 'TensorFlow — text classification, sentiment polarity prediction' },
+          { label: 'Classical ML', value: 'Scikit-learn — text classification, information extraction' },
+          { label: 'Distributed Compute', value: 'Apache Spark — scalable data processing & distributed model training' },
+          { label: 'Visualization', value: 'Power BI — sentiment trend dashboards, brand comparison reports' },
+          { label: 'NLP Techniques', value: 'Tokenization · Embeddings · TF-IDF · Sentiment Polarity' },
+        ],
+        governance: ['Model outputs validated against labelled sentiment benchmarks', 'Spark pipeline designed for reproducibility', 'Power BI reports scoped by brand/product', 'Insight delivery cycle aligned with cross-functional team review cadences'],
+        results: [
+          { num: 'RESULT 1', text: 'Automated sentiment classification across thousands of daily brand mentions.' },
+          { num: 'RESULT 2', text: 'Delivered Power BI sentiment trend dashboards giving cross-functional teams real-time visibility.' },
+          { num: 'RESULT 3', text: 'Enabled Apache Spark distributed training to overcome single-machine scale limits.' },
+          { num: 'RESULT 4', text: 'Insights directly improved conversational AI systems in digital commerce environments.' },
+        ],
+        tech: ['TensorFlow', 'Scikit-learn', 'Apache Spark', 'Python', 'Power BI', 'NLP', 'Text Classification', 'Sentiment Analysis'],
+        videoUrl: null,
+      },
+      webusage: {
+        id: 'DM-01', category: 'Data Mining · Web Analytics',
+        title: 'Web Usage Mining Analytics',
+        subtitle: 'Apache web server log analysis pipeline extracting session statistics, referrer patterns, and frequent page co-occurrence rules via the Apriori algorithm.',
+        overview: `Developed a comprehensive Jupyter notebook-based pipeline to parse, process, and mine behavioral patterns from Apache HTTP access logs.`,
+        problems: [
+          { num: '01', text: 'Raw, unstructured logs: Apache access logs are dense, multi-field text files requiring custom parsing.' },
+          { num: '02', text: 'No session visibility: Raw logs record individual requests but do not surface session-level behavior.' },
+          { num: '03', text: 'Referrer blind spots: Marketing and content teams had no automated view of which external domains were driving traffic.' },
+          { num: '04', text: 'Hidden page co-occurrence patterns: UX teams could not identify which pages users frequently visit together.' },
+        ],
+        baselineKpis: [
+          { label: 'Log format', value: 'Apache HTTP access log (apachelogs.txt)' },
+          { label: 'Parsed fields', value: 'IP, timestamp, resource, referrer, user agent, status, object size' },
+          { label: 'Analysis method', value: 'Manual inspection — no automated mining' },
+          { label: 'Pattern detection', value: 'None — page co-occurrence not previously analyzed' },
+        ],
+        solution: `Built a modular Python/Pandas pipeline that parses Apache logs into structured DataFrames, extracts session and pageview statistics, ranks top visitor and referrer sources, then applies the Apriori algorithm.`,
+        capabilities: ['Modular log parsing functions extracting IP, timestamp, resource, referrer, user agent, status, and object size', 'Session extraction and per-user pageview tracking', 'Top visitor/client pair identification', 'Referrer domain analysis', 'Apriori algorithm mining frequent page-set combinations', 'Association rules output with support, confidence, and lift metrics'],
+        approach: ['Defined Python parsing functions with timezone handling', 'Loaded log entries into Pandas DataFrame', 'Separated sessions and page activities', 'Aggregated visited pages by session/client as item baskets', 'Applied Apriori with tunable thresholds'],
+        architecture: [
+          { label: 'Sources', top: 'SOURCES', value: 'Apache\nHTTP Logs', sub: 'apachelogs.txt' },
+          { label: 'Parse', top: 'PARSE', value: 'Python\nPandas', sub: 'Structured DF', active: true },
+          { label: 'Analyse', top: 'ANALYSE', value: 'Session\nReferrer', sub: 'EDA', active: true },
+          { label: 'Mine', top: 'MINE', value: 'Apriori\nRules', sub: 'Patterns' },
+          { label: 'Output', top: 'OUTPUT', value: 'Ranked\nRules', sub: 'Insights' },
+        ],
+        archDetails: [
+          { label: 'Log Source', value: 'Apache HTTP access log — apachelogs.txt' },
+          { label: 'Processing Stack', value: 'Python · Pandas — parsing, session extraction, EDA' },
+          { label: 'Mining Algorithm', value: 'Apriori (apyori) — frequent itemsets and association rules' },
+          { label: 'Rule Metrics', value: 'Support · Confidence · Lift' },
+          { label: 'Outputs', value: 'Top visitor pairs · Referrer rankings · Frequent page rules DataFrames' },
+        ],
+        governance: ['Modular parsing functions ensure reproducibility', 'Apriori thresholds explicitly defined and tunable', 'IP and user agent data treated as behavioral signals only', 'Results clearly separated into session-level, page-level, and referrer-level analyses'],
+        results: [
+          { num: 'RESULT 1', text: 'Converted dense, unstructured Apache logs into clean, queryable Pandas DataFrames.' },
+          { num: 'RESULT 2', text: 'Surfaced top visitor/client pairs and leading referrer domains.' },
+          { num: 'RESULT 3', text: 'Discovered frequent page co-occurrence rules using Apriori.' },
+          { num: 'RESULT 4', text: 'Delivered fully parameterized rule mining with tunable support, confidence, and lift thresholds.' },
+        ],
+        tech: ['Python', 'Pandas', 'Apriori', 'apyori', 'Jupyter', 'Log Parsing', 'Association Rules', 'Session Mining'],
+        videoUrl: null,
+      },
+      patternmining: {
+        id: 'DM-02', category: 'Data Mining · Market Basket Analysis',
+        title: 'Pattern Mining with Association Rules',
+        subtitle: 'Market Basket Analysis pipeline applying the Apriori algorithm to transactional retail data.',
+        overview: `Developed a Market Basket Analysis pipeline in a Jupyter notebook to discover latent purchasing patterns within transactional retail data.`,
+        problems: [
+          { num: '01', text: 'Hidden purchase patterns: Retail managers lacked visibility into which products customers consistently buy together.' },
+          { num: '02', text: 'Manual co-occurrence analysis: Identifying item associations required impractical manual cross-referencing at scale.' },
+          { num: '03', text: 'No ranking framework: There was no metric-driven framework to prioritize which associations had the highest business value.' },
+          { num: '04', text: 'Variable transaction width: Transaction records contained NaN padding for shorter baskets, requiring preprocessing.' },
+        ],
+        baselineKpis: [
+          { label: 'Dataset', value: 'storedata.csv — multi-item transaction records' },
+          { label: 'Format', value: 'Tabular CSV; each row a transaction, NaN-padded to max width' },
+          { label: 'Baseline analysis', value: 'None — no automated pattern detection in place' },
+          { label: 'Rule metrics', value: 'Support, confidence, lift — computed per mined rule' },
+        ],
+        solution: `Built a clean MBA pipeline: loaded and preprocessed storedata.csv into a list-of-lists basket format, ran the Apriori algorithm with configurable thresholds, and converted results into structured Pandas DataFrames.`,
+        capabilities: ['Apriori algorithm mining frequent itemsets across all transaction baskets', 'Configurable min-support, confidence, lift, and itemset-length thresholds', 'NaN-aware transaction preprocessing', 'Association rules stored in structured Pandas DataFrames', 'Multi-metric ranking: sort rules by antecedent length, confidence, or support', 'Extended to secondary dataset (transactions.txt)'],
+        approach: ['Loaded storedata.csv into Pandas and inspected shape and data types', 'Preprocessed each row into a basket list, stripping NaN values', 'Ran Apriori with user-defined thresholds', 'Converted association rules to structured DataFrame', 'Sorted rules by multiple metrics', 'Replicated pipeline on transactions.txt'],
+        architecture: [
+          { label: 'Sources', top: 'SOURCES', value: 'Store\nCSV / TXT', sub: 'Transactions' },
+          { label: 'Prep', top: 'PREP', value: 'Pandas\nNaN Strip', sub: 'Baskets', active: true },
+          { label: 'Mine', top: 'MINE', value: 'Apriori\napyori', sub: 'Frequent Sets', active: true },
+          { label: 'Rank', top: 'RANK', value: 'DataFrame\nSort', sub: 'Rules' },
+          { label: 'Output', top: 'OUTPUT', value: 'Business\nInsights', sub: 'Cross-Sell' },
+        ],
+        archDetails: [
+          { label: 'Dataset', value: 'storedata.csv + transactions.txt — transactional retail records' },
+          { label: 'Mining Algorithm', value: 'Apriori (apyori) — frequent itemsets and association rule generation' },
+          { label: 'Processing Stack', value: 'Python · Pandas · NumPy' },
+          { label: 'Rule Metrics', value: 'Support · Confidence · Lift · Antecedent Length' },
+          { label: 'Visualization', value: 'Matplotlib — optional rule metric distribution plots' },
+        ],
+        governance: ['Apriori thresholds explicitly parameterized for auditability', 'NaN preprocessing documented and modular', 'Rules converted to DataFrames immediately after mining', 'Multi-dataset validation confirms pipeline generalizability'],
+        results: [
+          { num: 'RESULT 1', text: 'Mined actionable frequent itemsets and ranked association rules from retail transaction data.' },
+          { num: 'RESULT 2', text: 'Delivered rules ranked by confidence, support, and lift.' },
+          { num: 'RESULT 3', text: 'Preprocessed NaN-padded variable-width transaction records into clean Apriori input.' },
+          { num: 'RESULT 4', text: 'Validated pipeline generalizability on a second dataset (transactions.txt).' },
+        ],
+        tech: ['Python', 'Pandas', 'NumPy', 'Apriori', 'apyori', 'Matplotlib', 'Jupyter', 'Market Basket Analysis', 'Association Rules'],
+        videoUrl: null,
+      },
+    };
+
+    // ── MODAL OPEN/CLOSE ──────────────────────────────────────────────────
+    function openModal(key) {
+      const p = projectData[key];
+      if (!p) return;
+      document.getElementById('modal-content-box').innerHTML = buildModal(p);
+      document.getElementById('project-modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('project-modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    // ── MODAL HTML BUILDER ────────────────────────────────────────────────
+    function buildModal(p) {
+      return `
+        <div style="position:sticky;top:0;z-index:10;background:#0a0a0a;border-bottom:1px solid #1a1a1a;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:#d4d4d8;border:1px solid #1f1f1f;padding:3px 10px;">${p.id}</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#b4b4b8;text-transform:uppercase;letter-spacing:0.15em;">${p.category}</span>
+          </div>
+          <button onclick="closeModal()" style="background:none;border:none;cursor:pointer;color:#d4d4d8;padding:6px;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#d4d4d8'">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="modal-section" style="padding-top:48px;padding-bottom:40px;">
+          <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.25em;color:#d4d4d8;text-align:center;margin-bottom:12px;">${p.id}</p>
+          <h2 style="font-family:'Inter',sans-serif;font-size:clamp(22px,4vw,32px);font-weight:900;color:#ffffff;text-align:center;margin:0 0 12px;letter-spacing:-0.03em;line-height:1.1;">${p.title}</h2>
+          <p style="font-size:15px;color:#b4b4b8;text-align:center;line-height:1.7;max-width:600px;margin:0 auto;">${p.subtitle}</p>
+        </div>
+        <div class="modal-section">
+          <p class="modal-label">Overview</p>
+          <p style="font-size:14px;line-height:1.8;color:#d4d4d8;">${p.overview}</p>
+        </div>
+        ${p.previewImg ? `<div class="modal-section" style="padding-top:0;padding-bottom:0;"><div style="border:1px solid #1a1a1a;overflow:hidden;background:#0d0d0d;"><div style="background:#111;padding:8px 14px;border-bottom:1px solid #1a1a1a;display:flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:#ff5f56;display:inline-block;"></span><span style="width:8px;height:8px;border-radius:50%;background:#ffbd2e;display:inline-block;"></span><span style="width:8px;height:8px;border-radius:50%;background:#27c93f;display:inline-block;"></span><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#b4b4b8;margin-left:8px;text-transform:uppercase;letter-spacing:0.12em;">Dashboard Preview</span></div><img src="${p.previewImg}" alt="Dashboard Preview" style="width:100%;display:block;opacity:0.92;" /></div></div>` : ''}
+        <div class="modal-section">
+          <p class="modal-label">Problem &amp; Baseline</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
+            <div>${p.problems.map(pr => `<div style="display:flex;gap:16px;margin-bottom:20px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;color:#b4b4b8;flex-shrink:0;min-width:24px;">${pr.num}</span><p style="font-size:13px;line-height:1.7;color:#b4b4b8;margin:0;">${pr.text}</p></div>`).join('')}</div>
+            <div style="background:#0d0d0d;border:1px solid #1a1a1a;padding:20px;"><p style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:#d4d4d8;margin:0 0 16px;">Baseline KPIs</p>${p.baselineKpis.map(kpi => `<div style="border-left:2px solid #1f1f1f;padding:6px 0 6px 14px;margin-bottom:10px;"><p style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#d4d4d8;margin:0 0 2px;">${kpi.label}: <span style="color:#d4d4d8;">${kpi.value}</span></p></div>`).join('')}</div>
+          </div>
+        </div>
+        <div class="modal-section">
+          <p class="modal-label">Solution</p>
+          <p style="font-size:14px;line-height:1.8;color:#d4d4d8;margin-bottom:24px;">${p.solution}</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
+            <div><p style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.18em;color:#d4d4d8;margin:0 0 12px;">Key Capabilities</p>${p.capabilities.map(c => `<div style="display:flex;gap:10px;margin-bottom:10px;"><span style="color:#b4b4b8;flex-shrink:0;margin-top:2px;">•</span><p style="font-size:13px;color:#b4b4b8;margin:0;line-height:1.6;">${c}</p></div>`).join('')}</div>
+            <div><p style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.18em;color:#d4d4d8;margin:0 0 12px;">Approach</p>${p.approach.map(a => `<div style="border-left:2px solid #1f1f1f;padding:6px 0 6px 14px;margin-bottom:10px;"><p style="font-size:13px;color:#b4b4b8;margin:0;line-height:1.6;">${a}</p></div>`).join('')}</div>
+          </div>
+        </div>
+        <div class="modal-section">
+          <p class="modal-label">Technical Architecture</p>
+          <div style="display:flex;align-items:center;justify-content:center;gap:0;padding:24px 0 32px;overflow-x:auto;flex-wrap:nowrap;">
+            ${p.architecture.map((node, i) => `<div class="pipe-node"><span class="pipe-label-top">${node.top}</span><div class="pipe-circle ${node.active ? 'active-node' : ''}"><span class="pipe-value" style="white-space:pre-line;font-size:${node.active ? '11px' : '10px'};">${node.value}</span></div><span class="pipe-sub">${node.sub}</span></div>${i < p.architecture.length - 1 ? '<div class="pipe-connector" style="margin-top:10px;"></div>' : ''}`).join('')}
+          </div>
+          <div style="display:grid;gap:1px;background:#111;border:1px solid #1a1a1a;">${p.archDetails.map(d => `<div style="background:#0a0a0a;padding:14px 20px;display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.18em;color:#d4d4d8;min-width:150px;">${d.label}</span><span style="font-size:13px;color:#d4d4d8;">${d.value}</span></div>`).join('')}</div>
+        </div>
+        <div class="modal-section">
+          <p class="modal-label">Governance &amp; Reliability</p>
+          ${p.governance.map(g => `<div class="gov-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b4b4b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>${g}</span></div>`).join('')}
+        </div>
+        <div class="modal-section">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;"><p class="modal-label" style="margin:0;">Value Delivered</p><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:#b4b4b8;border:1px solid #1f1f1f;padding:4px 10px;">ROI Verified</span></div>
+          ${p.results.map(r => `<div class="result-card"><p style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.18em;color:#d4d4d8;margin:0 0 8px;">${r.num}</p><p style="font-size:14px;font-weight:600;color:#e4e4e7;margin:0;line-height:1.5;">${r.text}</p></div>`).join('')}
+        </div>
+        <div class="modal-section" style="padding-bottom:40px;">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+            ${p.tech.map(t => `<span class="tech-pill">${t}</span>`).join('')}
+            ${p.videoUrl ? `<a href="${p.videoUrl}" target="_blank" rel="noopener" style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:#d4d4d8;display:flex;align-items:center;gap:6px;text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#d4d4d8'">${p.videoUrl.includes('streamlit') ? 'Live App ↗' : 'Watch Demo'}</a>` : ''}
+          </div>
+        </div>
+      `;
+    }
+
+    // ── TYPING EFFECT ─────────────────────────────────────────────────────
+    const words = ["Drives Decisions.", "Scales with Data.", "Forecasts the Future.", "Ships to Production."];
+    let wordIdx = 0, charIdx = 0, isDeleting = false;
+    const typingEl = document.getElementById('typing-text');
+
+    function type() {
+      const currentWord = words[wordIdx];
+      if (isDeleting) { typingEl.textContent = currentWord.substring(0, charIdx - 1); charIdx--; }
+      else { typingEl.textContent = currentWord.substring(0, charIdx + 1); charIdx++; }
+      if (!isDeleting && charIdx === currentWord.length) { isDeleting = true; setTimeout(type, 2000); }
+      else if (isDeleting && charIdx === 0) { isDeleting = false; wordIdx = (wordIdx + 1) % words.length; setTimeout(type, 500); }
+      else { setTimeout(type, isDeleting ? 50 : 100); }
+    }
+
+    // ── SCROLL REVEAL ────────────────────────────────────────────────────
+    function reveal() {
+      document.querySelectorAll('.reveal').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 150) el.classList.add('active');
+      });
+    }
+
+    // ── NAVBAR SCROLL ────────────────────────────────────────────────────
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('main-nav');
+      if (window.scrollY > 100) { nav.classList.add('bg-black/80', 'border-zinc-900'); nav.classList.remove('border-transparent'); }
+      else { nav.classList.remove('bg-black/80', 'border-zinc-900'); nav.classList.add('border-transparent'); }
+      reveal();
+    });
+
+    function handleContactForm(btn) {
+      const section = btn.closest('section');
+      const inputs = section.querySelectorAll('input, textarea');
+      const [nameEl, emailEl, subjectEl, msgEl] = inputs;
+      const name = nameEl?.value.trim();
+      const email = emailEl?.value.trim();
+      const subject = subjectEl?.value.trim() || 'Portfolio Inquiry';
+      const body = msgEl?.value.trim();
+      if (!name || !email || !body) {
+        btn.textContent = 'Please fill in all fields';
+        btn.classList.add('bg-zinc-300');
+        setTimeout(() => { btn.textContent = 'Send Message'; btn.classList.remove('bg-zinc-300'); }, 2500);
+        return;
+      }
+      const mailto = `mailto:craigtanakac@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + body)}`;
+      window.location.href = mailto;
+      btn.textContent = 'Opening mail client…';
+      setTimeout(() => { btn.textContent = 'Send Message'; }, 3000);
+    }
+
+    // ── THEME TOGGLE ─────────────────────────────────────────────────────
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.classList.contains('dark');
+      html.classList.toggle('dark', !isDark);
+      html.classList.toggle('light', isDark);
+      // Moon icon = click to switch to light (visible in dark mode)
+      // Sun icon = click to switch to dark (visible in light mode)
+      document.getElementById('icon-moon').style.display = isDark ? 'none' : 'block';
+      document.getElementById('icon-sun').style.display = isDark ? 'block' : 'none';
+    }
+
+    // ── PROJECT FILTER LOGIC ─────────────────────────────────────────────
+    function initFilters() {
+      const buttons = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('.project-card');
+      const noMsg = document.getElementById('no-projects');
+
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Update active button style
+          buttons.forEach(b => b.classList.remove('active-filter'));
+          btn.classList.add('active-filter');
+
+          const filter = btn.dataset.filter;
+          let visibleCount = 0;
+
+          cards.forEach(card => {
+            const cats = card.dataset.categories || '';
+            const matches = filter === 'all' || cats.split(' ').includes(filter);
+
+            if (matches) {
+              card.classList.remove('card-hidden');
+              visibleCount++;
+            } else {
+              card.classList.add('card-hidden');
+            }
+          });
+
+          // Show/hide empty state
+          if (noMsg) noMsg.classList.toggle('hidden', visibleCount > 0);
+        });
+      });
+    }
+
+    window.onload = () => { type(); reveal(); initFilters(); };
+  </script>
+</body>
+
+</html>
